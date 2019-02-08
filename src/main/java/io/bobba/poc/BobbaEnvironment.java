@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class BobbaEnvironment {
     private static BobbaEnvironment instance;
-    private static final String VERSION = "1.0.0 alpha";
+    public static final String VERSION = "1.0.0 alpha";
+    public static final static int PORT = 1232;
 
     private Game game;
 
@@ -22,7 +23,7 @@ public class BobbaEnvironment {
         System.out.println("Copyright (c) 2019 - relevance");
         System.out.println();
 
-        Logging.getInstance().setLogLevel(LogLevel.Verbose);
+        Logging.getInstance().setLogLevel(LogLevel.SuperDebug);
         this.game = new Game();
         Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose);
 
