@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class BobbaEnvironment {
     private static BobbaEnvironment instance;
     public static final String VERSION = "1.0.0 alpha";
-    public static final static int PORT = 1232;
+    public static final int PORT = 1232;
 
     private Game game;
 

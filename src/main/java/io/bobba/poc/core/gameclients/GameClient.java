@@ -9,4 +9,9 @@ public class GameClient {
     public GameClient(int id, Connection connection) {
         this.connection = connection;
     }
+
+    public void handleMessage(String rawMessage) {
+
+    }
+
 }
