@@ -27,7 +27,7 @@ public class BobbaEnvironment {
         System.out.println("Copyright (c) 2019 - relevance");
         System.out.println();
 
-        Logging.getInstance().setLogLevel(LogLevel.SuperDebug);
+        Logging.getInstance().setLogLevel(LogLevel.Verbose);
         this.game = new Game();
         Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, this.getClass());
     }
@@ -73,6 +73,15 @@ public class BobbaEnvironment {
                         Logging.getInstance().writeLine("NextStep: " + point.getX() + ", " + point.getY(), LogLevel.Info, BobbaEnvironment.class);
                         break;
 
+                    case "map":
+                        SqState[][] map = getInstance().getGame().getRoom().getGameMap().getMap();
+                        for (int i = 0; i < getInstance().getGame().getRoom().getGameMap().getRoomModel().maxY; i++) {
+                            for (int j = 0; j < getInstance().getGame().getRoom().getGameMap().getRoomModel().maxX; j++) {
+                                System.out.print(map[j][i].ordinal() + "\t| ");
+                            }
+                            System.out.println();
+                        }
+                        break;
                     default:
                         Logging.getInstance().writeLine("Invalid command", LogLevel.Info, BobbaEnvironment.class);
                         break;

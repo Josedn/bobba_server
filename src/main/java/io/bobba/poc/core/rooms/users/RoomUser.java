@@ -38,10 +38,6 @@ public class RoomUser {
         return virtualId;
     }
 
-    public void setVirtualId(int virtualId) {
-        this.virtualId = virtualId;
-    }
-
     public int getX() {
         return x;
     }
@@ -140,10 +136,6 @@ public class RoomUser {
 
     public Room getRoom() {
         return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
     }
 
     public User getUser() {

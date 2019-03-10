@@ -18,6 +18,7 @@ public class GameMap {
     private boolean diagonalEnabled;
     private Map<Point, List<RoomItem>> coordinatedItems;
     private Map<Point, List<RoomUser>> coordinatedUsers;
+
     private SqState[][] map;
     private double[][] itemHeightMap;
 
@@ -109,11 +110,14 @@ public class GameMap {
     }
 
     private void setDefaultValue(int x, int y) {
-        map[x][y] = SqState.Walkable;
-        itemHeightMap[x][y] = 0;
+        if (roomModel.getMap()[x][y] == 1)
+            map[x][y] = SqState.Walkable;
+        else
+            map[x][y] = SqState.Closed;
         if (x == roomModel.doorX && y == roomModel.doorY) {
             map[x][y] = SqState.WalkableLast;
         }
+        itemHeightMap[x][y] = 0;
     }
 
     private void removeCoordinatedItem(RoomItem item, Point coord) {
@@ -317,5 +321,9 @@ public class GameMap {
 
     public boolean isValidTile(int x, int y) {
         return x >= 0 && y >= 0 && x < roomModel.maxX && y < roomModel.maxY && map[x][y] != SqState.Closed;
+    }
+
+    public SqState[][] getMap() {
+        return map;
     }
 }
