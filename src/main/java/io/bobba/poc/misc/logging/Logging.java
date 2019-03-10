@@ -30,6 +30,15 @@ public class Logging {
         }
     }
 
+    public void logError(Object o, Exception e, Class tag) {
+        if (canLog(LogLevel.Warning)) {
+            writeLine(o + ": " + e.toString(), LogLevel.Warning, tag);
+        }
+        if (canLog(LogLevel.Debug)) {
+            e.printStackTrace();
+        }
+    }
+
     public static Logging getInstance() {
         if (instance == null) {
             instance = new Logging(LogLevel.Verbose);

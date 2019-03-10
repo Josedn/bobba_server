@@ -1,11 +1,9 @@
 package io.bobba.poc.communication.protocol;
 
-import java.util.StringTokenizer;
-
 public class ClientMessage {
-    private final String SEPARATOR = "|";
+    private final String SEPARATOR = "\\|"; // | with applied regex
     private String body;
-    private StringTokenizer tokenizer;
+    private String[] tokens;
     private int pointer;
     private int id;
 
@@ -13,7 +11,7 @@ public class ClientMessage {
         this.pointer = 0;
         this.id = -1;
         this.body = message;
-        tokenizer = new StringTokenizer(body, SEPARATOR);
+        tokens = body.split(SEPARATOR);
 
         try {
             this.id = Integer.parseInt(popToken());
@@ -27,10 +25,10 @@ public class ClientMessage {
     }
 
     private String popToken() {
-        if (tokenizer.hasMoreTokens()) {
-            return tokenizer.nextToken();
+        if (tokens.length > pointer) {
+            return tokens[pointer++];
         }
-        return null;
+        return "";
     }
 
     public int popInt() {
@@ -44,7 +42,6 @@ public class ClientMessage {
     public String popString() {
         int tickets = popInt();
         String totalString = popToken();
-
         for (int i = 0; i < tickets; i++) {
             totalString += SEPARATOR + popToken();
         }

@@ -8,6 +8,7 @@ import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 import org.omg.CORBA.Environment;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class BobbaEnvironment {
@@ -56,21 +57,6 @@ public class BobbaEnvironment {
                     case "cycle":
                         getInstance().getGame().onCycle();
                         Logging.getInstance().writeLine("Cycle forced!", LogLevel.Info, BobbaEnvironment.class);
-                        break;
-                    case "nextstep":
-                        int currentX = Integer.parseInt(commandArgs[1]);
-                        int currentY = Integer.parseInt(commandArgs[2]);
-                        int targetX = Integer.parseInt(commandArgs[3]);
-                        int targetY = Integer.parseInt(commandArgs[4]);
-
-                        SqState[][] sq = new SqState[20][20];
-                        for (int i = 0; i < 20; i++) {
-                            for (int j = 0; j < 20; j++) {
-                                sq[i][j] = SqState.Walkable;
-                            }
-                        }
-                        SquarePoint point = DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, sq, new double[20][20], 20, 20, false, true);
-                        Logging.getInstance().writeLine("NextStep: " + point.getX() + ", " + point.getY(), LogLevel.Info, BobbaEnvironment.class);
                         break;
 
                     case "map":

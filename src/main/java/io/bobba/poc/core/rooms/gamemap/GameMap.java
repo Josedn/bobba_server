@@ -163,7 +163,7 @@ public class GameMap {
     }
 
     public Point getUserNextStep(int currentX, int currentY, int targetX, int targetY) {
-        SquarePoint point =  DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, map, itemHeightMap, roomModel.maxX, roomModel.maxY, true, diagonalEnabled);
+        SquarePoint point = DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, map, itemHeightMap, roomModel.maxX, roomModel.maxY, false, diagonalEnabled);
         return new Point(point.getX(), point.getY());
     }
 
@@ -297,20 +297,21 @@ public class GameMap {
                 }
             }
         }
+
         if (x > 1) {
             if (rotation == 0 || rotation == 4) {
                 for (int i = 1; i < x; i++) {
-                    pointList.add(new Point(posX, posY + i));
+                    pointList.add(new Point(posX + i, posY));
 
-                    for (int j = 1; j < x; j++) {
+                    for (int j = 1; j < y; j++) {
                         pointList.add(new Point(posX + i, posY + j));
                     }
                 }
             } else if (rotation == 2 || rotation == 6) {
                 for (int i = 1; i < x; i++) {
-                    pointList.add(new Point(posX + i, posY));
+                    pointList.add(new Point(posX, posY + i));
 
-                    for (int j = 1; j < x; j++) {
+                    for (int j = 1; j < y; j++) {
                         pointList.add(new Point(posX + j, posY + i));
                     }
                 }

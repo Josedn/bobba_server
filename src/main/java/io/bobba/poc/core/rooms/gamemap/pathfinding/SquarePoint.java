@@ -42,8 +42,11 @@ public class SquarePoint {
 
     public boolean canWalk() {
         if (!lastStep) {
-            if (!override) return (squareData == SqState.Walkable || squareData == SqState.Idk);
-            else return true;
+            if (!override) {
+                return (squareData == SqState.Walkable || squareData == SqState.Idk);
+            } else {
+                return true;
+            }
         } else {
             if (!override) {
                 if (squareData == SqState.WalkableLast)

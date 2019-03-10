@@ -49,10 +49,7 @@ public class ConnectionManager extends WebSocketServer {
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        Logging.getInstance().writeLine("Error with socket: " + ex.toString(), LogLevel.Warning, this.getClass());
-        if (Logging.getInstance().canLog(LogLevel.Debug)){
-            ex.printStackTrace();
-        }
+        Logging.getInstance().logError("Error with socket", ex, this.getClass());
     }
 
     @Override

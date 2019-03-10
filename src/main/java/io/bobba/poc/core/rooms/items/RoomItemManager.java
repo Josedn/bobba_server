@@ -71,7 +71,7 @@ public class RoomItemManager {
         }
     }
 
-    void addWallItemToRoom(int id, int x, int y, int rot, int state, BaseItem baseItem) {
+    public void addWallItemToRoom(int id, int x, int y, int rot, int state, BaseItem baseItem) {
         if (getItem(id) == null) {
             wallItems.put(id, new WallItem(id, x, y, rot, state, room, baseItem));
             room.sendMessage(new SerializeWallItemComposer(wallItems.get(id)));

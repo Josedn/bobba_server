@@ -32,7 +32,7 @@ public class DreamPathfinder {
 
         for (int i = 0; i < 8; i++) {
             SquarePoint position = pInfo.pos(i);
-            if (!position.isInUse())
+            if (position == null || !position.isInUse())
                 continue;
 
             if (position.canWalk()) {

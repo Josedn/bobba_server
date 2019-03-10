@@ -11,6 +11,7 @@ import io.bobba.poc.core.rooms.items.interactors.RoomItemInteractor;
 import io.bobba.poc.misc.TextHandling;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomItem {
@@ -45,6 +46,7 @@ public class RoomItem {
     }
 
     private void updateCoords() {
+        coords = new ArrayList<>();
         coords = GameMap.getAffectedTiles(baseItem.getX(), baseItem.getY(), x, y, rot);
         coords.add(new Point(x, y));
     }
