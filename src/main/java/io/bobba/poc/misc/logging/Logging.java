@@ -13,8 +13,19 @@ public class Logging {
         this.logLevel = logLevel;
     }
 
+    public boolean canLog(LogLevel logLevel) {
+        return this.logLevel.ordinal() <= logLevel.ordinal();
+    }
+
+    public void writeLine(Object o, LogLevel logLevel, Class tag) {
+        if (canLog(logLevel)) {
+            System.out.println("[" + logLevel.toString().toUpperCase() + "][" + tag.getName() + "] - " + o);
+        }
+    }
+
+    @Deprecated
     public void writeLine(Object o, LogLevel logLevel) {
-        if (this.logLevel.ordinal() <= logLevel.ordinal()) {
+        if (canLog(logLevel)) {
             System.out.println("[" + logLevel.toString().toUpperCase() + "] - " + o);
         }
     }

@@ -1,0 +1,12 @@
+package io.bobba.poc.communication.outgoing;
+
+import com.sun.security.ntlm.Server;
+import io.bobba.poc.communication.protocol.ServerMessage;
+import io.bobba.poc.communication.protocol.ServerOpCodes;
+
+public class WaveComposer  extends ServerMessage {
+    public WaveComposer(int userId) {
+        super(ServerOpCodes.PLAYER_WAVE);
+        appendInt(userId);
+    }
+}

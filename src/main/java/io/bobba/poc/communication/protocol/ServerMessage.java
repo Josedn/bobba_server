@@ -16,6 +16,10 @@ public class ServerMessage {
         appendToken(String.valueOf(i));
     }
 
+    public void appendFloat(double d) {
+        appendToken(String.valueOf(d).replace(',', '.'));
+    }
+
     public void appendString(String str) {
         int tickets = 0;
         for (int i = 0; i < str.length(); i++) {

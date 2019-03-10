@@ -49,11 +49,14 @@ public class ConnectionManager extends WebSocketServer {
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        Logging.getInstance().writeLine("Error with socket: " + ex.getMessage(), LogLevel.Warning);
+        Logging.getInstance().writeLine("Error with socket: " + ex.toString(), LogLevel.Warning, this.getClass());
+        if (Logging.getInstance().canLog(LogLevel.Debug)){
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void onStart() {
-        Logging.getInstance().writeLine("Server listening on " + this.getPort() + "...", LogLevel.Debug);
+        Logging.getInstance().writeLine("Server listening on " + this.getPort() + "...", LogLevel.Debug, this.getClass());
     }
 }
