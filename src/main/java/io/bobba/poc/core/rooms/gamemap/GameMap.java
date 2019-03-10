@@ -128,10 +128,13 @@ public class GameMap {
 
     public void updateUserMovement(Point oldCoord, Point newCoord, RoomUser user) {
         removeUserFromMap(user, oldCoord);
-
-        map[oldCoord.x][oldCoord.y] = user.getCurrentSqState(); // EXPERIMENTAL
+        if (oldCoord.x != roomModel.doorX || oldCoord.y != roomModel.doorY) {
+            map[oldCoord.x][oldCoord.y] = user.getCurrentSqState(); // EXPERIMENTAL
+        }
         user.setCurrentSqState(map[newCoord.x][newCoord.y]); // EXPERIMENTAL
-        map[newCoord.x][newCoord.y] = SqState.Closed; // EXPERIMENTAL
+        if (newCoord.x != roomModel.doorX || newCoord.y != roomModel.doorY) {
+            map[newCoord.x][newCoord.y] = SqState.Closed; // EXPERIMENTAL
+        }
 
         addUserToMap(user, newCoord);
     }
