@@ -58,6 +58,8 @@ public class BobbaEnvironment {
                     case "exit":
                     case "stop":
                         Logging.getInstance().writeLine("Stopping server...", LogLevel.Info, BobbaEnvironment.class);
+                        getInstance().getGame().getConnectionManager().stop();
+                        System.exit(0);
                         return;
                     case "cycle":
                         getInstance().getGame().onCycle();
