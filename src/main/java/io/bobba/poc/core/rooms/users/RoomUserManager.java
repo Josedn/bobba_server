@@ -126,6 +126,12 @@ public class RoomUserManager {
         user.setNeedsUpdate(true);
     }
 
+    public void updateUserStatusses() {
+        for (RoomUser user : getUsers()) {
+            updateUserStatus(user);
+        }
+    }
+
     public void updateUserStatus(RoomUser user) {
         if (user.getStatus("lay") != null || user.getStatus("sit") != null) {
             user.removeStatus("lay");

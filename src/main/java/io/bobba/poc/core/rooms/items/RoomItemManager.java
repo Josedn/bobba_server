@@ -44,7 +44,7 @@ public class RoomItemManager {
             floorItems.put(id, new RoomItem(id, x, y, z, rot, state, room, baseItem));
             room.getGameMap().addItemToMap(floorItems.get(id));
             room.sendMessage(new SerializeFloorItemComposer(floorItems.get(id)));
-            room.updateUserStatusses();
+            room.getRoomUserManager().updateUserStatusses();
         }
     }
 
@@ -56,7 +56,7 @@ public class RoomItemManager {
             } else {
                 floorItems.remove(item);
                 room.getGameMap().removeItemFromMap(item);
-                room.updateUserStatusses();
+                room.getRoomUserManager().updateUserStatusses();
             }
             room.sendMessage(new FurniRemoveComposer(id));
         }
@@ -83,5 +83,8 @@ public class RoomItemManager {
         if (item != null) {
             item.getInteractor().onTrigger(user, true);
         }
+    }
+
+    public void onCycle() {
     }
 }

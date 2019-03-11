@@ -9,7 +9,14 @@ import io.bobba.poc.core.rooms.gamemap.RoomModel;
 import io.bobba.poc.core.users.Authenticator;
 import io.bobba.poc.misc.logging.Logging;
 import io.bobba.poc.net.ConnectionManager;
+import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
+import java.io.File;
+import java.io.FileInputStream;
+import java.security.KeyStore;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
@@ -56,18 +63,15 @@ public class Game {
         double z = 0.0;
 
         int currentX = 0;
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             int currentY = 0;
-            for (int j = 0; j < 6; j++)
-            {
+            for (int j = 0; j < 6; j++) {
                 room.getRoomItemManager().addFloorItemToRoom(itemId++, 1 + currentX, currentY, z, lt_patch.getDirections().get(0), 1, lt_patch);
                 currentY += 2;
             }
             currentX += 2;
         }
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             room.getRoomItemManager().addFloorItemToRoom(itemId++, 1 + (i * 2), 11, z, lt_patch.getDirections().get(0), 1, lt_patch);
         }
 
@@ -172,12 +176,42 @@ public class Game {
         room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 1, anc_sunset_wall);
     }
 
-    public Game() {
+    private void loadSslServer(int port) throws Exception {
+        connectionManager = new ConnectionManager(port, this.gameClientManager);
+
+        if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
+
+            // load up the key store
+            String storeType = BobbaEnvironment.getConfigManager().getSslStoreType();
+            String keyStore = BobbaEnvironment.getConfigManager().getSslStoreFile();
+            String storePassword = BobbaEnvironment.getConfigManager().getSslStorePassword();
+            String keyPassword = BobbaEnvironment.getConfigManager().getSslKeyPassword();
+
+            KeyStore ks = KeyStore.getInstance(storeType);
+            File kf = new File(keyStore);
+            ks.load(new FileInputStream(kf), storePassword.toCharArray());
+
+            KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+            kmf.init(ks, keyPassword.toCharArray());
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
+            tmf.init(ks);
+
+            SSLContext sslContext = null;
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
+
+            connectionManager.setWebSocketFactory(new DefaultSSLWebSocketServerFactory(sslContext));
+        }
+
+        connectionManager.start();
+    }
+
+    public Game(int port) throws Exception {
         this.gameClientManager = new GameClientManager();
-        this.connectionManager = new ConnectionManager(BobbaEnvironment.PORT, this.gameClientManager);
         this.authenticator = new Authenticator();
         this.itemManager = new BaseItemManager();
         this.room = new Room(1, "Test room", new RoomModel());
+        loadSslServer(port);
 
         addFurniture();
 

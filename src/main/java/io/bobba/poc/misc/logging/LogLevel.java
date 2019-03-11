@@ -6,5 +6,5 @@ public enum LogLevel {
     Verbose,
     Warning,
     Info,
-    None,
+    None
 }

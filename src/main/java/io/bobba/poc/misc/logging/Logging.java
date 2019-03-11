@@ -1,5 +1,9 @@
 package io.bobba.poc.misc.logging;
 
+import sun.rmi.runtime.Log;
+
+import java.util.Arrays;
+
 public class Logging {
     private static Logging instance;
 
@@ -44,5 +48,17 @@ public class Logging {
             instance = new Logging(LogLevel.Verbose);
         }
         return instance;
+    }
+
+    public LogLevel getLogLevel() {
+        return logLevel;
+    }
+
+    public static LogLevel valueOfLogLevel(String logLevel) {
+        for (LogLevel level : LogLevel.values()) {
+            if (level.toString().toLowerCase().equals(logLevel.toLowerCase()))
+                return level;
+        }
+        return LogLevel.Verbose;
     }
 }

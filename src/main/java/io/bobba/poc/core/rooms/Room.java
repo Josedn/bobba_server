@@ -36,9 +36,6 @@ public class Room {
         this.gameMap = new GameMap(this, roomModel);
     }
 
-    public void updateUserStatusses() {
-    }
-
     public void sendMessage(ServerMessage message) {
         List<RoomUser> playersToSend = roomUserManager.getUsers();
 
@@ -50,6 +47,7 @@ public class Room {
     }
 
     public void onCycle() {
+        roomItemManager.onCycle();
         roomUserManager.onCycle();
     }
 }

@@ -22,7 +22,6 @@ public class ConnectionManager extends WebSocketServer {
         this.connectionHandler = connectionHandler;
         this.connections = new HashMap<>();
         this.totalConnectionCount = 0;
-        this.start();
     }
 
     private int generateConnectionId() {
