@@ -77,6 +77,7 @@ public class RoomUserManager {
         List<RoomUser> currentUsers = getUsers();
         for (RoomUser user : currentUsers) {
             if (user.isWalking()){
+                System.out.println(user.getUser().getUsername() + " is walking");
                 handleWalkingUser(user);
             } else {
                 user.removeStatus("mv");
@@ -88,23 +89,22 @@ public class RoomUserManager {
 
     private void handleWalkingUser(RoomUser user) {
         if (user.getX() != user.getNextX() || user.getY() != user.getNextY()) {
-            if (room.getGameMap().canWalk(user.getNextX(), user.getNextY())) {
+            if (room.getGameMap().canWalkTo(user.getNextX(), user.getNextY())) {
                 room.getGameMap().updateUserMovement(new Point(user.getX(), user.getY()), new Point(user.getNextX(), user.getNextY()), user);
                 user.setX(user.getNextX());
                 user.setY(user.getNextY());
                 user.setZ(user.getNextZ());
-
-                updateUserStatus(user);
             } else {
                 user.setWalking(false);
                 user.removeStatus("mv");
             }
+            updateUserStatus(user);
         }
         Point nextStep = room.getGameMap().getUserNextStep(user.getX(), user.getY(), user.getTargetX(), user.getTargetY());
         if (nextStep.getX() == user.getX() && nextStep.getY() == user.getY()) { //No path found or already on goal
             user.setWalking(false);
             user.removeStatus("mv");
-        } else {
+        } else if (room.getGameMap().canWalkTo(nextStep.x, nextStep.y)) {
             user.setNextX(nextStep.x);
             user.setNextY(nextStep.y);
             double nextZ = room.getGameMap().sqAbsoluteHeight(nextStep);
@@ -112,6 +112,10 @@ public class RoomUserManager {
             user.addStatus("mv", nextStep.x + "," + nextStep.y + "," + TextHandling.getFloatString(nextZ));
             int newRot = GameMap.calculateRotation(user.getX(), user.getY(), user.getNextX(), user.getNextY());
             user.setRot(newRot);
+        } else { //Walking canceled
+            user.setWalking(false);
+            user.removeStatus("mv");
+            updateUserStatus(user);
         }
         user.setNeedsUpdate(true);
     }

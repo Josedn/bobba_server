@@ -1,4 +1,4 @@
-package io.bobba.poc.core.rooms.gamemap.pathfinding;
+package io.bobba.poc.core.rooms.gamemap.pathfinding.dream;
 
 import io.bobba.poc.core.rooms.gamemap.SqState;
 

@@ -1,10 +1,13 @@
 package io.bobba.poc.core.rooms.gamemap;
 
 import io.bobba.poc.core.rooms.Room;
+import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.AStar;
+import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.ISearchGrid;
+import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.Node;
+import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.DreamPathfinder;
+import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.SquarePoint;
 import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.rooms.items.RoomItem;
-import io.bobba.poc.core.rooms.gamemap.pathfinding.DreamPathfinder;
-import io.bobba.poc.core.rooms.gamemap.pathfinding.SquarePoint;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameMap {
+public class GameMap implements ISearchGrid {
     private Room room;
     private RoomModel roomModel;
     private boolean diagonalEnabled;
@@ -149,10 +152,10 @@ public class GameMap {
         map[user.getX()][user.getY()] = user.getCurrentSqState(); //May be wrong
         removeUserFromMap(user, new Point(user.getX(), user.getY()));
     }
-
+    /*
     public boolean canWalk(int x, int y) {
         return !squareGotUsers(x, y);
-    }
+    }*/
 
     public boolean squareGotUsers(int x, int y) {
         return getRoomUsersForSquare(new Point(x, y)).size() > 0;
@@ -166,6 +169,16 @@ public class GameMap {
     }
 
     public Point getUserNextStep(int currentX, int currentY, int targetX, int targetY) {
+        Node initialNode = new Node(currentX, currentY);
+        Node finalNode = new Node(targetX, targetY);
+        if (!initialNode.equals(finalNode)) {
+            AStar aStar = new AStar(roomModel.maxX, roomModel.maxY, initialNode, finalNode, diagonalEnabled, this);
+            List<Node> path = aStar.findPath();
+            if (path.size() > 1) {
+                return new Point(new Point(path.get(1).getRow(), path.get(1).getCol()));
+            }
+        }
+        //Path is closed... then try heuristic walking
         SquarePoint point = DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, map, itemHeightMap, roomModel.maxX, roomModel.maxY, false, diagonalEnabled);
         return new Point(point.getX(), point.getY());
     }
@@ -323,11 +336,16 @@ public class GameMap {
         return pointList;
     }
 
-    public boolean isValidTile(int x, int y) {
+    public boolean canWalkTo(int x, int y) {
         return x >= 0 && y >= 0 && x < roomModel.maxX && y < roomModel.maxY && map[x][y] != SqState.Closed;
     }
 
     public SqState[][] getMap() {
         return map;
+    }
+
+    @Override
+    public boolean isBlocked(int x, int y) {
+        return map[x][y] != SqState.Walkable;
     }
 }

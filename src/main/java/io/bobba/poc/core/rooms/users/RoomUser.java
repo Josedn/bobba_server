@@ -208,7 +208,7 @@ public class RoomUser {
 
     public void moveTo(int x, int y) {
         Logging.getInstance().writeLine(getUser().getUsername() + " wants to move to " + x + ", " + y, LogLevel.Debug, this.getClass());
-        if (room.getGameMap().isValidTile(x, y)) {
+        if (room.getGameMap().canWalkTo(x, y)) {
             this.setTargetX(x);
             this.setTargetY(y);
             this.setWalking(true);

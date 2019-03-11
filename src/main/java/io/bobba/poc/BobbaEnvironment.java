@@ -2,13 +2,9 @@ package io.bobba.poc;
 
 import io.bobba.poc.core.Game;
 import io.bobba.poc.core.rooms.gamemap.SqState;
-import io.bobba.poc.core.rooms.gamemap.pathfinding.DreamPathfinder;
-import io.bobba.poc.core.rooms.gamemap.pathfinding.SquarePoint;
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
-import org.omg.CORBA.Environment;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class BobbaEnvironment {
@@ -28,7 +24,7 @@ public class BobbaEnvironment {
         System.out.println("Copyright (c) 2019 - relevance");
         System.out.println();
 
-        Logging.getInstance().setLogLevel(LogLevel.Debug);
+        Logging.getInstance().setLogLevel(LogLevel.Verbose);
         this.game = new Game();
         Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, this.getClass());
     }
