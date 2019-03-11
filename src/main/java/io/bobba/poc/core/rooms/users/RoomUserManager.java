@@ -5,9 +5,7 @@ import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.items.RoomItem;
-import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.misc.TextHandling;
-import io.bobba.poc.misc.logging.Logging;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -27,6 +25,15 @@ public class RoomUserManager {
 
     public List<RoomUser> getUsers() {
         return new ArrayList<>(users.values());
+    }
+
+    public RoomUser getUser(String name) {
+        for (RoomUser user : getUsers()) {
+            if (user.getUser().getUsername().toLowerCase().equals(name.toLowerCase())) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public RoomUser getUser(int id) {
@@ -62,10 +69,10 @@ public class RoomUserManager {
         List<RoomUser> usersToUpdate = new ArrayList<>();
 
         for (RoomUser user : users) {
-                if (!user.isNeedsUpdate()) {
-                    continue;
-                }
-                user.setNeedsUpdate(false);
+            if (!user.isNeedsUpdate()) {
+                continue;
+            }
+            user.setNeedsUpdate(false);
             usersToUpdate.add(user);
         }
         if (usersToUpdate.size() > 0) {
@@ -76,8 +83,7 @@ public class RoomUserManager {
     public void onCycle() {
         List<RoomUser> currentUsers = getUsers();
         for (RoomUser user : currentUsers) {
-            if (user.isWalking()){
-                System.out.println(user.getUser().getUsername() + " is walking");
+            if (user.isWalking()) {
                 handleWalkingUser(user);
             } else {
                 user.removeStatus("mv");
@@ -120,7 +126,7 @@ public class RoomUserManager {
         user.setNeedsUpdate(true);
     }
 
-    private void updateUserStatus(RoomUser user) {
+    public void updateUserStatus(RoomUser user) {
         if (user.getStatus("lay") != null || user.getStatus("sit") != null) {
             user.removeStatus("lay");
             user.removeStatus("sit");

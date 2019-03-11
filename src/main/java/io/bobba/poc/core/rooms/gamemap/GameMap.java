@@ -161,7 +161,7 @@ public class GameMap implements ISearchGrid {
         return getRoomUsersForSquare(new Point(x, y)).size() > 0;
     }
 
-    private List<RoomUser> getRoomUsersForSquare(Point coord) {
+    public List<RoomUser> getRoomUsersForSquare(Point coord) {
         if (coordinatedUsers.containsKey(coord)) {
             return coordinatedUsers.get(coord);
         }

@@ -22,8 +22,8 @@ public class Game {
     private Room room;
 
     private final int DELTA_TIME = 500;
-    public int baseItemId = 0;
-    public int itemId = 0;
+    public static int baseItemId = 0;
+    public static int itemId = 0;
 
     private void addFurniture() {
         BaseItem club_sofa = itemManager.addRoomItem(baseItemId++, 267, 2, 1, 1.0, "club_sofa", 1, false, false, true, Arrays.asList(0, 2, 4, 6));

@@ -178,6 +178,10 @@ public class RoomUser {
         this.stattuses.put(key, value);
     }
 
+    public boolean hasStatus(String key) {
+        return this.stattuses.containsKey(key);
+    }
+
     public void removeStatus(String key) {
         if (this.stattuses.containsKey(key)) {
             this.stattuses.remove(key);
@@ -185,6 +189,11 @@ public class RoomUser {
     }
 
     public void chat(String message) {
+        if ((message.startsWith(":") || message.startsWith("/")) && SimpleChatCommandHandler.parse(this, message.substring(1))) {
+            return;
+        }
+        if (message.toLowerCase().contains("o/"))
+            wave();
         room.sendMessage(new ChatComposer(virtualId, message));
     }
 
