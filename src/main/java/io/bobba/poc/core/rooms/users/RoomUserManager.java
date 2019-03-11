@@ -7,6 +7,7 @@ import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.items.RoomItem;
 import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.misc.TextHandling;
+import io.bobba.poc.misc.logging.Logging;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -75,13 +76,8 @@ public class RoomUserManager {
     public void onCycle() {
         List<RoomUser> currentUsers = getUsers();
         for (RoomUser user : currentUsers) {
-            if (user.isSetStep()) {
-                if (setStepForUser(user)) {
-                    continue;
-                }
-            }
-            if (user.isWalking()) {
-                calculatePath(user);
+            if (user.isWalking()){
+                handleWalkingUser(user);
             } else {
                 user.removeStatus("mv");
             }
@@ -90,51 +86,34 @@ public class RoomUserManager {
         broadcastStatusUpdates();
     }
 
-    private void calculatePath(RoomUser user) {
+    private void handleWalkingUser(RoomUser user) {
+        if (user.getX() != user.getNextX() || user.getY() != user.getNextY()) {
+            if (room.getGameMap().canWalk(user.getNextX(), user.getNextY())) {
+                room.getGameMap().updateUserMovement(new Point(user.getX(), user.getY()), new Point(user.getNextX(), user.getNextY()), user);
+                user.setX(user.getNextX());
+                user.setY(user.getNextY());
+                user.setZ(user.getNextZ());
+
+                updateUserStatus(user);
+            } else {
+                user.setWalking(false);
+                user.removeStatus("mv");
+            }
+        }
         Point nextStep = room.getGameMap().getUserNextStep(user.getX(), user.getY(), user.getTargetX(), user.getTargetY());
         if (nextStep.getX() == user.getX() && nextStep.getY() == user.getY()) { //No path found or already on goal
             user.setWalking(false);
             user.removeStatus("mv");
         } else {
-            handleSetMovement(nextStep, user);
+            user.setNextX(nextStep.x);
+            user.setNextY(nextStep.y);
+            double nextZ = room.getGameMap().sqAbsoluteHeight(nextStep);
+            user.setNextZ(nextZ);
+            user.addStatus("mv", nextStep.x + "," + nextStep.y + "," + TextHandling.getFloatString(nextZ));
+            int newRot = GameMap.calculateRotation(user.getX(), user.getY(), user.getNextX(), user.getNextY());
+            user.setRot(newRot);
         }
         user.setNeedsUpdate(true);
-    }
-
-    private void handleSetMovement(Point nextStep, RoomUser user) {
-        user.removeStatus("mv");
-        double nextZ = room.getGameMap().sqAbsoluteHeight(nextStep);
-        user.removeStatus("lay");
-        user.removeStatus("sit");
-
-        user.addStatus("mv", nextStep.x + "," + nextStep.y + "," + TextHandling.getFloatString(nextZ));
-        int newRot = GameMap.calculateRotation(user.getX(), user.getY(), nextStep.x, nextStep.y);
-
-        user.setRot(newRot);
-        user.setNextX(nextStep.x);
-        user.setNextY(nextStep.y);
-        user.setNextZ(nextZ);
-        user.setSetStep(true);
-
-        // gamemap square swap already done (?)
-
-        user.setNeedsUpdate(true);
-    }
-
-    private boolean setStepForUser(RoomUser user) {
-        if (room.getGameMap().canWalk(user.getNextX(), user.getNextY())) {
-            room.getGameMap().updateUserMovement(new Point(user.getX(), user.getY()), new Point(user.getNextX(), user.getNextY()), user);
-            user.setX(user.getNextX());
-            user.setY(user.getNextY());
-            user.setZ(user.getNextZ());
-
-            updateUserStatus(user);
-        } else {
-            user.setWalking(false);
-            return true;
-        }
-        user.setSetStep(false);
-        return false;
     }
 
     private void updateUserStatus(RoomUser user) {

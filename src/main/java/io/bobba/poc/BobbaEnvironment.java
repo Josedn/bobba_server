@@ -28,7 +28,7 @@ public class BobbaEnvironment {
         System.out.println("Copyright (c) 2019 - relevance");
         System.out.println();
 
-        Logging.getInstance().setLogLevel(LogLevel.Verbose);
+        Logging.getInstance().setLogLevel(LogLevel.Debug);
         this.game = new Game();
         Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, this.getClass());
     }

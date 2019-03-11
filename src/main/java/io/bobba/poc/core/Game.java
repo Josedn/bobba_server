@@ -22,18 +22,10 @@ public class Game {
     private Room room;
 
     private final int DELTA_TIME = 500;
+    public int baseItemId = 0;
+    public int itemId = 0;
 
-    public Game() {
-        this.gameClientManager = new GameClientManager();
-        this.connectionManager = new ConnectionManager(BobbaEnvironment.PORT, this.gameClientManager);
-        this.authenticator = new Authenticator();
-        this.itemManager = new BaseItemManager();
-        this.room = new Room(1, "Test room", new RoomModel());
-
-        int baseItemId = 0;
-        int itemId = 0;
-        double z = 0.0;
-
+    private void addFurniture() {
         BaseItem club_sofa = itemManager.addRoomItem(baseItemId++, 267, 2, 1, 1.0, "club_sofa", 1, false, false, true, Arrays.asList(0, 2, 4, 6));
         BaseItem lt_patch = itemManager.addRoomItem(baseItemId++, 3188, 2, 2, 0.01, "lt_patch", 3, false, true, false, Arrays.asList(0, 2, 4, 6));
         BaseItem lt_stone2 = itemManager.addRoomItem(baseItemId++, 3177, 2, 1, 1.05, "lt_stone2", 3, true, false, false, Arrays.asList(0, 2));
@@ -60,6 +52,8 @@ public class Game {
         BaseItem anc_sunset_wall = itemManager.addWallItem(baseItemId++, 4462, "anc_sunset_wall", 2);
 
         BaseItem doorD = itemManager.addRoomItem(baseItemId++, 1505, 1, 1, 0, "doorD", 3, false, true, false, Arrays.asList(2, 4));
+
+        double z = 0.0;
 
         int currentX = 0;
         for (int i = 0; i < 4; i++)
@@ -176,6 +170,16 @@ public class Game {
         room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5, 4, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40, 4, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 1, anc_sunset_wall);
+    }
+
+    public Game() {
+        this.gameClientManager = new GameClientManager();
+        this.connectionManager = new ConnectionManager(BobbaEnvironment.PORT, this.gameClientManager);
+        this.authenticator = new Authenticator();
+        this.itemManager = new BaseItemManager();
+        this.room = new Room(1, "Test room", new RoomModel());
+
+        addFurniture();
 
         Thread roomThread = new Thread(new Runnable() {
             @Override

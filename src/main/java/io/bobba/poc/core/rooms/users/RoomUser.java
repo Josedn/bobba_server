@@ -26,7 +26,6 @@ public class RoomUser {
     private double nextZ;
     private boolean walking;
     private boolean needsUpdate;
-    private boolean setStep;
     private SqState currentSqState;
 
     private Map<String, String> stattuses;
@@ -126,14 +125,6 @@ public class RoomUser {
         this.needsUpdate = needsUpdate;
     }
 
-    public boolean isSetStep() {
-        return setStep;
-    }
-
-    public void setSetStep(boolean setStep) {
-        this.setStep = setStep;
-    }
-
     public Room getRoom() {
         return room;
     }
@@ -168,9 +159,10 @@ public class RoomUser {
         this.nextX = x;
         this.nextY = y;
         this.nextZ = z;
+
         this.walking = false;
+
         this.stattuses = new HashMap<>();
-        this.setStep = false;
         this.currentSqState = SqState.WalkableLast;
     }
 

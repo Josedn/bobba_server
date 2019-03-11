@@ -9,7 +9,7 @@ public class Authenticator {
     private int nextId;
 
     public Authenticator() {
-
+        nextId = 1;
     }
 
     public void tryLogin(GameClient client, String username, String look) {
