@@ -1,9 +1,5 @@
 package io.bobba.poc.misc.logging;
 
-import sun.rmi.runtime.Log;
-
-import java.util.Arrays;
-
 public class Logging {
     private static Logging instance;
 
@@ -21,7 +17,7 @@ public class Logging {
         return this.logLevel.ordinal() <= logLevel.ordinal();
     }
 
-    public void writeLine(Object o, LogLevel logLevel, Class tag) {
+    public void writeLine(Object o, LogLevel logLevel, Class<?> tag) {
         if (canLog(logLevel)) {
             System.out.println("[" + logLevel.toString().toUpperCase() + "][" + tag.getName() + "] - " + o);
         }
@@ -34,7 +30,7 @@ public class Logging {
         }
     }
 
-    public void logError(Object o, Exception e, Class tag) {
+    public void logError(Object o, Exception e, Class<?> tag) {
         if (canLog(LogLevel.Warning)) {
             writeLine(o + ": " + e.toString(), LogLevel.Warning, tag);
         }

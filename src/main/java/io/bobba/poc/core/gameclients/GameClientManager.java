@@ -1,14 +1,12 @@
 package io.bobba.poc.core.gameclients;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 import io.bobba.poc.net.Connection;
 import io.bobba.poc.net.IConnectionHandler;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class GameClientManager implements IConnectionHandler {
     private ConcurrentMap<Integer, GameClient> clients;

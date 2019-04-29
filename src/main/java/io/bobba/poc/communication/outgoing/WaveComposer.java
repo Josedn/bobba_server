@@ -1,6 +1,5 @@
 package io.bobba.poc.communication.outgoing;
 
-import com.sun.security.ntlm.Server;
 import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.communication.protocol.ServerOpCodes;
 
