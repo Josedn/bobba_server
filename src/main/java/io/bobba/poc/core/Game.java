@@ -59,6 +59,7 @@ public class Game {
         BaseItem anc_sunset_wall = itemManager.addWallItem(baseItemId++, 4462, "anc_sunset_wall", 2);
 
         BaseItem doorD = itemManager.addRoomItem(baseItemId++, 1505, 1, 1, 0, "doorD", 3, false, true, false, Arrays.asList(2, 4));
+        BaseItem duck = itemManager.addRoomItem(baseItemId++, 179, 1, 1, 1.0, "duck", 1, false, false, false, Arrays.asList(0, 2, 4, 6));
 
         double z = 0.0;
 
@@ -130,9 +131,9 @@ public class Game {
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 5, z, hween12_track.getDirections().get(3), 0, hween12_track);
 
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 5, z, hween12_track_crl.getDirections().get(3), 0, hween12_track_crl);
-        room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 5, z, hween12_track_crl.getDirections().get(3), 0, hween12_track_crl);
-        room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 11, z, hween12_track_crl.getDirections().get(3), 0, hween12_track_crl);
-        room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 11, z, hween12_track_crl.getDirections().get(3), 0, hween12_track_crl);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 5, z, hween12_track_crl.getDirections().get(2), 0, hween12_track_crl);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 11, z, hween12_track_crl.getDirections().get(1), 0, hween12_track_crl);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 11, z, hween12_track_crl.getDirections().get(0), 0, hween12_track_crl);
 
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 8, z, LT_skull.getDirections().get(2), 0, LT_skull);
 
@@ -152,28 +153,29 @@ public class Game {
         //room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
 
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 0, z, doorD.getDirections().get(1), 0, doorD);
+        
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 3, z + lt_stone2.getZ(), duck.getDirections().get(2), 0, duck);
 
         // Wall
-
-        room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155, 2, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115, 2, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75, 2, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40, 2, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20, 2, 0, lt_jngl_wall);
-
-        room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5, 4, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40, 4, 0, lt_jngl_wall);
-        room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 0, lt_jngl_wall);
-
-        room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155, 2, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115, 2, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75, 2, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40, 2, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20, 2, 1, anc_sunset_wall);
-
         room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5, 4, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40, 4, 1, anc_sunset_wall);
         room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 1, anc_sunset_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155, 2, 1, anc_sunset_wall);
+
+        room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115 + 5, 2, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75 + 5, 2, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40 + 5, 2, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20 + 5, 2, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5 + 5, 4, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, lt_jngl_wall);
+        room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155 + 5, 2, 0, lt_jngl_wall);
+        
+        
     }
 
     private void loadSslServer(int port) throws Exception {
