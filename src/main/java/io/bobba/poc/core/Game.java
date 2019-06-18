@@ -60,6 +60,8 @@ public class Game {
 
         BaseItem doorD = itemManager.addRoomItem(baseItemId++, 1505, 1, 1, 0, "doorD", 3, false, true, false, Arrays.asList(2, 4));
         BaseItem duck = itemManager.addRoomItem(baseItemId++, 179, 1, 1, 1.0, "duck", 1, false, false, false, Arrays.asList(0, 2, 4, 6));
+        
+        BaseItem scifirocket3 = itemManager.addRoomItem(baseItemId++, 1565, 1, 1, 0, "scifirocket*3", 2, false, false, false, Arrays.asList(0));
 
         double z = 0.0;
 
@@ -155,6 +157,7 @@ public class Game {
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 0, z, doorD.getDirections().get(1), 0, doorD);
         
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 3, z + lt_stone2.getZ(), duck.getDirections().get(2), 0, duck);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 10, z, scifirocket3.getDirections().get(0), 0, scifirocket3);
 
         // Wall
         room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115, 2, 1, anc_sunset_wall);

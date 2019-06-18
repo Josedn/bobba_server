@@ -1,16 +1,15 @@
 package io.bobba.poc.net;
 
-import io.bobba.poc.misc.logging.LogLevel;
-import io.bobba.poc.misc.logging.Logging;
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.java_websocket.WebSocket;
-import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
-import java.net.InetSocketAddress;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import io.bobba.poc.misc.logging.LogLevel;
+import io.bobba.poc.misc.logging.Logging;
 
 public class ConnectionManager extends WebSocketServer {
     private int totalConnectionCount;

@@ -207,7 +207,7 @@ public class GameMap implements ISearchGrid {
         return returnItems;
     }
 
-    private List<RoomItem> getRoomitemsForSquare(Point coord) {
+    private List<RoomItem> getRoomItemsForSquare(Point coord) {
         if (coordinatedItems.containsKey(coord)) {
             return coordinatedItems.get(coord);
         }
