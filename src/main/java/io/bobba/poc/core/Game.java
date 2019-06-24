@@ -146,13 +146,13 @@ public class Game {
 
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 0, z, anc_artifact3.getDirections().get(0), 0, anc_artifact3);
 
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 1, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 2, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 1, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 2, z, anc_waterfall.getDirections().get(0), 0, anc_waterfall);
 
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
-        //room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
+        room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z, anc_waterfall.getDirections().get(1), 0, anc_waterfall);
 
         room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 0, z, doorD.getDirections().get(1), 0, doorD);
         
