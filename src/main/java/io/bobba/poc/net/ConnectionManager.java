@@ -1,32 +1,78 @@
 package io.bobba.poc.net;
 
-import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.java_websocket.WebSocket;
-import org.java_websocket.handshake.ClientHandshake;
-import org.java_websocket.server.WebSocketServer;
+import io.bobba.poc.net.codec.HTTPInitializer;
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
-import io.bobba.poc.misc.logging.LogLevel;
-import io.bobba.poc.misc.logging.Logging;
-
-public class ConnectionManager extends WebSocketServer {
+public class ConnectionManager {
     private int totalConnectionCount;
-    private Map<WebSocket, Connection> connections;
-    private IConnectionHandler connectionHandler;
+    private Map<Channel, Connection> connections;
+    public IConnectionHandler connectionHandler;
+    private Channel listener;
+    private ServerBootstrap server;
 
     public ConnectionManager(int port, IConnectionHandler connectionHandler) {
-        super(new InetSocketAddress(port));
+    	
         this.connectionHandler = connectionHandler;
         this.connections = new HashMap<>();
         this.totalConnectionCount = 0;
+    	
+    	// Configure the server.
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(2);
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+            b.option(ChannelOption.SO_BACKLOG, 1024);
+            b.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new HTTPInitializer(this));
+
+            this.listener = b.bind(port).sync().channel();
+            
+            if (this.listener.isOpen()) {
+				this.server = b;
+				// Bind and start to accept incoming connections.
+			}
+            
+            this.listener.closeFuture().sync();
+            
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
+    }
+    
+    public void startNewConnection(Channel channel) {
+    	Connection connection = new Connection(generateConnectionId(), channel);
+    	this.connections.put(channel, connection);
+    	this.connectionHandler.handleNewConnection(connection);
+    }
+    
+    public void stopConnection(Channel channel) {
+    	this.connectionHandler.handleDisconnect(this.connections.get(channel));
+        this.connections.remove(channel);
+    }
+    
+    public void handleMessage(Channel channel, String message) {
+    	this.connectionHandler.handleMessage(this.connections.get(channel), message);
     }
 
     private int generateConnectionId() {
         return this.totalConnectionCount++;
     }
-
+/*
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         Connection newConnection = new Connection(generateConnectionId(), conn);
@@ -54,4 +100,6 @@ public class ConnectionManager extends WebSocketServer {
     public void onStart() {
         Logging.getInstance().writeLine("Server listening on " + this.getPort() + "...", LogLevel.Debug, this.getClass());
     }
+    
+    */
 }

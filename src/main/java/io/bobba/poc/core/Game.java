@@ -1,6 +1,9 @@
 package io.bobba.poc.core;
 
-import io.bobba.poc.BobbaEnvironment;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Arrays;
+
 import io.bobba.poc.core.gameclients.GameClientManager;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.items.BaseItemManager;
@@ -9,17 +12,6 @@ import io.bobba.poc.core.rooms.gamemap.RoomModel;
 import io.bobba.poc.core.users.Authenticator;
 import io.bobba.poc.misc.logging.Logging;
 import io.bobba.poc.net.ConnectionManager;
-import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.KeyStore;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Arrays;
 
 public class Game {
     private ConnectionManager connectionManager;
@@ -184,7 +176,7 @@ public class Game {
     private void loadSslServer(int port) throws Exception {
         connectionManager = new ConnectionManager(port, this.gameClientManager);
 
-        if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
+        /*if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
 
             // load up the key store
             String storeType = BobbaEnvironment.getConfigManager().getSslStoreType();
@@ -206,9 +198,9 @@ public class Game {
             sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
             connectionManager.setWebSocketFactory(new DefaultSSLWebSocketServerFactory(sslContext));
-        }
+        }*/
 
-        connectionManager.start();
+        //connectionManager.start();
     }
 
     public Game(int port) throws Exception {
