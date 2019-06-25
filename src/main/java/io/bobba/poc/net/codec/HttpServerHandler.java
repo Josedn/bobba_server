@@ -17,6 +17,12 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 	public HttpServerHandler(ConnectionManager manager) {
 		this.manager = manager;
 	}
+	
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		manager.stopConnection(ctx.channel());
+		ctx.close();
+	}
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {

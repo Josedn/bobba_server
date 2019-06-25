@@ -50,7 +50,8 @@ public class ConnectionManager {
 
 		this.server.bind(port).sync().channel();
 		if (sslContext != null) {
-			Logging.getInstance().writeLine("Server listening securely on " + port + "...", LogLevel.Verbose, this.getClass());
+			Logging.getInstance().writeLine("Server listening securely on " + port + "...", LogLevel.Verbose,
+					this.getClass());
 		} else {
 			Logging.getInstance().writeLine("Server listening on " + port + "...", LogLevel.Verbose, this.getClass());
 		}
@@ -73,13 +74,18 @@ public class ConnectionManager {
 
 	public void stopConnection(Channel channel) {
 		Connection connection = this.connections.get(channel);
-		this.connectionHandler.handleDisconnect(connection);
-		connection.close();
-		this.connections.remove(channel);
+		if (connection != null) {
+			this.connectionHandler.handleDisconnect(connection);
+			connection.close();
+			this.connections.remove(channel);
+		}
 	}
 
 	public void handleMessage(Channel channel, String message) {
-		this.connectionHandler.handleMessage(this.connections.get(channel), message);
+		Connection connection = this.connections.get(channel);
+		if (connection != null) {
+			this.connectionHandler.handleMessage(connection, message);
+		}
 	}
 
 	private int generateConnectionId() {

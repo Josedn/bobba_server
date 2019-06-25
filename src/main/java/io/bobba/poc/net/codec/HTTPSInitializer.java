@@ -4,6 +4,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 
 import io.bobba.poc.net.ConnectionManager;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -19,7 +20,7 @@ public class HTTPSInitializer extends ChannelInitializer<SocketChannel> {
 		this.manager = manager;
 		this.sslContext = sslContext;
 	}
-
+	
 	private SslHandler generateSslHandler() {
 		SSLEngine sslEngine = sslContext.createSSLEngine();
 		sslEngine.setUseClientMode(false);
