@@ -33,7 +33,7 @@ public class GameClientManager implements IConnectionHandler {
     public void handleDisconnect(Connection connection) {
         GameClient disconnected = this.clients.remove(connection.getId());
         if (disconnected != null) {
-            disconnected.stop();
+			disconnected.stop();
             Logging.getInstance().writeLine("Gameclient dropped (" + connection.getId() + ")", LogLevel.Debug, this.getClass());
         }
     }

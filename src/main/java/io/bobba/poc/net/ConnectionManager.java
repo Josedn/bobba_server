@@ -14,92 +14,52 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 public class ConnectionManager {
-    private int totalConnectionCount;
-    private Map<Channel, Connection> connections;
-    public IConnectionHandler connectionHandler;
-    private Channel listener;
-    private ServerBootstrap server;
+	private int totalConnectionCount;
+	private Map<Channel, Connection> connections;
+	public IConnectionHandler connectionHandler;
+	private ServerBootstrap server;
+	EventLoopGroup bossGroup;
+	EventLoopGroup workerGroup;
 
-    public ConnectionManager(int port, IConnectionHandler connectionHandler) {
-    	
-        this.connectionHandler = connectionHandler;
-        this.connections = new HashMap<>();
-        this.totalConnectionCount = 0;
-    	
-    	// Configure the server.
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup(2);
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.option(ChannelOption.SO_BACKLOG, 1024);
-            b.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
-                    .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new HTTPInitializer(this));
+	public ConnectionManager(int port, IConnectionHandler connectionHandler) throws InterruptedException {
 
-            this.listener = b.bind(port).sync().channel();
-            
-            if (this.listener.isOpen()) {
-				this.server = b;
-				// Bind and start to accept incoming connections.
-			}
-            
-            this.listener.closeFuture().sync();
-            
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
-    }
-    
-    public void startNewConnection(Channel channel) {
-    	Connection connection = new Connection(generateConnectionId(), channel);
-    	this.connections.put(channel, connection);
-    	this.connectionHandler.handleNewConnection(connection);
-    }
-    
-    public void stopConnection(Channel channel) {
-    	this.connectionHandler.handleDisconnect(this.connections.get(channel));
-        this.connections.remove(channel);
-    }
-    
-    public void handleMessage(Channel channel, String message) {
-    	this.connectionHandler.handleMessage(this.connections.get(channel), message);
-    }
+		this.connectionHandler = connectionHandler;
+		this.connections = new HashMap<>();
+		this.totalConnectionCount = 0;
 
-    private int generateConnectionId() {
-        return this.totalConnectionCount++;
-    }
-/*
-    @Override
-    public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        Connection newConnection = new Connection(generateConnectionId(), conn);
-        this.connections.put(conn, newConnection);
-        this.connectionHandler.handleNewConnection(newConnection);
-    }
+		// Configure the server.
+		this.bossGroup = new NioEventLoopGroup();
+		this.workerGroup = new NioEventLoopGroup();
 
-    @Override
-    public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-        this.connectionHandler.handleDisconnect(this.connections.get(conn));
-        this.connections.remove(conn);
-    }
+		this.server = new ServerBootstrap();
+		this.server.option(ChannelOption.SO_BACKLOG, 1024);
+		this.server.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+				.childHandler(new HTTPInitializer(this));
 
-    @Override
-    public void onMessage(WebSocket conn, String message) {
-        this.connectionHandler.handleMessage(this.connections.get(conn), message);
-    }
+		this.server.bind(port).sync().channel();
+	}
 
-    @Override
-    public void onError(WebSocket conn, Exception ex) {
-        Logging.getInstance().logError("Error with socket", ex, this.getClass());
-    }
+	public void dispose() {
+		bossGroup.shutdownGracefully();
+		workerGroup.shutdownGracefully();
+	}
 
-    @Override
-    public void onStart() {
-        Logging.getInstance().writeLine("Server listening on " + this.getPort() + "...", LogLevel.Debug, this.getClass());
-    }
-    
-    */
+	public void startNewConnection(Channel channel) {
+		Connection connection = new Connection(generateConnectionId(), channel);
+		this.connections.put(channel, connection);
+		this.connectionHandler.handleNewConnection(connection);
+	}
+
+	public void stopConnection(Channel channel) {
+		this.connectionHandler.handleDisconnect(this.connections.get(channel));
+		this.connections.remove(channel);
+	}
+
+	public void handleMessage(Channel channel, String message) {
+		this.connectionHandler.handleMessage(this.connections.get(channel), message);
+	}
+
+	private int generateConnectionId() {
+		return this.totalConnectionCount++;
+	}
 }

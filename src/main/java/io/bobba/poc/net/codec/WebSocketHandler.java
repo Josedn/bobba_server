@@ -31,7 +31,7 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
 				manager.handleMessage(ctx.channel(), ((TextWebSocketFrame) msg).text());
 				
 				//System.out.println("TextWebSocketFrame Received : ");
-				//ctx.channel().writeAndFlush(new TextWebSocketFrame("Message recieved : " + ((TextWebSocketFrame) msg).text()));
+				//ctx.channel().writeAndFlush(new TextWebSocketFrame("3"));
 				//System.out.println(((TextWebSocketFrame) msg).text());
 			} else if (msg instanceof PingWebSocketFrame) {
 				//System.out.println("PingWebSocketFrame Received : ");

@@ -1,7 +1,6 @@
 package io.bobba.poc.net.codec;
 
 import io.bobba.poc.net.ConnectionManager;
-import io.bobba.poc.net.IConnectionHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.HttpHeaderNames;
@@ -37,7 +36,7 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 				
 				this.manager.startNewConnection(ctx.channel());
 			
-				System.out.println("Handshake is done");
+				//System.out.println("Handshake is done");
 			}
 		}
 	}
@@ -55,9 +54,9 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 	}
 
 	protected String getWebSocketURL(HttpRequest req) {
-		System.out.println("Req URI : " + req.uri());
+		//System.out.println("Req URI : " + req.uri());
 		String url = "ws://" + req.headers().get("Host") + req.uri();
-		System.out.println("Constructed URL : " + url);
+		//System.out.println("Constructed URL : " + url);
 		return url;
 	}
 }
