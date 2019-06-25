@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
 
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
@@ -17,7 +16,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.ssl.SslHandler;
 
 public class ConnectionManager {
 	private int totalConnectionCount;
@@ -74,7 +72,9 @@ public class ConnectionManager {
 	}
 
 	public void stopConnection(Channel channel) {
-		this.connectionHandler.handleDisconnect(this.connections.get(channel));
+		Connection connection = this.connections.get(channel);
+		this.connectionHandler.handleDisconnect(connection);
+		connection.close();
 		this.connections.remove(channel);
 	}
 

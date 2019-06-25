@@ -19,35 +19,44 @@ public class WebSocketHandler extends ChannelInboundHandlerAdapter {
 	}
 
 	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		manager.stopConnection(ctx.channel());
+		ctx.close();
+	}
+
+	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		
 		if (msg instanceof WebSocketFrame) {
-			//System.out.println("This is a WebSocket frame");
-			//System.out.println("Client Channel : " + ctx.channel());
+			// System.out.println("This is a WebSocket frame");
+			// System.out.println("Client Channel : " + ctx.channel());
 			if (msg instanceof BinaryWebSocketFrame) {
-				//System.out.println("BinaryWebSocketFrame Received : ");
-				//System.out.println(((BinaryWebSocketFrame) msg).content());
+				// System.out.println("BinaryWebSocketFrame Received : ");
+				// System.out.println(((BinaryWebSocketFrame) msg).content());
 			} else if (msg instanceof TextWebSocketFrame) {
 				manager.handleMessage(ctx.channel(), ((TextWebSocketFrame) msg).text());
-				
-				//System.out.println("TextWebSocketFrame Received : ");
-				//ctx.channel().writeAndFlush(new TextWebSocketFrame("3"));
-				//System.out.println(((TextWebSocketFrame) msg).text());
+
+				// System.out.println("TextWebSocketFrame Received : ");
+				// ctx.channel().writeAndFlush(new TextWebSocketFrame("3"));
+				// System.out.println(((TextWebSocketFrame) msg).text());
 			} else if (msg instanceof PingWebSocketFrame) {
-				//System.out.println("PingWebSocketFrame Received : ");
-				//System.out.println(((PingWebSocketFrame) msg).content());
+				// System.out.println("PingWebSocketFrame Received : ");
+				// System.out.println(((PingWebSocketFrame) msg).content());
 			} else if (msg instanceof PongWebSocketFrame) {
-				//System.out.println("PongWebSocketFrame Received : ");
-				//System.out.println(((PongWebSocketFrame) msg).content());
+				// System.out.println("PongWebSocketFrame Received : ");
+				// System.out.println(((PongWebSocketFrame) msg).content());
 			} else if (msg instanceof CloseWebSocketFrame) {
-				
+
 				manager.stopConnection(ctx.channel());
-				
-				//System.out.println("CloseWebSocketFrame Received : ");
-				//System.out.println("ReasonText :" + ((CloseWebSocketFrame) msg).reasonText());
-				//System.out.println("StatusCode : " + ((CloseWebSocketFrame) msg).statusCode());
+
+				// System.out.println("CloseWebSocketFrame Received : ");
+				// System.out.println("ReasonText :" + ((CloseWebSocketFrame)
+				// msg).reasonText());
+				// System.out.println("StatusCode : " + ((CloseWebSocketFrame)
+				// msg).statusCode());
 			} else {
-				//System.out.println("Unsupported WebSocketFrame");
+				// System.out.println("Unsupported WebSocketFrame");
+				// System.out.println(msg.getClass().getCanonicalName());
+				manager.stopConnection(ctx.channel());
 			}
 		}
 	}
