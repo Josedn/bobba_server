@@ -43,12 +43,7 @@ public class ConnectionManager {
 		ChannelHandler channelHandler = null;
 
 		if (sslContext != null) {
-			SSLEngine sslEngine = sslContext.createSSLEngine();
-			sslEngine.setUseClientMode(false);
-			sslEngine.setNeedClientAuth(false);
-			SslHandler sslHandler = new SslHandler(sslEngine);
-
-			channelHandler = new HTTPSInitializer(this, sslHandler);
+			channelHandler = new HTTPSInitializer(this, sslContext);
 		} else {
 			channelHandler = new HTTPInitializer(this);
 		}
