@@ -1,44 +1,40 @@
 package io.bobba.poc.net;
 
-import org.java_websocket.WebSocket;
-
 import java.util.Date;
 
+import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+
 public class Connection {
-    private int id;
-    private Date created;
+	private int id;
+	private Date created;
+	private Channel channel;
 
-    private WebSocket socket;
+	public Connection(int id, Channel channel) {
+		this.id = id;
+		this.channel = channel;
+		this.created = new Date();
+	}
 
-    public Connection(int id, WebSocket socket) {
-        this.id = id;
-        this.socket = socket;
-        this.created = new Date();
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public boolean isOpen() {
+		return this.channel.isOpen();
+	}
 
-    public boolean isOpen() {
-        return this.socket.isOpen();
-    }
+	public Date getCreated() {
+		return created;
+	}
 
-    public Date getCreated() {
-        return created;
-    }
+	public void send(String data) {
+		this.channel.writeAndFlush(new TextWebSocketFrame(data));
+	}
 
-    public WebSocket getSocket() {
-        return socket;
-    }
-
-    public void send(String data) {
-        this.socket.send(data);
-    }
-
-    public void close() {
-        if (this.socket.isOpen()) {
-            this.socket.close();
-        }
-    }
+	public void close() {
+		if (this.channel.isOpen()) {
+			this.channel.close();
+		}
+	}
 }
