@@ -52,9 +52,9 @@ public class RoomItemManager {
         RoomItem item = getItem(id);
         if (item != null) {
             if (item instanceof WallItem) {
-                wallItems.remove(item);
+                wallItems.remove(id);
             } else {
-                floorItems.remove(item);
+                floorItems.remove(id);
                 room.getGameMap().removeItemFromMap(item);
                 room.getRoomUserManager().updateUserStatusses();
             }
@@ -69,6 +69,8 @@ public class RoomItemManager {
         for (int itemId : items) {
             removeItem(itemId);
         }
+        System.out.println(floorItems.values());
+        System.out.println(wallItems.values());
     }
 
     public void addWallItemToRoom(int id, int x, int y, int rot, int state, BaseItem baseItem) {

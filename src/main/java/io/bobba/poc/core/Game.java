@@ -1,15 +1,8 @@
 package io.bobba.poc.core;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.security.KeyStore;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManagerFactory;
 
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.core.gameclients.GameClientManager;
