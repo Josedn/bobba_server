@@ -9,6 +9,9 @@ public class ClientOpCodes {
     public final static int REQUEST_WAVE = 13;
     public final static int REQUEST_ROOM_DATA = 15;
     public final static int REQUEST_ITEM_INTERACT = 18;
+    public final static int REQUEST_ITEM_MOVE = 19;
+    public final static int REQUEST_ITEM_PICK_UP = 20;
+    public final static int REQUEST_CHANGE_LOOKS = 21;
 
     private ClientOpCodes() {
 

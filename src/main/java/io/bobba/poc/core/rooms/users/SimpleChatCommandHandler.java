@@ -1,13 +1,13 @@
 package io.bobba.poc.core.rooms.users;
 
+import java.awt.Point;
+import java.util.List;
+
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.core.Game;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.misc.TextHandling;
 import io.bobba.poc.misc.logging.Logging;
-
-import java.awt.Point;
-import java.util.List;
 
 public class SimpleChatCommandHandler {
     private SimpleChatCommandHandler() {

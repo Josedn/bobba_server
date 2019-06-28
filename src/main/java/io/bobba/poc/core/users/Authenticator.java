@@ -14,11 +14,12 @@ public class Authenticator {
 
     public void tryLogin(GameClient client, String username, String look) {
         if (client.getUser() == null) {
-            client.setUser(new User(nextId++, username, look, client));
+        	User user = new User(nextId++, username, "I \uD83D\uDC96 bobba", look, client);
+            client.setUser(user);
 
             Logging.getInstance().writeLine(client.getUser().getUsername() + " (" + client.getUser().getId() + ") has logged in!", LogLevel.Verbose, this.getClass());
 
-            client.sendMessage(new LoginOkComposer());
+            client.sendMessage(new LoginOkComposer(user.getId(), user.getUsername(), user.getLook(), user.getMotto()));
         } else {
             Logging.getInstance().writeLine("Client already logged!", LogLevel.Warning, this.getClass());
             client.stop();

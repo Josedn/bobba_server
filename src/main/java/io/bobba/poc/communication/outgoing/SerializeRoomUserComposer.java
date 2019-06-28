@@ -20,6 +20,7 @@ public class SerializeRoomUserComposer extends ServerMessage {
             appendInt(user.getRot());
             appendString(user.getUser().getUsername());
             appendString(user.getUser().getLook());
+            appendString(user.getUser().getMotto());
         }
     }
 

@@ -27,6 +27,8 @@ public class Game {
 	public static int itemId = 0;
 
 	private void addFurniture() {
+		BaseItem shelves_norja = itemManager.addRoomItem(baseItemId++, 13, 1, 1, 1.0, "shelves_norja", 1, false, false,
+				false, Arrays.asList(0, 2));
 		BaseItem club_sofa = itemManager.addRoomItem(baseItemId++, 267, 2, 1, 1.0, "club_sofa", 1, false, false, true,
 				Arrays.asList(0, 2, 4, 6));
 		BaseItem lt_patch = itemManager.addRoomItem(baseItemId++, 3188, 2, 2, 0.01, "lt_patch", 3, false, true, false,
@@ -80,9 +82,14 @@ public class Game {
 		BaseItem scifirocket3 = itemManager.addRoomItem(baseItemId++, 1565, 1, 1, 0, "scifirocket*3", 2, false, false,
 				false, Arrays.asList(0));
 
+		BaseItem flag_columbia = itemManager.addWallItem(baseItemId++, 4258, "flag_columbia", 1);
+
+		BaseItem hc_wall_lamp = itemManager.addWallItem(baseItemId++, 4003, "hc_wall_lamp", 2);
+
 		double z = 0.0;
 
 		int currentX = 0;
+
 		for (int i = 0; i < 4; i++) {
 			int currentY = 0;
 			for (int j = 0; j < 6; j++) {
@@ -229,7 +236,6 @@ public class Game {
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 1, anc_sunset_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155, 2, 1, anc_sunset_wall);
 
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115 + 5, 2, 0, lt_jngl_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75 + 5, 2, 0, lt_jngl_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40 + 5, 2, 0, lt_jngl_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20 + 5, 2, 0, lt_jngl_wall);
@@ -237,6 +243,12 @@ public class Game {
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, lt_jngl_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, lt_jngl_wall);
 		room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155 + 5, 2, 0, lt_jngl_wall);
+
+		room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115 + 5, 2, 0, lt_jngl_wall);
+
+		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, flag_columbia);
+
+		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, hc_wall_lamp);
 
 	}
 

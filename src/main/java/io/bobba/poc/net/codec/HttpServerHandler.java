@@ -41,7 +41,6 @@ public class HttpServerHandler extends ChannelInboundHandlerAdapter {
 				handleHandshake(ctx, httpRequest);
 				
 				this.manager.startNewConnection(ctx.channel());
-			
 				//System.out.println("Handshake is done");
 			}
 		}

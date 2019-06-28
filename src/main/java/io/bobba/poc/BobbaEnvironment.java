@@ -22,7 +22,8 @@ public class BobbaEnvironment {
         System.out.println("|   ||   ||   ||   |,---| ||   |");
         System.out.println("`---'`---'`---'`---'`---^o``---'");
         System.out.println(VERSION);
-        System.out.println("Copyright (c) 2019 - relevance");
+        System.out.println("Copyright (c) 2019 - Relevance");
+        System.out.println("Made by Relevance. Follow me on instagram @josednn");
         System.out.println();
 
         Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(configManager.getLogLevel()));

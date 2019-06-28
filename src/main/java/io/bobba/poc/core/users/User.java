@@ -1,5 +1,6 @@
 package io.bobba.poc.core.users;
 
+import io.bobba.poc.communication.outgoing.LoginOkComposer;
 import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.users.RoomUser;
@@ -10,6 +11,7 @@ public class User {
 	private int id;
 	private String username;
 	private String look;
+	private String motto;
 	private GameClient client;
 	private boolean disconnected;
 	private Room currentRoom;
@@ -44,11 +46,24 @@ public class User {
 
 	public void setLook(String look) {
 		this.look = look;
+		if (this.getCurrentRoomUser() != null) {
+			this.getCurrentRoomUser().getRoom().getRoomUserManager().serializeUser(this.getCurrentRoomUser());
+		}
+		client.sendMessage(new LoginOkComposer(getId(), getUsername(), getLook(), getMotto()));
 	}
 
-	public User(int id, String username, String look, GameClient client) {
+	public String getMotto() {
+		return motto;
+	}
+
+	public void setMotto(String motto) {
+		this.motto = motto;
+	}
+
+	public User(int id, String username, String motto, String look, GameClient client) {
 		this.id = id;
 		this.username = username;
+		this.motto = motto;
 		this.look = look;
 		this.client = client;
 		this.disconnected = false;

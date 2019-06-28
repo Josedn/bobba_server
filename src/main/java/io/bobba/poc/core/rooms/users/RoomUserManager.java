@@ -1,17 +1,21 @@
 package io.bobba.poc.core.rooms.users;
 
-import io.bobba.poc.communication.outgoing.*;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.bobba.poc.communication.outgoing.PlayerRemoveComposer;
+import io.bobba.poc.communication.outgoing.SerializeFloorItemComposer;
+import io.bobba.poc.communication.outgoing.SerializeRoomUserComposer;
+import io.bobba.poc.communication.outgoing.SerializeRoomUserStatus;
+import io.bobba.poc.communication.outgoing.SerializeWallItemComposer;
 import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.items.RoomItem;
 import io.bobba.poc.misc.TextHandling;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RoomUserManager {
 
@@ -51,6 +55,11 @@ public class RoomUserManager {
         List<RoomUser> users = getUsers();
         client.sendMessage(new SerializeRoomUserComposer(users));
         client.sendMessage(new SerializeRoomUserStatus(users));
+    }
+    
+    public void serializeUser(RoomUser user) {
+    	room.sendMessage(new SerializeRoomUserComposer(user));
+    	room.sendMessage(new SerializeRoomUserStatus(user));
     }
 
     public void removeUserFromRoom(GameClient client) {

@@ -10,7 +10,7 @@ import io.bobba.poc.misc.logging.Logging;
 
 public class GameClientMessageHandler {
     private IIncomingEvent[] requestHandlers;
-    private final static int HIGHEST_MESSAGE_ID = 20;
+    private final static int HIGHEST_MESSAGE_ID = 30;
 
     public GameClientMessageHandler() {
         this.requestHandlers = new IIncomingEvent[HIGHEST_MESSAGE_ID];
@@ -30,7 +30,11 @@ public class GameClientMessageHandler {
             return false;
         }
         Logging.getInstance().writeLine("Handled by: " + requestHandlers[message.getId()].getClass().getName(), LogLevel.Debug, this.getClass());
-        requestHandlers[message.getId()].handle(client, message);
+        try {
+        	requestHandlers[message.getId()].handle(client, message);	
+        } catch (Exception e) {
+        	Logging.getInstance().writeLine("Error handling " +requestHandlers[message.getId()].getClass().getSimpleName() + ". " + e.toString(), LogLevel.Warning, this.getClass());
+        }
         return true;
     }
     private void registerRequests() {
@@ -42,5 +46,8 @@ public class GameClientMessageHandler {
         requestHandlers[ClientOpCodes.REQUEST_WAVE] = new RequestWave();
         requestHandlers[ClientOpCodes.REQUEST_ROOM_DATA] = new RequestRoomData();
         requestHandlers[ClientOpCodes.REQUEST_ITEM_INTERACT] = new RequestFurniInteract();
+        requestHandlers[ClientOpCodes.REQUEST_ITEM_MOVE] = new RequestFurniMovement();
+        requestHandlers[ClientOpCodes.REQUEST_ITEM_PICK_UP] = new RequestFurniPickUp();
+        requestHandlers[ClientOpCodes.REQUEST_CHANGE_LOOKS] = new RequestChangeLooks();
     }
 }
