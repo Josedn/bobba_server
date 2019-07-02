@@ -1,4 +1,4 @@
-package io.bobba.poc.communication.incoming.generic;
+package io.bobba.poc.communication.incoming.users;
 
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.incoming.IIncomingEvent;

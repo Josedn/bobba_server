@@ -1,6 +1,6 @@
 package io.bobba.poc.core.rooms.items;
 
-import io.bobba.poc.communication.outgoing.FurniStateComposer;
+import io.bobba.poc.communication.outgoing.rooms.FurniStateComposer;
 import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.Room;

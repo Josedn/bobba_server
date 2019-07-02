@@ -14,6 +14,7 @@ public class BaseItem {
     private boolean stackable;
     private boolean walkable;
     private boolean seat;
+    private boolean inventoryStackable;
     private List<Integer> directions;
 
     public BaseItem(int id, ItemType type, int baseId, int x, int y, double z, String itemName, int states, boolean stackable, boolean walkable, boolean seat, List<Integer> directions) {
@@ -29,6 +30,7 @@ public class BaseItem {
         this.walkable = walkable;
         this.seat = seat;
         this.directions = directions;
+        this.inventoryStackable = true;
     }
 
     public int getId() {
@@ -78,4 +80,8 @@ public class BaseItem {
     public List<Integer> getDirections() {
         return directions;
     }
+
+	public boolean isInventoryStackable() {
+		return inventoryStackable;
+	}
 }

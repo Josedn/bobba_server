@@ -1,7 +1,7 @@
 package io.bobba.poc.core.rooms.users;
 
-import io.bobba.poc.communication.outgoing.ChatComposer;
-import io.bobba.poc.communication.outgoing.WaveComposer;
+import io.bobba.poc.communication.outgoing.rooms.ChatComposer;
+import io.bobba.poc.communication.outgoing.rooms.WaveComposer;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.gamemap.SqState;

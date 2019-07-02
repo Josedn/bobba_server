@@ -1,9 +1,13 @@
 package io.bobba.poc.core.users;
 
-import io.bobba.poc.communication.outgoing.LoginOkComposer;
+import io.bobba.poc.BobbaEnvironment;
+import io.bobba.poc.communication.outgoing.users.LoginOkComposer;
+import io.bobba.poc.core.Game;
 import io.bobba.poc.core.gameclients.GameClient;
+import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.users.RoomUser;
+import io.bobba.poc.core.users.inventory.Inventory;
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 
@@ -15,6 +19,7 @@ public class User {
 	private GameClient client;
 	private boolean disconnected;
 	private Room currentRoom;
+	private Inventory inventory;
 
 	public Room getCurrentRoom() {
 		return currentRoom;
@@ -46,10 +51,7 @@ public class User {
 
 	public void setLook(String look) {
 		this.look = look;
-		if (this.getCurrentRoomUser() != null) {
-			this.getCurrentRoomUser().getRoom().getRoomUserManager().serializeUser(this.getCurrentRoomUser());
-		}
-		client.sendMessage(new LoginOkComposer(getId(), getUsername(), getLook(), getMotto()));
+		notifyChange();
 	}
 
 	public String getMotto() {
@@ -58,6 +60,18 @@ public class User {
 
 	public void setMotto(String motto) {
 		this.motto = motto;
+		notifyChange();
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	private void notifyChange() {
+		if (this.getCurrentRoomUser() != null) {
+			this.getCurrentRoomUser().getRoom().getRoomUserManager().serializeUser(this.getCurrentRoomUser());
+		}
+		client.sendMessage(new LoginOkComposer(getId(), getUsername(), getLook(), getMotto()));
 	}
 
 	public User(int id, String username, String motto, String look, GameClient client) {
@@ -67,6 +81,10 @@ public class User {
 		this.look = look;
 		this.client = client;
 		this.disconnected = false;
+		this.inventory = new Inventory(this);
+		for (BaseItem item : BobbaEnvironment.getInstance().getGame().getItemManager().getItems()) {
+			this.inventory.addItem(Game.itemId++, item, 0);	
+		}		
 	}
 
 	public RoomUser getCurrentRoomUser() {
@@ -84,4 +102,5 @@ public class User {
 			currentRoom.getRoomUserManager().removeUserFromRoom(client);
 		}
 	}
+
 }

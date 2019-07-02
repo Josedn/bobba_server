@@ -1,17 +1,19 @@
 package io.bobba.poc.core.rooms.items;
 
-import io.bobba.poc.communication.outgoing.FurniRemoveComposer;
-import io.bobba.poc.communication.outgoing.SerializeFloorItemComposer;
-import io.bobba.poc.communication.outgoing.SerializeWallItemComposer;
-import io.bobba.poc.core.items.BaseItem;
-import io.bobba.poc.core.rooms.Room;
-import io.bobba.poc.core.rooms.users.RoomUser;
-
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.bobba.poc.communication.outgoing.rooms.FurniRemoveComposer;
+import io.bobba.poc.communication.outgoing.rooms.SerializeFloorItemComposer;
+import io.bobba.poc.communication.outgoing.rooms.SerializeWallItemComposer;
+import io.bobba.poc.core.items.BaseItem;
+import io.bobba.poc.core.items.ItemType;
+import io.bobba.poc.core.rooms.Room;
+import io.bobba.poc.core.rooms.users.RoomUser;
+import io.bobba.poc.core.users.inventory.UserItem;
 
 public class RoomItemManager {
 	private Map<Integer, RoomItem> floorItems;
@@ -99,14 +101,32 @@ public class RoomItemManager {
 				} else {
 					double nextZ = room.getGameMap().sqAbsoluteHeight(new Point(x, y));
 					this.addFloorItemToRoom(itemId, x, y, nextZ, rot, item.getState(), item.getBaseItem());
-				}	
+				}
 			}
 		}
 	}
+
 	public void handleItemPickUp(int itemId, RoomUser user) {
 		RoomItem item = getItem(itemId);
 		if (item != null) {
 			this.removeItem(itemId);
+			
+			user.getUser().getInventory().addItem(itemId, item.getBaseItem(), item.getState());
 		}
+	}
+
+	public void handleItemPlacement(int itemId, int x, int y, int rot, RoomUser user) {
+		UserItem userItem = user.getUser().getInventory().getItem(itemId);
+		if (userItem != null) {
+			System.out.println("Removing item");
+			user.getUser().getInventory().removeItem(itemId);
+			if (userItem.getBaseItem().getType() == ItemType.WallItem) {
+				addWallItemToRoom(itemId, x, y, rot, userItem.getState(), userItem.getBaseItem());
+			} else {
+				double nextZ = room.getGameMap().sqAbsoluteHeight(new Point(x, y));
+				this.addFloorItemToRoom(itemId, x, y, nextZ, rot, userItem.getState(), userItem.getBaseItem());
+			}
+		}
+
 	}
 }

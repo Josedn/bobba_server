@@ -1,4 +1,4 @@
-package io.bobba.poc.communication.outgoing;
+package io.bobba.poc.communication.outgoing.users;
 
 import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.communication.protocol.ServerOpCodes;

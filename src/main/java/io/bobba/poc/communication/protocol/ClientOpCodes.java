@@ -12,6 +12,9 @@ public class ClientOpCodes {
     public final static int REQUEST_ITEM_MOVE = 19;
     public final static int REQUEST_ITEM_PICK_UP = 20;
     public final static int REQUEST_CHANGE_LOOKS = 21;
+    public final static int REQUEST_CHANGE_MOTTO = 22;
+    public final static int REQUEST_INVENTORY_ITEMS = 23;
+    public final static int REQUEST_ITEM_PLACE = 24;
 
     private ClientOpCodes() {
 

@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.bobba.poc.communication.outgoing.PlayerRemoveComposer;
-import io.bobba.poc.communication.outgoing.SerializeFloorItemComposer;
-import io.bobba.poc.communication.outgoing.SerializeRoomUserComposer;
-import io.bobba.poc.communication.outgoing.SerializeRoomUserStatus;
-import io.bobba.poc.communication.outgoing.SerializeWallItemComposer;
+import io.bobba.poc.communication.outgoing.rooms.PlayerRemoveComposer;
+import io.bobba.poc.communication.outgoing.rooms.SerializeFloorItemComposer;
+import io.bobba.poc.communication.outgoing.rooms.SerializeRoomUserComposer;
+import io.bobba.poc.communication.outgoing.rooms.SerializeRoomUserStatus;
+import io.bobba.poc.communication.outgoing.rooms.SerializeWallItemComposer;
 import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.GameMap;

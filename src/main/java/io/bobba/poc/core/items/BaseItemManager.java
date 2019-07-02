@@ -1,5 +1,6 @@
 package io.bobba.poc.core.items;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,13 +22,17 @@ public class BaseItemManager {
 
     public BaseItem addWallItem(int id, int baseId, String itemName, int states) {
         if (!items.containsKey(id)) {
-            items.put(id, new BaseItem(id, ItemType.RoomItem, baseId, 0, 0, 0, itemName, states, false, false, false, Arrays.asList(2, 4)));
+            items.put(id, new BaseItem(id, ItemType.WallItem, baseId, 0, 0, 0, itemName, states, false, false, false, Arrays.asList(2, 4)));
         }
         return items.get(id);
     }
 
     public BaseItem getItem(int id) {
         return items.getOrDefault(id, null);
+    }
+    
+    public List<BaseItem> getItems() {
+    	return new ArrayList<BaseItem>(items.values());
     }
 
     public BaseItem findItem(String itemName) {

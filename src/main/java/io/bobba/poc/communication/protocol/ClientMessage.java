@@ -1,7 +1,7 @@
 package io.bobba.poc.communication.protocol;
 
 public class ClientMessage {
-    private final String SEPARATOR = "\\|"; // | with applied regex
+    private final char SEPARATOR = '|';
     private String body;
     private String[] tokens;
     private int pointer;
@@ -11,7 +11,7 @@ public class ClientMessage {
         this.pointer = 0;
         this.id = -1;
         this.body = message;
-        tokens = body.split(SEPARATOR);
+        tokens = body.split("\\" + SEPARATOR);
 
         try {
             this.id = Integer.parseInt(popToken());
@@ -45,7 +45,6 @@ public class ClientMessage {
         for (int i = 0; i < tickets; i++) {
             totalString += SEPARATOR + popToken();
         }
-
         return totalString;
     }
 }

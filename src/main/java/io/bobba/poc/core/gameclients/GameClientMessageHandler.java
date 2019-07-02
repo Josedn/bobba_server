@@ -1,8 +1,20 @@
 package io.bobba.poc.core.gameclients;
 
 import io.bobba.poc.communication.incoming.IIncomingEvent;
-import io.bobba.poc.communication.incoming.generic.Login;
-import io.bobba.poc.communication.incoming.rooms.*;
+import io.bobba.poc.communication.incoming.rooms.RequestChangeLooks;
+import io.bobba.poc.communication.incoming.rooms.RequestChangeMotto;
+import io.bobba.poc.communication.incoming.rooms.RequestChat;
+import io.bobba.poc.communication.incoming.rooms.RequestFurniInteract;
+import io.bobba.poc.communication.incoming.rooms.RequestFurniMovement;
+import io.bobba.poc.communication.incoming.rooms.RequestFurniPickUp;
+import io.bobba.poc.communication.incoming.rooms.RequestFurniPlace;
+import io.bobba.poc.communication.incoming.rooms.RequestLookAt;
+import io.bobba.poc.communication.incoming.rooms.RequestMap;
+import io.bobba.poc.communication.incoming.rooms.RequestMovement;
+import io.bobba.poc.communication.incoming.rooms.RequestRoomData;
+import io.bobba.poc.communication.incoming.rooms.RequestWave;
+import io.bobba.poc.communication.incoming.users.Login;
+import io.bobba.poc.communication.incoming.users.RequestGetInventory;
 import io.bobba.poc.communication.protocol.ClientMessage;
 import io.bobba.poc.communication.protocol.ClientOpCodes;
 import io.bobba.poc.misc.logging.LogLevel;
@@ -49,5 +61,8 @@ public class GameClientMessageHandler {
         requestHandlers[ClientOpCodes.REQUEST_ITEM_MOVE] = new RequestFurniMovement();
         requestHandlers[ClientOpCodes.REQUEST_ITEM_PICK_UP] = new RequestFurniPickUp();
         requestHandlers[ClientOpCodes.REQUEST_CHANGE_LOOKS] = new RequestChangeLooks();
+        requestHandlers[ClientOpCodes.REQUEST_CHANGE_MOTTO] = new RequestChangeMotto();
+        requestHandlers[ClientOpCodes.REQUEST_INVENTORY_ITEMS] = new RequestGetInventory();
+        requestHandlers[ClientOpCodes.REQUEST_ITEM_PLACE] = new RequestFurniPlace();
     }
 }

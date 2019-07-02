@@ -12,6 +12,8 @@ public class ServerOpCodes {
     public final static int ITEM_REMOVE = 17;
     public final static int ITEM_STATE = 19;
     public final static int WALL_ITEM_DATA = 20;
+    public final static int INVENTORY_ITEMS = 21;
+    public final static int INVENTORY_ITEM_REMOVE = 22;
 
     private ServerOpCodes() {
 
