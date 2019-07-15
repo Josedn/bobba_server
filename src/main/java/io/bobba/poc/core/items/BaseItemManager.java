@@ -15,14 +15,14 @@ public class BaseItemManager {
 
     public BaseItem addRoomItem(int id, int baseId, int x, int y, double z, String itemName, int states, boolean stackable, boolean walkable, boolean seat, List<Integer> directions) {
         if (!items.containsKey(id)) {
-            items.put(id, new BaseItem(id, ItemType.RoomItem, baseId, x, y, z, itemName, states, stackable, walkable, seat, directions));
+            items.put(id, new BaseItem(id, ItemType.RoomItem, baseId, x, y, z, itemName, states, stackable, walkable, seat, directions, InteractionType.DEFAULT));
         }
         return items.get(id);
     }
 
     public BaseItem addWallItem(int id, int baseId, String itemName, int states) {
         if (!items.containsKey(id)) {
-            items.put(id, new BaseItem(id, ItemType.WallItem, baseId, 0, 0, 0, itemName, states, false, false, false, Arrays.asList(2, 4)));
+            items.put(id, new BaseItem(id, ItemType.WallItem, baseId, 0, 0, 0, itemName, states, false, false, false, Arrays.asList(2, 4), InteractionType.DEFAULT));
         }
         return items.get(id);
     }

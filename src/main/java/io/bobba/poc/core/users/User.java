@@ -2,7 +2,9 @@ package io.bobba.poc.core.users;
 
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.users.LoginOkComposer;
+import io.bobba.poc.communication.outgoing.users.UpdateCreditsBalanceComposer;
 import io.bobba.poc.core.Game;
+import io.bobba.poc.core.catalogue.Catalogue;
 import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.Room;
@@ -14,6 +16,7 @@ import io.bobba.poc.misc.logging.Logging;
 public class User {
 	private int id;
 	private int rank;
+	private int credits;
 	private String username;
 	private String look;
 	private String motto;
@@ -67,6 +70,15 @@ public class User {
 		this.motto = motto;
 		notifyChange();
 	}
+	
+	public void setCredits(int credits) {
+		this.credits = credits;
+		client.sendMessage(new UpdateCreditsBalanceComposer(credits));
+	}
+	
+	public int getCredits() {
+		return credits;
+	}
 
 	public Inventory getInventory() {
 		return inventory;
@@ -85,11 +97,12 @@ public class User {
 		this.motto = motto;
 		this.look = look;
 		this.rank = 7;
+		this.credits = 1337;
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
 		for (BaseItem item : BobbaEnvironment.getInstance().getGame().getItemManager().getItems()) {
-			this.inventory.addItem(Game.itemId++, item, 0);	
+			this.inventory.addItem(Catalogue.generateItemId(), item, 0);	
 		}		
 	}
 

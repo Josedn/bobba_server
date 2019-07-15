@@ -30,7 +30,6 @@ public class Game {
 
 	private final int DELTA_TIME = 500;
 	public static int baseItemId = 0;
-	public static int itemId = 0;
 
 	private void addFurniture() {
 		BaseItem shelves_norja = itemManager.addRoomItem(baseItemId++, 13, 1, 1, 1.0, "shelves_norja", 1, false, false,
@@ -99,162 +98,162 @@ public class Game {
 		for (int i = 0; i < 4; i++) {
 			int currentY = 0;
 			for (int j = 0; j < 6; j++) {
-				room.getRoomItemManager().addFloorItemToRoom(itemId++, 1 + currentX, currentY, z,
+				room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1 + currentX, currentY, z,
 						lt_patch.getDirections().get(0), 1, lt_patch);
 				currentY += 2;
 			}
 			currentX += 2;
 		}
 		for (int i = 0; i < 4; i++) {
-			room.getRoomItemManager().addFloorItemToRoom(itemId++, 1 + (i * 2), 11, z, lt_patch.getDirections().get(0),
+			room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1 + (i * 2), 11, z, lt_patch.getDirections().get(0),
 					1, lt_patch);
 		}
 
 		z = lt_patch.getZ();
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 12, z, scifidoor_4.getDirections().get(0), 1,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 12, z, scifidoor_4.getDirections().get(0), 1,
 				scifidoor_4);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 10, z, lt_stone2.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 10, z, lt_stone2.getDirections().get(1), 0,
 				lt_stone2);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 8, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 6, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 4, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 8, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 6, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 4, z, lt_stone2.getDirections().get(1), 0, lt_stone2);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 4, z, hween12_scarecrow.getDirections().get(1), 1,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 4, z, hween12_scarecrow.getDirections().get(1), 1,
 				hween12_scarecrow);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 3, z + 1.05, rare_icecream_2.getDirections().get(1),
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 3, z + 1.05, rare_icecream_2.getDirections().get(1),
 				0, rare_icecream_2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 8, 12, z, rare_dragon_5.getDirections().get(1), 1,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 8, 12, z, rare_dragon_5.getDirections().get(1), 1,
 				rare_dragon_5);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 3, z, lt_gate.getDirections().get(0), 0, lt_gate);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 3, z, lt_stone2.getDirections().get(0), 0, lt_stone2);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 3, z, lt_gate.getDirections().get(0), 0, lt_gate);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 10, z, hween12_cart.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 10, z, hween12_cart.getDirections().get(1), 0,
 				hween12_cart);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 8, z, hween12_cart.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 8, z, hween12_cart.getDirections().get(1), 0,
 				hween12_cart);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 6, z, hween12_cart.getDirections().get(1), 0,
-				hween12_cart);
-
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 4, z, hween12_cart.getDirections().get(2), 0,
-				hween12_cart);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 4, z, hween12_cart.getDirections().get(2), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 6, z, hween12_cart.getDirections().get(1), 0,
 				hween12_cart);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 8, 7, z, hween12_cart.getDirections().get(3), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 4, z, hween12_cart.getDirections().get(2), 0,
 				hween12_cart);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 8, 9, z, hween12_cart.getDirections().get(3), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 4, z, hween12_cart.getDirections().get(2), 0,
 				hween12_cart);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 12, z, hween12_cart.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 8, 7, z, hween12_cart.getDirections().get(3), 0,
+				hween12_cart);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 8, 9, z, hween12_cart.getDirections().get(3), 0,
+				hween12_cart);
+
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 12, z, hween12_cart.getDirections().get(0), 0,
 				hween12_cart);
 
 		//
-		// room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z,
+		// room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 0, z,
 		// club_sofa.getDirections().get(2), 0, club_sofa);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 10, z, hween12_track.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 10, z, hween12_track.getDirections().get(0), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 9, z, hween12_track.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 9, z, hween12_track.getDirections().get(0), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 8, z, hween12_track.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 8, z, hween12_track.getDirections().get(0), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 7, z, hween12_track.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 7, z, hween12_track.getDirections().get(0), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 6, z, hween12_track.getDirections().get(0), 0,
-				hween12_track);
-
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 10, z, hween12_track.getDirections().get(2), 0,
-				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 9, z, hween12_track.getDirections().get(2), 0,
-				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 8, z, hween12_track.getDirections().get(2), 0,
-				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 7, z, hween12_track.getDirections().get(2), 0,
-				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 6, z, hween12_track.getDirections().get(2), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 6, z, hween12_track.getDirections().get(0), 0,
 				hween12_track);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 11, z, hween12_track.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 10, z, hween12_track.getDirections().get(2), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 11, z, hween12_track.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 9, z, hween12_track.getDirections().get(2), 0,
+				hween12_track);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 8, z, hween12_track.getDirections().get(2), 0,
+				hween12_track);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 7, z, hween12_track.getDirections().get(2), 0,
+				hween12_track);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 6, z, hween12_track.getDirections().get(2), 0,
 				hween12_track);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 5, z, hween12_track.getDirections().get(3), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 11, z, hween12_track.getDirections().get(1), 0,
 				hween12_track);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 5, z, hween12_track.getDirections().get(3), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 11, z, hween12_track.getDirections().get(1), 0,
 				hween12_track);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 5, z, hween12_track_crl.getDirections().get(3), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 5, z, hween12_track.getDirections().get(3), 0,
+				hween12_track);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 5, z, hween12_track.getDirections().get(3), 0,
+				hween12_track);
+
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 5, z, hween12_track_crl.getDirections().get(3), 0,
 				hween12_track_crl);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 5, z, hween12_track_crl.getDirections().get(2), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 5, z, hween12_track_crl.getDirections().get(2), 0,
 				hween12_track_crl);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 4, 11, z, hween12_track_crl.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 4, 11, z, hween12_track_crl.getDirections().get(1), 0,
 				hween12_track_crl);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 11, z, hween12_track_crl.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 11, z, hween12_track_crl.getDirections().get(0), 0,
 				hween12_track_crl);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 8, z, LT_skull.getDirections().get(2), 0, LT_skull);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 8, z, LT_skull.getDirections().get(2), 0, LT_skull);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 3, z, hween12_moon.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 3, z, hween12_moon.getDirections().get(0), 0,
 				hween12_moon);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z, stories_shakespeare_tree.getDirections().get(0),
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 0, z, stories_shakespeare_tree.getDirections().get(0),
 				0, stories_shakespeare_tree);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 7, 0, z, club_sofa.getDirections().get(2), 0, club_sofa);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 7, 0, z, club_sofa.getDirections().get(2), 0, club_sofa);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 0, z, anc_artifact3.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 0, z, anc_artifact3.getDirections().get(0), 0,
 				anc_artifact3);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 0, z, anc_waterfall.getDirections().get(0), 0,
 				anc_waterfall);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 1, z, anc_waterfall.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 1, z, anc_waterfall.getDirections().get(0), 0,
 				anc_waterfall);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 2, z, anc_waterfall.getDirections().get(0), 0,
-				anc_waterfall);
-
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 1, 0, z, anc_waterfall.getDirections().get(1), 0,
-				anc_waterfall);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 2, 0, z, anc_waterfall.getDirections().get(1), 0,
-				anc_waterfall);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 3, 0, z, anc_waterfall.getDirections().get(1), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 2, z, anc_waterfall.getDirections().get(0), 0,
 				anc_waterfall);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 0, z, doorD.getDirections().get(1), 0, doorD);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 1, 0, z, anc_waterfall.getDirections().get(1), 0,
+				anc_waterfall);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 2, 0, z, anc_waterfall.getDirections().get(1), 0,
+				anc_waterfall);
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 3, 0, z, anc_waterfall.getDirections().get(1), 0,
+				anc_waterfall);
 
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 5, 3, z + lt_stone2.getZ(), duck.getDirections().get(2),
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 0, z, doorD.getDirections().get(1), 0, doorD);
+
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 5, 3, z + lt_stone2.getZ(), duck.getDirections().get(2),
 				0, duck);
-		room.getRoomItemManager().addFloorItemToRoom(itemId++, 6, 10, z, scifirocket3.getDirections().get(0), 0,
+		room.getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), 6, 10, z, scifirocket3.getDirections().get(0), 0,
 				scifirocket3);
 
 		// Wall
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115, 2, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75, 2, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40, 2, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20, 2, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5, 4, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40, 4, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75, 4, 1, anc_sunset_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155, 2, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -220, 115, 2, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -130, 75, 2, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -130 + 90, 75 - 40, 2, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 20, 75 - 40 - 20, 2, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 110, 5, 4, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 195, 40, 4, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 280, 75, 4, 1, anc_sunset_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -310, 155, 2, 1, anc_sunset_wall);
 
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -130, 75 + 5, 2, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -130 + 90, 75 - 40 + 5, 2, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 20, 75 - 40 - 20 + 5, 2, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 110, 5 + 5, 4, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, lt_jngl_wall);
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -310, 155 + 5, 2, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -130, 75 + 5, 2, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -130 + 90, 75 - 40 + 5, 2, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 20, 75 - 40 - 20 + 5, 2, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 110, 5 + 5, 4, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 195, 40 + 5, 4, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 280, 75 + 5, 4, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -310, 155 + 5, 2, 0, lt_jngl_wall);
 
-		room.getRoomItemManager().addWallItemToRoom(itemId++, -220, 115 + 5, 2, 0, lt_jngl_wall);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), -220, 115 + 5, 2, 0, lt_jngl_wall);
 
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, flag_columbia);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 280, 75 + 5, 4, 0, flag_columbia);
 
-		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, hc_wall_lamp);
+		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 195, 40 + 5, 4, 0, hc_wall_lamp);
 		
 		
 		

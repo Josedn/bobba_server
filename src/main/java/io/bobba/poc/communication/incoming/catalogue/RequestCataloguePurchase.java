@@ -12,7 +12,9 @@ public class RequestCataloguePurchase implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getCatalogue().handlePurchase(user, request.popInt());
+        	int pageId = request.popInt();
+        	int itemId = request.popInt();
+        	BobbaEnvironment.getInstance().getGame().getCatalogue().handlePurchase(user, pageId, itemId);
         }
     }
 }

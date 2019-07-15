@@ -15,9 +15,10 @@ public class BaseItem {
     private boolean walkable;
     private boolean seat;
     private boolean inventoryStackable;
+    private InteractionType interactionType;
     private List<Integer> directions;
 
-    public BaseItem(int id, ItemType type, int baseId, int x, int y, double z, String itemName, int states, boolean stackable, boolean walkable, boolean seat, List<Integer> directions) {
+    public BaseItem(int id, ItemType type, int baseId, int x, int y, double z, String itemName, int states, boolean stackable, boolean walkable, boolean seat, List<Integer> directions, InteractionType interactionType) {
         this.id = id;
         this.type = type;
         this.baseId = baseId;
@@ -30,6 +31,7 @@ public class BaseItem {
         this.walkable = walkable;
         this.seat = seat;
         this.directions = directions;
+        this.interactionType = interactionType;
         this.inventoryStackable = true;
     }
 
@@ -75,6 +77,10 @@ public class BaseItem {
 
     public boolean isSeat() {
         return seat;
+    }
+    
+    public InteractionType getInteractionType() {
+    	return interactionType;
     }
 
     public List<Integer> getDirections() {

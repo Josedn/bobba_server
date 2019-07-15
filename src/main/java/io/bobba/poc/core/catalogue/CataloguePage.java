@@ -105,6 +105,15 @@ public class CataloguePage {
 		this.textMisc2 = textMisc2;
 		this.items = items;
 	}
+
+	public CatalogueItem getItem(int itemId) {
+		for (CatalogueItem item : items) {
+			if (item.getId() == itemId) {
+				return item;
+			}
+		}
+		return null;
+	}
 	
 	
 }
