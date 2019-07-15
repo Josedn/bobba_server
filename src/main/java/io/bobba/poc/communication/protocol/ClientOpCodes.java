@@ -15,7 +15,9 @@ public class ClientOpCodes {
     public final static int REQUEST_CHANGE_MOTTO = 22;
     public final static int REQUEST_INVENTORY_ITEMS = 23;
     public final static int REQUEST_ITEM_PLACE = 24;
-
+    public final static int REQUEST_CATALOGUE_INDEX = 25;
+    public final static int REQUEST_CATALOGUE_PAGE = 26;
+    public final static int REQUEST_CATALOGUE_PURCHASE = 27;
     private ClientOpCodes() {
 
     }

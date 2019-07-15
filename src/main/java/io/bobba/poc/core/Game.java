@@ -2,9 +2,14 @@ package io.bobba.poc.core;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import io.bobba.poc.BobbaEnvironment;
+import io.bobba.poc.core.catalogue.Catalogue;
+import io.bobba.poc.core.catalogue.CatalogueItem;
+import io.bobba.poc.core.catalogue.CataloguePage;
 import io.bobba.poc.core.gameclients.GameClientManager;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.items.BaseItemManager;
@@ -20,6 +25,7 @@ public class Game {
 	private GameClientManager gameClientManager;
 	private Authenticator authenticator;
 	private BaseItemManager itemManager;
+	private Catalogue catalogue;
 	private Room room;
 
 	private final int DELTA_TIME = 500;
@@ -249,6 +255,31 @@ public class Game {
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 280, 75 + 5, 4, 0, flag_columbia);
 
 		room.getRoomItemManager().addWallItemToRoom(itemId++, 195, 40 + 5, 4, 0, hc_wall_lamp);
+		
+		
+		
+		
+		this.catalogue.pages.put(1, new CataloguePage(1, -1, "Catálogo", true, true, 0, "c8684e", 1, "frontpage",
+				"catalog_frontpage_headline_shop_ES", "fatherhabbo_300x187_girl", "Introducing Bobba Catalogue",
+				"omg it works", "Why is it in spanish?",
+				"I just took the catalogue from my old hispanic hotel, sorry bout that. :')",
+				new ArrayList<>()));
+		
+		this.catalogue.pages.put(80, new CataloguePage(80, -1, "Wired", false, true, 0, "aaaaaa", 80, "default", "", "", "", "", "", "", new ArrayList<>()));
+		
+		List<CatalogueItem> dummy = new ArrayList<>();
+		dummy.add(new CatalogueItem(45, club_sofa, "club_sofa", 3, 1));
+		dummy.add(new CatalogueItem(46, shelves_norja, "shelves_norja", 3, 1));
+		//dummy.add(new CatalogueItem())
+		this.catalogue.pages.put(81, new CataloguePage(81, 80, "Causantes", true, true, 0, "aaaaaa", 81, "default",
+				"catalog_wired_header2_es", "ctlg_pic_wired_triggers",
+				"Los Causantes permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
+				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy));
+		this.catalogue.pages.put(82, new CataloguePage(82, 80, "Efectos", true, true, 0, "aaaaaa", 82, "default",
+				"catalog_wired_header3_es", "ctlg_pic_wired_effects",
+				"Los Efectos permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
+				"¡Haz click en cada objeto para ver cómo funciona!", "", "", new ArrayList<>()));
+		
 
 	}
 
@@ -256,6 +287,7 @@ public class Game {
 		this.gameClientManager = new GameClientManager();
 		this.authenticator = new Authenticator();
 		this.itemManager = new BaseItemManager();
+		this.catalogue = new Catalogue();
 		this.room = new Room(1, "Test room", new RoomModel());
 
 		if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
@@ -318,5 +350,9 @@ public class Game {
 
 	public BaseItemManager getItemManager() {
 		return itemManager;
+	}
+	
+	public Catalogue getCatalogue() {
+		return catalogue;
 	}
 }

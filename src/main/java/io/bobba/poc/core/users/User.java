@@ -13,6 +13,7 @@ import io.bobba.poc.misc.logging.Logging;
 
 public class User {
 	private int id;
+	private int rank;
 	private String username;
 	private String look;
 	private String motto;
@@ -39,6 +40,10 @@ public class User {
 
 	public String getUsername() {
 		return username;
+	}
+	
+	public int getRank() {
+		return rank;
 	}
 
 	public void setUsername(String username) {
@@ -79,6 +84,7 @@ public class User {
 		this.username = username;
 		this.motto = motto;
 		this.look = look;
+		this.rank = 7;
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);

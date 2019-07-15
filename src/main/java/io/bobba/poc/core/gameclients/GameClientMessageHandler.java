@@ -1,6 +1,9 @@
 package io.bobba.poc.core.gameclients;
 
 import io.bobba.poc.communication.incoming.IIncomingEvent;
+import io.bobba.poc.communication.incoming.catalogue.RequestCatalogueIndex;
+import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePage;
+import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePurchase;
 import io.bobba.poc.communication.incoming.rooms.RequestChangeLooks;
 import io.bobba.poc.communication.incoming.rooms.RequestChangeMotto;
 import io.bobba.poc.communication.incoming.rooms.RequestChat;
@@ -64,5 +67,8 @@ public class GameClientMessageHandler {
         requestHandlers[ClientOpCodes.REQUEST_CHANGE_MOTTO] = new RequestChangeMotto();
         requestHandlers[ClientOpCodes.REQUEST_INVENTORY_ITEMS] = new RequestGetInventory();
         requestHandlers[ClientOpCodes.REQUEST_ITEM_PLACE] = new RequestFurniPlace();
+        requestHandlers[ClientOpCodes.REQUEST_CATALOGUE_INDEX] = new RequestCatalogueIndex();
+        requestHandlers[ClientOpCodes.REQUEST_CATALOGUE_PAGE] = new RequestCataloguePage();
+        requestHandlers[ClientOpCodes.REQUEST_CATALOGUE_PURCHASE] = new RequestCataloguePurchase();
     }
 }
