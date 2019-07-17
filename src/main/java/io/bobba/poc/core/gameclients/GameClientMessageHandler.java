@@ -11,6 +11,8 @@ import io.bobba.poc.communication.incoming.navigator.RequestNavigatorOwnRooms;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorPopularRooms;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorRemoveFavourite;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorSearchRooms;
+import io.bobba.poc.communication.incoming.roomdata.RequestHeightMap;
+import io.bobba.poc.communication.incoming.roomdata.RequestRoomData;
 import io.bobba.poc.communication.incoming.rooms.RequestChangeLooks;
 import io.bobba.poc.communication.incoming.rooms.RequestChangeMotto;
 import io.bobba.poc.communication.incoming.rooms.RequestChat;
@@ -19,9 +21,7 @@ import io.bobba.poc.communication.incoming.rooms.RequestFurniMovement;
 import io.bobba.poc.communication.incoming.rooms.RequestFurniPickUp;
 import io.bobba.poc.communication.incoming.rooms.RequestFurniPlace;
 import io.bobba.poc.communication.incoming.rooms.RequestLookAt;
-import io.bobba.poc.communication.incoming.rooms.RequestMap;
 import io.bobba.poc.communication.incoming.rooms.RequestMovement;
-import io.bobba.poc.communication.incoming.rooms.RequestRoomData;
 import io.bobba.poc.communication.incoming.rooms.RequestWave;
 import io.bobba.poc.communication.incoming.users.Login;
 import io.bobba.poc.communication.incoming.users.RequestGetInventory;
@@ -62,7 +62,7 @@ public class GameClientMessageHandler {
 	}
 
 	private void registerRequests() {
-		requestHandlers[ClientOpCodes.REQUEST_MAP] = new RequestMap();
+		requestHandlers[ClientOpCodes.REQUEST_MAP] = new RequestHeightMap();
 		requestHandlers[ClientOpCodes.LOGIN] = new Login();
 		requestHandlers[ClientOpCodes.REQUEST_MOVEMENT] = new RequestMovement();
 		requestHandlers[ClientOpCodes.REQUEST_CHAT] = new RequestChat();

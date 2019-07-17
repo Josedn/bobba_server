@@ -1,13 +1,14 @@
 package io.bobba.poc.core.rooms;
 
+import java.util.List;
+
 import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.gamemap.RoomModel;
 import io.bobba.poc.core.rooms.items.RoomItemManager;
+import io.bobba.poc.core.rooms.roomdata.RoomData;
 import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.rooms.users.RoomUserManager;
-
-import java.util.List;
 
 public class Room {
 	private RoomData roomData;
@@ -40,7 +41,6 @@ public class Room {
 
 	public void sendMessage(ServerMessage message) {
 		List<RoomUser> playersToSend = roomUserManager.getUsers();
-
 		for (RoomUser user : playersToSend) {
 			if (user != null) {
 				user.getUser().getClient().sendMessage(message);

@@ -283,6 +283,9 @@ public class Game {
 		this.itemManager = new BaseItemManager();
 		this.catalogue = new Catalogue();
 		this.roomManager = new RoomManager();
+		this.navigator = new Navigator();
+		
+		this.roomManager.initialize();
 
 		if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
 			this.connectionManager = new ConnectionManager(port, this.gameClientManager, SSLHelper.loadSslContext());

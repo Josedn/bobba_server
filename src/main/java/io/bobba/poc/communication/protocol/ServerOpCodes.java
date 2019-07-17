@@ -2,7 +2,6 @@ package io.bobba.poc.communication.protocol;
 
 public class ServerOpCodes {
     public final static int LOGIN_OK = 3;
-    public final static int MAP_DATA = 4;
     public final static int PLAYERS_DATA = 6;
     public final static int PLAYER_STATUS = 8;
     public final static int CHAT = 10;
@@ -19,6 +18,11 @@ public class ServerOpCodes {
     public final static int CATALOGUE_PURCHASE_ERROR = 25;
     public final static int CATALOGUE_PURCHASE_INFO = 26;
     public final static int CREDITS_BALANCE = 27;
+    public final static int ROOM_DATA_MODEL_INFO = 28;
+    public final static int ROOM_DATA = 29;
+    public final static int ROOM_DATA_HEIGHTMAP = 4;
+    public final static int NAVIGATOR_ROOM_LIST = 30;
+    public final static int NAVIGATOR_LEAVE_ROOM = 31;
 
     private ServerOpCodes() {
 

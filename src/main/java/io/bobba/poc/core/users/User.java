@@ -16,6 +16,8 @@ public class User {
 	private int id;
 	private int rank;
 	private int credits;
+	private int homeRoomId;
+	private int loadingRoomId;
 	private String username;
 	private String look;
 	private String motto;
@@ -82,6 +84,10 @@ public class User {
 	public Inventory getInventory() {
 		return inventory;
 	}
+	
+	public int getHomeRoomId() {
+		return homeRoomId;
+	}
 
 	private void notifyChange() {
 		if (this.getCurrentRoomUser() != null) {
@@ -97,6 +103,8 @@ public class User {
 		this.look = look;
 		this.rank = 7;
 		this.credits = 1337;
+		this.homeRoomId = 1;
+		this.loadingRoomId = 0;
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
@@ -119,6 +127,14 @@ public class User {
 		if (currentRoom != null) {
 			currentRoom.getRoomUserManager().removeUserFromRoom(this);
 		}
+	}
+
+	public int getLoadingRoomId() {
+		return loadingRoomId;
+	}
+
+	public void setLoadingRoomId(int loadingRoomId) {
+		this.loadingRoomId = loadingRoomId;
 	}
 
 }

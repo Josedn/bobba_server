@@ -1,12 +1,12 @@
-package io.bobba.poc.communication.outgoing.rooms;
+package io.bobba.poc.communication.outgoing.roomdata;
 
 import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.communication.protocol.ServerOpCodes;
 import io.bobba.poc.core.rooms.gamemap.RoomModel;
 
-public class MapComposer  extends ServerMessage {
-    public MapComposer(RoomModel model) {
-        super(ServerOpCodes.MAP_DATA);
+public class HeightMapComposer extends ServerMessage {
+    public HeightMapComposer(RoomModel model) {
+        super(ServerOpCodes.ROOM_DATA_HEIGHTMAP);
         appendInt(model.maxX);
         appendInt(model.maxY);
         appendInt(model.doorX);
