@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.List;
 
 import io.bobba.poc.BobbaEnvironment;
-import io.bobba.poc.core.Game;
 import io.bobba.poc.core.catalogue.Catalogue;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.misc.TextHandling;

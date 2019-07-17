@@ -2,19 +2,13 @@ package io.bobba.poc.core;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.core.catalogue.Catalogue;
-import io.bobba.poc.core.catalogue.CatalogueItem;
-import io.bobba.poc.core.catalogue.CataloguePage;
 import io.bobba.poc.core.gameclients.GameClientManager;
-import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.items.BaseItemManager;
-import io.bobba.poc.core.rooms.Room;
-import io.bobba.poc.core.rooms.gamemap.RoomModel;
+import io.bobba.poc.core.navigator.Navigator;
+import io.bobba.poc.core.rooms.RoomManager;
 import io.bobba.poc.core.users.Authenticator;
 import io.bobba.poc.misc.SSLHelper;
 import io.bobba.poc.misc.logging.Logging;
@@ -26,12 +20,13 @@ public class Game {
 	private Authenticator authenticator;
 	private BaseItemManager itemManager;
 	private Catalogue catalogue;
-	private Room room;
+	private Navigator navigator;
+	private RoomManager roomManager;
 
 	private final int DELTA_TIME = 500;
 	public static int baseItemId = 0;
 
-	private void addFurniture() {
+	/*private void addFurniture() {
 		BaseItem shelves_norja = itemManager.addRoomItem(baseItemId++, 13, 1, 1, 1.0, "shelves_norja", 1, false, false,
 				false, Arrays.asList(0, 2));
 		BaseItem club_sofa = itemManager.addRoomItem(baseItemId++, 267, 2, 1, 1.0, "club_sofa", 1, false, false, true,
@@ -256,8 +251,6 @@ public class Game {
 		room.getRoomItemManager().addWallItemToRoom(Catalogue.generateItemId(), 195, 40 + 5, 4, 0, hc_wall_lamp);
 		
 		
-		
-		
 		this.catalogue.pages.put(1, new CataloguePage(1, -1, "Catálogo", true, true, 0, "c8684e", 1, "frontpage",
 				"catalog_frontpage_headline_shop_ES", "fatherhabbo_300x187_girl", "Introducing Bobba Catalogue",
 				"omg it works", "Why is it in spanish?",
@@ -270,35 +263,32 @@ public class Game {
 		dummy.add(new CatalogueItem(45, club_sofa, "club_sofa", 3, 1));
 		dummy.add(new CatalogueItem(46, shelves_norja, "shelves_norja", 3, 1));
 		
-		List<CatalogueItem> dummy2 = new ArrayList<>();
-		dummy2.add(new CatalogueItem(47, duck, "duck", 5, 1));
-		//dummy.add(new CatalogueItem())
 		this.catalogue.pages.put(81, new CataloguePage(81, 80, "Causantes", true, true, 0, "aaaaaa", 81, "default",
 				"catalog_wired_header2_es", "ctlg_pic_wired_triggers",
 				"Los Causantes permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
 				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy));
+		
+		List<CatalogueItem> dummy2 = new ArrayList<>();
+		dummy2.add(new CatalogueItem(47, duck, "duck", 5, 1));
+		
 		this.catalogue.pages.put(82, new CataloguePage(82, 80, "Efectos", true, true, 0, "aaaaaa", 82, "default",
 				"catalog_wired_header3_es", "ctlg_pic_wired_effects",
 				"Los Efectos permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
 				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy2));
-		
-
-	}
+	}*/
 
 	public Game(int port) throws Exception {
 		this.gameClientManager = new GameClientManager();
 		this.authenticator = new Authenticator();
 		this.itemManager = new BaseItemManager();
 		this.catalogue = new Catalogue();
-		this.room = new Room(1, "Test room", new RoomModel());
+		this.roomManager = new RoomManager();
 
 		if (BobbaEnvironment.getConfigManager().getSslEnabled().toLowerCase().equals("true")) {
 			this.connectionManager = new ConnectionManager(port, this.gameClientManager, SSLHelper.loadSslContext());
 		} else {
 			this.connectionManager = new ConnectionManager(port, this.gameClientManager);
 		}
-
-		addFurniture();
 
 		Thread roomThread = new Thread(new Runnable() {
 			@Override
@@ -331,11 +321,7 @@ public class Game {
 	}
 
 	public void onCycle() {
-		room.onCycle();
-	}
-
-	public Room getRoom() {
-		return room;
+		this.roomManager.onCycle();
 	}
 
 	public ConnectionManager getConnectionManager() {
@@ -356,5 +342,13 @@ public class Game {
 	
 	public Catalogue getCatalogue() {
 		return catalogue;
+	}
+
+	public Navigator getNavigator() {
+		return navigator;
+	}
+	
+	public RoomManager getRoomManager() {
+		return roomManager;
 	}
 }

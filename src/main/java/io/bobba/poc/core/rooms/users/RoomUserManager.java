@@ -11,10 +11,10 @@ import io.bobba.poc.communication.outgoing.rooms.SerializeFloorItemComposer;
 import io.bobba.poc.communication.outgoing.rooms.SerializeRoomUserComposer;
 import io.bobba.poc.communication.outgoing.rooms.SerializeRoomUserStatus;
 import io.bobba.poc.communication.outgoing.rooms.SerializeWallItemComposer;
-import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.GameMap;
 import io.bobba.poc.core.rooms.items.RoomItem;
+import io.bobba.poc.core.users.User;
 import io.bobba.poc.misc.TextHandling;
 
 public class RoomUserManager {
@@ -44,17 +44,19 @@ public class RoomUserManager {
         return users.getOrDefault(id, null);
     }
 
-    public void addUserToRoom(GameClient client) {
-        RoomUser user = new RoomUser(client.getUser().getId(), room.getGameMap().getRoomModel().doorX, room.getGameMap().getRoomModel().doorY, room.getGameMap().getRoomModel().doorZ, room.getGameMap().getRoomModel().doorRot, room, client.getUser());
-        client.getUser().setCurrentRoom(room);
+    public void addUserToRoom(User user) {
+    	if (user.getClient() != null) {
+    		RoomUser roomUser = new RoomUser(user.getId(), room.getGameMap().getRoomModel().doorX, room.getGameMap().getRoomModel().doorY, room.getGameMap().getRoomModel().doorZ, room.getGameMap().getRoomModel().doorRot, room, user);
+            user.setCurrentRoom(room);
 
-        room.sendMessage(new SerializeRoomUserComposer(user));
-        users.put(user.getVirtualId(), user);
-        client.sendMessage(new SerializeFloorItemComposer(room.getRoomItemManager().getFloorItems()));
-        client.sendMessage(new SerializeWallItemComposer(room.getRoomItemManager().getWallItems()));
-        List<RoomUser> users = getUsers();
-        client.sendMessage(new SerializeRoomUserComposer(users));
-        client.sendMessage(new SerializeRoomUserStatus(users));
+            room.sendMessage(new SerializeRoomUserComposer(roomUser));
+            users.put(roomUser.getVirtualId(), roomUser);
+            user.getClient().sendMessage(new SerializeFloorItemComposer(room.getRoomItemManager().getFloorItems()));
+            user.getClient().sendMessage(new SerializeWallItemComposer(room.getRoomItemManager().getWallItems()));
+            List<RoomUser> users = getUsers();
+            user.getClient().sendMessage(new SerializeRoomUserComposer(users));
+            user.getClient().sendMessage(new SerializeRoomUserStatus(users));
+    	}
     }
     
     public void serializeUser(RoomUser user) {
@@ -62,15 +64,13 @@ public class RoomUserManager {
     	room.sendMessage(new SerializeRoomUserStatus(user));
     }
 
-    public void removeUserFromRoom(GameClient client) {
-        if (client == null)
+    public void removeUserFromRoom(User user) {
+        RoomUser roomUser = getUser(user.getId());
+        if (roomUser == null)
             return;
-        RoomUser user = getUser(client.getUser().getId());
-        if (user == null)
-            return;
-        room.getGameMap().removeUserFromMap(user);
-        users.remove(client.getUser().getId());
-        room.sendMessage(new PlayerRemoveComposer(client.getUser().getId()));
+        room.getGameMap().removeUserFromMap(roomUser);
+        users.remove(user.getId());
+        room.sendMessage(new PlayerRemoveComposer(user.getId()));
     }
 
     private void broadcastStatusUpdates() {

@@ -44,7 +44,7 @@ public class GameClient {
 
     public void sendMessage(ServerMessage message) {
         Logging.getInstance().writeLine("Sent: '" + message.toString() + "'", LogLevel.SuperDebug, this.getClass());
-        Logging.getInstance().writeLine("Composed by: " + message.getClass().getName(), LogLevel.Debug, this.getClass());
+        Logging.getInstance().writeLine("Composed by: " + message.getClass().getSimpleName(), LogLevel.Debug, this.getClass());
         if (this.connection != null && this.connection.isOpen()) {
             this.connection.send(message.toString());
         } else {

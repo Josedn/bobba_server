@@ -18,6 +18,13 @@ public class ClientOpCodes {
     public final static int REQUEST_CATALOGUE_INDEX = 25;
     public final static int REQUEST_CATALOGUE_PAGE = 26;
     public final static int REQUEST_CATALOGUE_PURCHASE = 27;
+    public final static int REQUEST_NAVIGATOR_POPULAR_ROOMS = 28;
+    public final static int REQUEST_NAVIGATOR_OWN_ROOMS = 29;
+    public final static int REQUEST_NAVIGATOR_SEARCH_ROOMS = 30;
+    public final static int REQUEST_NAVIGATOR_MAKE_FAVOURITE = 31;
+    public final static int REQUEST_NAVIGATOR_REMOVE_FAVOURITE = 32;
+    public final static int REQUEST_NAVIGATOR_LEAVE_ROOM = 33;
+    public final static int REQUEST_NAVIGATOR_GO_TO_ROOM = 34;
     private ClientOpCodes() {
 
     }
