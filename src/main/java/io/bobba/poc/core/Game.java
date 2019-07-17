@@ -269,6 +269,9 @@ public class Game {
 		List<CatalogueItem> dummy = new ArrayList<>();
 		dummy.add(new CatalogueItem(45, club_sofa, "club_sofa", 3, 1));
 		dummy.add(new CatalogueItem(46, shelves_norja, "shelves_norja", 3, 1));
+		
+		List<CatalogueItem> dummy2 = new ArrayList<>();
+		dummy2.add(new CatalogueItem(47, duck, "duck", 5, 1));
 		//dummy.add(new CatalogueItem())
 		this.catalogue.pages.put(81, new CataloguePage(81, 80, "Causantes", true, true, 0, "aaaaaa", 81, "default",
 				"catalog_wired_header2_es", "ctlg_pic_wired_triggers",
@@ -277,7 +280,7 @@ public class Game {
 		this.catalogue.pages.put(82, new CataloguePage(82, 80, "Efectos", true, true, 0, "aaaaaa", 82, "default",
 				"catalog_wired_header3_es", "ctlg_pic_wired_effects",
 				"Los Efectos permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
-				"¡Haz click en cada objeto para ver cómo funciona!", "", "", new ArrayList<>()));
+				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy2));
 		
 
 	}

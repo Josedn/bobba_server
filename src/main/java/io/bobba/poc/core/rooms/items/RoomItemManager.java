@@ -118,7 +118,6 @@ public class RoomItemManager {
 	public void handleItemPlacement(int itemId, int x, int y, int rot, RoomUser user) {
 		UserItem userItem = user.getUser().getInventory().getItem(itemId);
 		if (userItem != null) {
-			System.out.println("Removing item");
 			user.getUser().getInventory().removeItem(itemId);
 			if (userItem.getBaseItem().getType() == ItemType.WallItem) {
 				addWallItemToRoom(itemId, x, y, rot, userItem.getState(), userItem.getBaseItem());
