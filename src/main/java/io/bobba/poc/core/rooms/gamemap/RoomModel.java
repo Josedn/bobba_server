@@ -133,4 +133,17 @@ public class RoomModel {
 		sqState[doorX][doorY] = SqState.Walkable;
 		sqFloorHeight[doorX][doorY] = doorZ;
 	}
+	
+	public void printHeightMap() {
+		for (int y = 0; y < mapSizeY; y++) {
+			for (int x = 0; x < mapSizeX; x++) {
+				if (sqState[x][y] != SqState.Closed) {
+					System.out.print(sqFloorHeight[x][y]);
+				} else {
+					System.out.print("x");
+				}
+			}
+			System.out.println();
+		}
+	}
 }

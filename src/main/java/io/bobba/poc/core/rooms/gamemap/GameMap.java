@@ -1,19 +1,19 @@
 package io.bobba.poc.core.rooms.gamemap;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.AStar;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.ISearchGrid;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.Node;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.DreamPathfinder;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.SquarePoint;
-import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.rooms.items.RoomItem;
-
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.bobba.poc.core.rooms.users.RoomUser;
 
 public class GameMap implements ISearchGrid {
     private Room room;
@@ -280,7 +280,8 @@ public class GameMap implements ISearchGrid {
                 }
             }
 
-            double floorHeight = 0.0; // Always 0 cuz no model heightmap // Model.SqFloorHeight[X, Y];
+            //double floorHeight = 0.0; // Always 0 cuz no model heightmap // Model.SqFloorHeight[X, Y];
+            double floorHeight = getRoomModel().getSqFloorHeight()[coord.x][coord.y];
             double stackHeight = highestStack - floorHeight;
 
             if (deduct)
@@ -289,7 +290,7 @@ public class GameMap implements ISearchGrid {
                 stackHeight = 0;
             return floorHeight + stackHeight;
         }
-        return 0.0;
+        return getRoomModel().getSqFloorHeight()[coord.x][coord.y];
     }
 
     public static List<Point> getAffectedTiles(int x, int y, int posX, int posY, int rotation) {

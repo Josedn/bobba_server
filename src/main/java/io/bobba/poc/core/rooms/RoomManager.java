@@ -109,14 +109,124 @@ public class RoomManager {
 				"xxxxx000000x\r\n" + 
 				"xxxxxxxxxxxx";
 		
+		String model_e = "xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xx0000000000\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx";
+		
+		String model_f = "xxxxxxxxxxxx\r\n" + 
+				"xxxxxxx0000x\r\n" + 
+				"xxxxxxx0000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"x0000000000x\r\n" + 
+				"x0000000000x\r\n" + 
+				"x0000000000x\r\n" + 
+				"x0000000000x\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx";
+		String model_g = "xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xx1111000000\r\n" + 
+				"xx1111000000\r\n" + 
+				"xx1111000000\r\n" + 
+				"xx1111000000\r\n" + 
+				"xx1111000000\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xxxxxxx00000\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx";
+		String model_h = "xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxx111111x\r\n" + 
+				"xxxxx111111x\r\n" + 
+				"xxxxx111111x\r\n" + 
+				"xxxxx111111x\r\n" + 
+				"xxxxx111111x\r\n" + 
+				"xxxxx000000x\r\n" + 
+				"xxxxx000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxx00000000x\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxx";
+		
+		String model_j = "xxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"xxxxxxxxxxx0000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x00000000000000000000\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"x0000000000xxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxxxxxxxxxxx";
+		
+		String model_0 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
+				"000000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
+				"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+		
+		
 		this.models.put("model_a", new RoomModel(3, 5, 0, 2, model_a));
 		this.models.put("model_b", new RoomModel(0, 5, 0, 2, model_b));
 		this.models.put("model_c", new RoomModel(4, 7, 0, 2, model_c));
 		this.models.put("model_d", new RoomModel(4, 7, 0, 2, model_d));
+		this.models.put("model_e", new RoomModel(1, 5, 0, 2, model_e));
+		this.models.put("model_f", new RoomModel(2, 5, 0, 2, model_f));
+		this.models.put("model_g", new RoomModel(1, 7, 1, 2, model_g));
+		this.models.put("model_h", new RoomModel(4, 4, 1, 2, model_h));
+		this.models.put("model_j", new RoomModel(0, 10, 0, 2, model_j));
+		this.models.put("model_0", new RoomModel(0, 4, 0, 2, model_0));
 	}
 	
 	private void createDummyRoom() {
-		RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_a", LockType.Open);
+		RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_h", LockType.Open);
 		Room room = new Room(roomData, getModel(roomData.getModelId()));		
 		//addFurniture(room);
 		this.rooms.put(room.getRoomData().getId(), room);
