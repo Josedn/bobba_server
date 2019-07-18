@@ -4,6 +4,7 @@ import io.bobba.poc.communication.incoming.IIncomingEvent;
 import io.bobba.poc.communication.incoming.catalogue.RequestCatalogueIndex;
 import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePage;
 import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePurchase;
+import io.bobba.poc.communication.incoming.navigator.RequestNavigatorCreateRoom;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorGoToRoom;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorLeaveRoom;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorMakeFavourite;
@@ -86,5 +87,6 @@ public class GameClientMessageHandler {
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_POPULAR_ROOMS] = new RequestNavigatorPopularRooms();
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_SEARCH_ROOMS] = new RequestNavigatorSearchRooms();
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_GO_TO_ROOM] = new RequestNavigatorGoToRoom();
+		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_CREATE_ROOM] = new RequestNavigatorCreateRoom();
 	}
 }

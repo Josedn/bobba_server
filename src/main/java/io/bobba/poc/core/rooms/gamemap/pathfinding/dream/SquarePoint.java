@@ -43,7 +43,7 @@ public class SquarePoint {
     public boolean canWalk() {
         if (!lastStep) {
             if (!override) {
-                return (squareData == SqState.Walkable || squareData == SqState.Idk);
+                return (squareData == SqState.Walkable);
             } else {
                 return true;
             }

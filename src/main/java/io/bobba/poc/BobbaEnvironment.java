@@ -26,12 +26,7 @@ public class BobbaEnvironment {
         System.out.println();
 
         Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(configManager.getLogLevel()));
-        try {
-            this.game = new Game(Integer.parseInt(configManager.getPort()));
-            Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, this.getClass());
-        } catch (Exception e) {
-            Logging.getInstance().logError("Error initializing server", e, this.getClass());
-        }
+        this.game = new Game();
     }
 
     public static ConfigManager getConfigManager() {
@@ -48,6 +43,14 @@ public class BobbaEnvironment {
 
     public static void main(String[] args) {
         instance = new BobbaEnvironment();
+        
+        try {
+        	instance.getGame().initialize(Integer.parseInt(configManager.getPort()));
+            Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, BobbaEnvironment.class);
+        } catch (Exception e) {
+            Logging.getInstance().logError("Error initializing server", e, BobbaEnvironment.class);
+        }
+        
         Scanner scn = new Scanner(System.in);
         String command;
         while (true) {

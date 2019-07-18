@@ -47,9 +47,9 @@ public class RoomUserManager {
 
 	public void addUserToRoom(User user) {
 		if (user.getClient() != null) {
-			RoomUser roomUser = new RoomUser(user.getId(), room.getGameMap().getRoomModel().doorX,
-					room.getGameMap().getRoomModel().doorY, room.getGameMap().getRoomModel().doorZ,
-					room.getGameMap().getRoomModel().doorRot, room, user);
+			RoomUser roomUser = new RoomUser(user.getId(), room.getGameMap().getRoomModel().getDoorX(),
+					room.getGameMap().getRoomModel().getDoorY(), room.getGameMap().getRoomModel().getDoorZ(),
+					room.getGameMap().getRoomModel().getDoorRot(), room, user);
 			user.setCurrentRoom(room);
 
 			room.sendMessage(new SerializeRoomUserComposer(roomUser));
@@ -59,7 +59,13 @@ public class RoomUserManager {
 			List<RoomUser> users = getUsers();
 			user.getClient().sendMessage(new SerializeRoomUserComposer(users));
 			user.getClient().sendMessage(new SerializeRoomUserStatus(users));
+			
+			updateRoomData();
 		}
+	}
+	
+	private void updateRoomData() {
+		room.getRoomData().setUserCount(users.size());
 	}
 
 	public void serializeUser(RoomUser user) {
@@ -75,6 +81,7 @@ public class RoomUserManager {
 			user.getClient().sendMessage(new NavigatorLeaveRoomComposer());
 			room.sendMessage(new PlayerRemoveComposer(user.getId()));
 			user.setCurrentRoom(null);
+			updateRoomData();
 		}
 	}
 

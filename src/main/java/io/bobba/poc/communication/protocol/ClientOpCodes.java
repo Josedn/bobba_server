@@ -25,6 +25,7 @@ public class ClientOpCodes {
     public final static int REQUEST_NAVIGATOR_REMOVE_FAVOURITE = 32;
     public final static int REQUEST_NAVIGATOR_LEAVE_ROOM = 33;
     public final static int REQUEST_NAVIGATOR_GO_TO_ROOM = 34;
+    public final static int REQUEST_NAVIGATOR_CREATE_ROOM = 35;
     private ClientOpCodes() {
 
     }
