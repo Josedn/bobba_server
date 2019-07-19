@@ -59,11 +59,11 @@ public class RoomUserManager {
 			List<RoomUser> users = getUsers();
 			user.getClient().sendMessage(new SerializeRoomUserComposer(users));
 			user.getClient().sendMessage(new SerializeRoomUserStatus(users));
-			
+
 			updateRoomData();
 		}
 	}
-	
+
 	private void updateRoomData() {
 		room.getRoomData().setUserCount(users.size());
 	}
@@ -81,6 +81,7 @@ public class RoomUserManager {
 			user.getClient().sendMessage(new NavigatorLeaveRoomComposer());
 			room.sendMessage(new PlayerRemoveComposer(user.getId()));
 			user.setCurrentRoom(null);
+			
 			updateRoomData();
 		}
 	}
@@ -90,11 +91,10 @@ public class RoomUserManager {
 		List<RoomUser> usersToUpdate = new ArrayList<>();
 
 		for (RoomUser user : users) {
-			if (!user.isNeedsUpdate()) {
-				continue;
+			if (user.isNeedsUpdate()) {
+				user.setNeedsUpdate(false);
+				usersToUpdate.add(user);
 			}
-			user.setNeedsUpdate(false);
-			usersToUpdate.add(user);
 		}
 		if (usersToUpdate.size() > 0) {
 			room.sendMessage(new SerializeRoomUserStatus(usersToUpdate));

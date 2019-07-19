@@ -281,12 +281,12 @@ public class RoomManager {
 	}
 	
 	private void createDummyRoom() {
-		RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_m", LockType.Open);
+		RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_h", LockType.Open);
 		Room room = new Room(roomData, getModel(roomData.getModelId()));		
 		//addFurniture(room);
 		this.rooms.put(room.getRoomData().getId(), room);
 		
-		roomData = new RoomData(roomId++, "dot dot dot", "Gravity", "a cool room", 25, "", "model_a", LockType.Open);
+		roomData = new RoomData(roomId++, "dot dot dot", "Gravity", "a cool room", 25, "", "model_g", LockType.Open);
 		room = new Room(roomData, getModel(roomData.getModelId()));
 		this.rooms.put(room.getRoomData().getId(), room);
 	}
