@@ -3,7 +3,6 @@ package io.bobba.poc.core.users;
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.users.LoginOkComposer;
 import io.bobba.poc.communication.outgoing.users.UpdateCreditsBalanceComposer;
-import io.bobba.poc.core.Game;
 import io.bobba.poc.core.catalogue.Catalogue;
 import io.bobba.poc.core.gameclients.GameClient;
 import io.bobba.poc.core.items.BaseItem;
@@ -17,6 +16,8 @@ public class User {
 	private int id;
 	private int rank;
 	private int credits;
+	private int homeRoomId;
+	private int loadingRoomId;
 	private String username;
 	private String look;
 	private String motto;
@@ -83,6 +84,10 @@ public class User {
 	public Inventory getInventory() {
 		return inventory;
 	}
+	
+	public int getHomeRoomId() {
+		return homeRoomId;
+	}
 
 	private void notifyChange() {
 		if (this.getCurrentRoomUser() != null) {
@@ -98,6 +103,8 @@ public class User {
 		this.look = look;
 		this.rank = 7;
 		this.credits = 1337;
+		this.homeRoomId = 1;
+		this.loadingRoomId = 0;
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
@@ -118,8 +125,16 @@ public class User {
 			return;
 		Logging.getInstance().writeLine(username + " has logged out", LogLevel.Verbose, this.getClass());
 		if (currentRoom != null) {
-			currentRoom.getRoomUserManager().removeUserFromRoom(client);
+			currentRoom.getRoomUserManager().removeUserFromRoom(this);
 		}
+	}
+
+	public int getLoadingRoomId() {
+		return loadingRoomId;
+	}
+
+	public void setLoadingRoomId(int loadingRoomId) {
+		this.loadingRoomId = loadingRoomId;
 	}
 
 }

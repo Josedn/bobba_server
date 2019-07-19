@@ -2,18 +2,18 @@ package io.bobba.poc.core.rooms.gamemap.pathfinding.dream;
 
 public class SquareInformation {
 
-    private int mX;
-    private int mY;
+    //private int mX;
+    //private int mY;
 
     private SquarePoint[] mPos;
 
-    private SquarePoint mTarget;
+    //private SquarePoint mTarget;
     private SquarePoint mPoint;
 
     public SquareInformation(int pX, int pY, SquarePoint pTarget, ModelInfo pMap, boolean pUserOverride, boolean CalculateDiagonal) {
-        mX = pX;
-        mY = pY;
-        mTarget = pTarget;
+        //mX = pX;
+        //mY = pY;
+        //mTarget = pTarget;
 
         mPoint = new SquarePoint(pX, pY, pTarget.getX(), pTarget.getY(), pMap.getState(pX, pY), pUserOverride);
         //Analyze all the squares arround the user

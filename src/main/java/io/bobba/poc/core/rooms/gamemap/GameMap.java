@@ -1,19 +1,19 @@
 package io.bobba.poc.core.rooms.gamemap;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.AStar;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.ISearchGrid;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.astar.Node;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.DreamPathfinder;
 import io.bobba.poc.core.rooms.gamemap.pathfinding.dream.SquarePoint;
-import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.rooms.items.RoomItem;
-
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import io.bobba.poc.core.rooms.users.RoomUser;
 
 public class GameMap implements ISearchGrid {
     private Room room;
@@ -35,8 +35,8 @@ public class GameMap implements ISearchGrid {
         this.diagonalEnabled = true;
         this.coordinatedItems = new HashMap<>();
         this.coordinatedUsers = new HashMap<>();
-        this.map = new SqState[roomModel.maxX][roomModel.maxY];
-        this.itemHeightMap = new double[roomModel.maxX][roomModel.maxY];
+        this.map = new SqState[roomModel.getMapSizeX()][roomModel.getMapSizeY()];
+        this.itemHeightMap = new double[roomModel.getMapSizeX()][roomModel.getMapSizeY()];
         generateMaps();
     }
 
@@ -113,11 +113,11 @@ public class GameMap implements ISearchGrid {
     }
 
     private void setDefaultValue(int x, int y) {
-        if (roomModel.getMap()[x][y] == 1)
+        if (roomModel.getSqState()[x][y] == SqState.Walkable)
             map[x][y] = SqState.Walkable;
         else
             map[x][y] = SqState.Closed;
-        if (x == roomModel.doorX && y == roomModel.doorY) {
+        if (x == roomModel.getDoorX() && y == roomModel.getDoorY()) {
             map[x][y] = SqState.WalkableLast;
         }
         itemHeightMap[x][y] = 0;
@@ -131,11 +131,11 @@ public class GameMap implements ISearchGrid {
 
     public void updateUserMovement(Point oldCoord, Point newCoord, RoomUser user) {
         removeUserFromMap(user, oldCoord);
-        if (oldCoord.x != roomModel.doorX || oldCoord.y != roomModel.doorY) {
+        if (oldCoord.x != roomModel.getDoorX() || oldCoord.y != roomModel.getDoorY()) {
             map[oldCoord.x][oldCoord.y] = user.getCurrentSqState(); // EXPERIMENTAL
         }
         user.setCurrentSqState(map[newCoord.x][newCoord.y]); // EXPERIMENTAL
-        if (newCoord.x != roomModel.doorX || newCoord.y != roomModel.doorY) {
+        if (newCoord.x != roomModel.getDoorX() || newCoord.y != roomModel.getDoorY()) {
             map[newCoord.x][newCoord.y] = SqState.Closed; // EXPERIMENTAL
         }
 
@@ -172,14 +172,14 @@ public class GameMap implements ISearchGrid {
         Node initialNode = new Node(currentX, currentY);
         Node finalNode = new Node(targetX, targetY);
         if (!initialNode.equals(finalNode)) {
-            AStar aStar = new AStar(roomModel.maxX, roomModel.maxY, initialNode, finalNode, diagonalEnabled, this);
+            AStar aStar = new AStar(roomModel.getMapSizeX(), roomModel.getMapSizeY(), initialNode, finalNode, diagonalEnabled, this);
             List<Node> path = aStar.findPath();
             if (path.size() > 1) {
                 return new Point(new Point(path.get(1).getRow(), path.get(1).getCol()));
             }
         }
         //Path is closed... then try heuristic walking
-        SquarePoint point = DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, map, itemHeightMap, roomModel.maxX, roomModel.maxY, false, diagonalEnabled);
+        SquarePoint point = DreamPathfinder.getNextStep(currentX, currentY, targetX, targetY, map, itemHeightMap, roomModel.getMapSizeX(), roomModel.getMapSizeY(), false, diagonalEnabled);
         return new Point(point.getX(), point.getY());
     }
 
@@ -207,7 +207,7 @@ public class GameMap implements ISearchGrid {
         return returnItems;
     }
 
-    private List<RoomItem> getRoomItemsForSquare(Point coord) {
+    public List<RoomItem> getRoomItemsForSquare(Point coord) {
         if (coordinatedItems.containsKey(coord)) {
             return coordinatedItems.get(coord);
         }
@@ -215,11 +215,11 @@ public class GameMap implements ISearchGrid {
     }
 
     public void generateMaps() {
-        map = new SqState[roomModel.maxX][roomModel.maxY];
-        itemHeightMap = new double[roomModel.maxX][roomModel.maxY];
+        map = new SqState[roomModel.getMapSizeX()][roomModel.getMapSizeY()];
+        itemHeightMap = new double[roomModel.getMapSizeX()][roomModel.getMapSizeY()];
 
-        for (int i = 0; i < roomModel.maxX; i++) {
-            for (int j = 0; j < roomModel.maxY; j++) {
+        for (int i = 0; i < roomModel.getMapSizeX(); i++) {
+            for (int j = 0; j < roomModel.getMapSizeY(); j++) {
                 setDefaultValue(i, j);
             }
         }
@@ -235,7 +235,7 @@ public class GameMap implements ISearchGrid {
             addItemToMap(item);
         }
 
-        map[roomModel.doorX][roomModel.doorY] = SqState.WalkableLast;
+        map[roomModel.getDoorX()][roomModel.getDoorY()] = SqState.WalkableLast;
     }
 
     public static int calculateRotation(int x1, int y1, int x2, int y2) {
@@ -280,7 +280,8 @@ public class GameMap implements ISearchGrid {
                 }
             }
 
-            double floorHeight = 0.0; // Always 0 cuz no model heightmap // Model.SqFloorHeight[X, Y];
+            //double floorHeight = 0.0; // Always 0 cuz no model heightmap // Model.SqFloorHeight[X, Y];
+            double floorHeight = getRoomModel().getSqFloorHeight()[coord.x][coord.y];
             double stackHeight = highestStack - floorHeight;
 
             if (deduct)
@@ -289,7 +290,7 @@ public class GameMap implements ISearchGrid {
                 stackHeight = 0;
             return floorHeight + stackHeight;
         }
-        return 0.0;
+        return getRoomModel().getSqFloorHeight()[coord.x][coord.y];
     }
 
     public static List<Point> getAffectedTiles(int x, int y, int posX, int posY, int rotation) {
@@ -337,7 +338,7 @@ public class GameMap implements ISearchGrid {
     }
 
     public boolean canWalkTo(int x, int y) {
-        return x >= 0 && y >= 0 && x < roomModel.maxX && y < roomModel.maxY && map[x][y] != SqState.Closed;
+        return x >= 0 && y >= 0 && x < roomModel.getMapSizeX() && y < roomModel.getMapSizeY() && map[x][y] != SqState.Closed;
     }
 
     public SqState[][] getMap() {

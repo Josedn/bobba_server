@@ -12,7 +12,7 @@ public class RequestChangeLooks implements IIncomingEvent {
         RoomUser user = client.getUser().getCurrentRoomUser();
         if (user != null){
         	String look = request.popString();
-        	String gender = request.popString();
+        	//String gender = request.popString();
         	
         	user.getUser().setLook(look);
         }
