@@ -9,6 +9,7 @@ import io.bobba.poc.communication.outgoing.messenger.MessengerFriendsComposer;
 import io.bobba.poc.communication.outgoing.messenger.MessengerMessageComposer;
 import io.bobba.poc.communication.outgoing.messenger.MessengerRequestsComposer;
 import io.bobba.poc.communication.outgoing.messenger.MessengerSearchResultComposer;
+import io.bobba.poc.communication.outgoing.messenger.MessengerUpdateFriendComposer;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.users.User;
 
@@ -38,7 +39,7 @@ public class Messenger {
 			}
 			
 			if (otherUser.isConnected()) {
-				otherUser.getMessenger().serializeFriends();
+				otherUser.getClient().sendMessage(new MessengerUpdateFriendComposer(this.user));
 			}
 		}
 	}
@@ -139,7 +140,7 @@ public class Messenger {
 
 	public void handleFollowFriend(int userId) {
 		User user = BobbaEnvironment.getInstance().getGame().getUserManager().getUser(userId);
-		if (user != null && isFriendsWith(user)) {
+		if (user != null && isFriendsWith(user) && user.isConnected()) {
 			Room currentRoom = user.getCurrentRoom();
 			if (currentRoom != null) {
 				BobbaEnvironment.getInstance().getGame().getRoomManager().prepareRoomForUser(this.user,
@@ -193,7 +194,7 @@ public class Messenger {
 
 	public void handleMessengerMessage(int userId, String text) {
 		User user = BobbaEnvironment.getInstance().getGame().getUserManager().getUser(userId);
-		if (user != null && isFriendsWith(user)) {
+		if (user != null && isFriendsWith(user) && user.isConnected()) {
 			user.getClient().sendMessage(new MessengerMessageComposer(this.user.getId(), text, false));
 			this.user.getClient().sendMessage(new MessengerMessageComposer(user.getId(), text, true));
 		}

@@ -27,6 +27,7 @@ public class ServerOpCodes {
     public final static int MESSENGER_SEARCH_RESULT = 33;
     public final static int MESSENGER_MESSAGE = 34;
     public final static int MESSENGER_REQUESTS = 35;
+    public final static int MESSENGER_UPDATE_FRIEND = 36;
 
     private ServerOpCodes() {
 
