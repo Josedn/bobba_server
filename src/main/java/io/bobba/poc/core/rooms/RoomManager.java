@@ -500,9 +500,15 @@ public class RoomManager {
 		if (currentRoom != null) {
 			currentRoom.getRoomUserManager().removeUserFromRoom(user);
 		}
-		Room newRoom = this.getLoadedRoom(roomId);
+		Room newRoom = null;
+		if (roomId == -1) {
+			newRoom = this.getLoadedRooms().get(0); //Home room
+		} else {
+			newRoom = this.getLoadedRoom(roomId);	
+		}
+		 
 		if (newRoom != null) {
-			user.setLoadingRoomId(roomId);
+			user.setLoadingRoomId(newRoom.getRoomData().getId());
 			user.getClient().sendMessage(new RoomModelInfoComposer(newRoom.getRoomData().getModelId(), newRoom.getRoomData().getId()));
 		}
 	}
