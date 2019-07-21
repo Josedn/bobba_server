@@ -23,6 +23,10 @@ public class ServerOpCodes {
     public final static int ROOM_DATA_HEIGHTMAP = 4;
     public final static int NAVIGATOR_ROOM_LIST = 30;
     public final static int NAVIGATOR_LEAVE_ROOM = 31;
+    public final static int MESSENGER_FRIENDS = 32;
+    public final static int MESSENGER_SEARCH_RESULT = 33;
+    public final static int MESSENGER_MESSAGE = 34;
+    public final static int MESSENGER_REQUESTS = 35;
 
     private ServerOpCodes() {
 

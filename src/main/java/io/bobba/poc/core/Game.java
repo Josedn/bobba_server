@@ -9,7 +9,7 @@ import io.bobba.poc.core.gameclients.GameClientManager;
 import io.bobba.poc.core.items.BaseItemManager;
 import io.bobba.poc.core.navigator.Navigator;
 import io.bobba.poc.core.rooms.RoomManager;
-import io.bobba.poc.core.users.Authenticator;
+import io.bobba.poc.core.users.UserManager;
 import io.bobba.poc.misc.SSLHelper;
 import io.bobba.poc.misc.logging.Logging;
 import io.bobba.poc.net.ConnectionManager;
@@ -17,7 +17,7 @@ import io.bobba.poc.net.ConnectionManager;
 public class Game {
 	private ConnectionManager connectionManager;
 	private GameClientManager gameClientManager;
-	private Authenticator authenticator;
+	private UserManager userManager;
 	private BaseItemManager itemManager;
 	private Catalogue catalogue;
 	private Navigator navigator;
@@ -27,7 +27,7 @@ public class Game {
 	
 	public Game() {
 		this.gameClientManager = new GameClientManager();
-		this.authenticator = new Authenticator();
+		this.userManager = new UserManager();
 		this.itemManager = new BaseItemManager();
 		this.catalogue = new Catalogue();
 		this.roomManager = new RoomManager();
@@ -87,8 +87,8 @@ public class Game {
 		return gameClientManager;
 	}
 
-	public Authenticator getAuthenticator() {
-		return authenticator;
+	public UserManager getUserManager() {
+		return userManager;
 	}
 
 	public BaseItemManager getItemManager() {

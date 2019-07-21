@@ -26,6 +26,15 @@ public class ClientOpCodes {
     public final static int REQUEST_NAVIGATOR_LEAVE_ROOM = 33;
     public final static int REQUEST_NAVIGATOR_GO_TO_ROOM = 34;
     public final static int REQUEST_NAVIGATOR_CREATE_ROOM = 35;
+    public final static int REQUEST_MESSENGER_ACCEPT_FRIEND = 36;
+    public final static int REQUEST_MESSENGER_DENY_FRIEND = 37;
+    public final static int REQUEST_MESSENGER_FOLLOW_FRIEND = 38;
+    public final static int REQUEST_MESSENGER_SEARCH_FRIEND = 39;
+    public final static int REQUEST_MESSENGER_SEND_MESSAGE = 40;
+    public final static int REQUEST_MESSENGER_REMOVE_FRIEND = 41;
+    public final static int REQUEST_MESSENGER_ADD_FRIEND = 42;
+    public final static int REQUEST_MESSENGER_LOAD_FRIENDS = 42;
+    
     private ClientOpCodes() {
 
     }

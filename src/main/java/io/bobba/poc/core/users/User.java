@@ -9,6 +9,7 @@ import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.users.inventory.Inventory;
+import io.bobba.poc.core.users.messenger.Messenger;
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 
@@ -25,6 +26,7 @@ public class User {
 	private boolean disconnected;
 	private Room currentRoom;
 	private Inventory inventory;
+	private Messenger messenger;
 
 	public Room getCurrentRoom() {
 		return currentRoom;
@@ -85,6 +87,10 @@ public class User {
 		return inventory;
 	}
 	
+	public Messenger getMessenger() {
+		return messenger;
+	}
+	
 	public int getHomeRoomId() {
 		return homeRoomId;
 	}
@@ -108,6 +114,7 @@ public class User {
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
+		this.messenger = new Messenger(this);
 		for (BaseItem item : BobbaEnvironment.getInstance().getGame().getItemManager().getItems()) {
 			this.inventory.addItem(Catalogue.generateItemId(), item, 0);	
 		}		
@@ -123,10 +130,18 @@ public class User {
 	public void onDisconnect() {
 		if (disconnected)
 			return;
+		disconnected = true;
 		Logging.getInstance().writeLine(username + " has logged out", LogLevel.Verbose, this.getClass());
 		if (currentRoom != null) {
 			currentRoom.getRoomUserManager().removeUserFromRoom(this);
 		}
+		if (messenger != null) {
+			messenger.notifyDisconnection();
+		}
+	}
+	
+	public boolean isConnected() {
+		return !disconnected;
 	}
 
 	public int getLoadingRoomId() {

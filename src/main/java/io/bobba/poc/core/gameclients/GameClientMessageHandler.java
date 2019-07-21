@@ -4,6 +4,14 @@ import io.bobba.poc.communication.incoming.IIncomingEvent;
 import io.bobba.poc.communication.incoming.catalogue.RequestCatalogueIndex;
 import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePage;
 import io.bobba.poc.communication.incoming.catalogue.RequestCataloguePurchase;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerAcceptFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerAddFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerDenyFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerFollowFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerLoadFriends;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerRemoveFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerSearchFriend;
+import io.bobba.poc.communication.incoming.messenger.RequestMessengerSendMessage;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorCreateRoom;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorGoToRoom;
 import io.bobba.poc.communication.incoming.navigator.RequestNavigatorLeaveRoom;
@@ -33,7 +41,7 @@ import io.bobba.poc.misc.logging.Logging;
 
 public class GameClientMessageHandler {
 	private IIncomingEvent[] requestHandlers;
-	private final static int HIGHEST_MESSAGE_ID = 40;
+	private final static int HIGHEST_MESSAGE_ID = 50;
 
 	public GameClientMessageHandler() {
 		this.requestHandlers = new IIncomingEvent[HIGHEST_MESSAGE_ID];
@@ -88,5 +96,13 @@ public class GameClientMessageHandler {
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_SEARCH_ROOMS] = new RequestNavigatorSearchRooms();
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_GO_TO_ROOM] = new RequestNavigatorGoToRoom();
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_CREATE_ROOM] = new RequestNavigatorCreateRoom();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_ACCEPT_FRIEND] = new RequestMessengerAcceptFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_ADD_FRIEND]  = new RequestMessengerAddFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_DENY_FRIEND] = new RequestMessengerDenyFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_FOLLOW_FRIEND] = new RequestMessengerFollowFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_LOAD_FRIENDS] = new RequestMessengerLoadFriends();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_REMOVE_FRIEND] = new RequestMessengerRemoveFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_SEARCH_FRIEND] = new RequestMessengerSearchFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_SEND_MESSAGE] = new RequestMessengerSendMessage();
 	}
 }
