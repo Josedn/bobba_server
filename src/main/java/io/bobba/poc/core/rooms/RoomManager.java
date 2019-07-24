@@ -299,35 +299,35 @@ public class RoomManager {
 	}
 	
 	private void addFurniture(Room room) {	
-		BaseItem club_sofa = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("club_sofa");
-		BaseItem lt_patch = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("lt_patch");
-		BaseItem lt_stone2 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("lt_stone2");
-		BaseItem lt_gate = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("lt_gate");
-		BaseItem scifidoor_4 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("scifidoor*4");
-		BaseItem hween12_scarecrow = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hween12_scarecrow");
-		BaseItem rare_icecream_2 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("rare_icecream*2");
-		BaseItem rare_dragon_5 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("rare_dragonlamp*5");
-		BaseItem hween12_cart = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hween12_cart");
-		BaseItem hween12_track = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hween12_track");
-		BaseItem hween12_track_crl = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hween12_track_crl");
-		BaseItem LT_skull = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("LT_skull");
-		BaseItem hween12_moon = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hween12_moon");
+		BaseItem club_sofa = BobbaEnvironment.getGame().getItemManager().findItem("club_sofa");
+		BaseItem lt_patch = BobbaEnvironment.getGame().getItemManager().findItem("lt_patch");
+		BaseItem lt_stone2 = BobbaEnvironment.getGame().getItemManager().findItem("lt_stone2");
+		BaseItem lt_gate = BobbaEnvironment.getGame().getItemManager().findItem("lt_gate");
+		BaseItem scifidoor_4 = BobbaEnvironment.getGame().getItemManager().findItem("scifidoor*4");
+		BaseItem hween12_scarecrow = BobbaEnvironment.getGame().getItemManager().findItem("hween12_scarecrow");
+		BaseItem rare_icecream_2 = BobbaEnvironment.getGame().getItemManager().findItem("rare_icecream*2");
+		BaseItem rare_dragon_5 = BobbaEnvironment.getGame().getItemManager().findItem("rare_dragonlamp*5");
+		BaseItem hween12_cart = BobbaEnvironment.getGame().getItemManager().findItem("hween12_cart");
+		BaseItem hween12_track = BobbaEnvironment.getGame().getItemManager().findItem("hween12_track");
+		BaseItem hween12_track_crl = BobbaEnvironment.getGame().getItemManager().findItem("hween12_track_crl");
+		BaseItem LT_skull = BobbaEnvironment.getGame().getItemManager().findItem("LT_skull");
+		BaseItem hween12_moon = BobbaEnvironment.getGame().getItemManager().findItem("hween12_moon");
 
-		BaseItem stories_shakespeare_tree = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("stories_shakespeare_tree");
-		BaseItem anc_artifact3 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("anc_artifact3");
-		BaseItem anc_waterfall = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("anc_waterfall");
+		BaseItem stories_shakespeare_tree = BobbaEnvironment.getGame().getItemManager().findItem("stories_shakespeare_tree");
+		BaseItem anc_artifact3 = BobbaEnvironment.getGame().getItemManager().findItem("anc_artifact3");
+		BaseItem anc_waterfall = BobbaEnvironment.getGame().getItemManager().findItem("anc_waterfall");
 
-		BaseItem lt_jngl_wall = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("lt_jngl_wall");
-		BaseItem anc_sunset_wall = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("anc_sunset_wall");
+		BaseItem lt_jngl_wall = BobbaEnvironment.getGame().getItemManager().findItem("lt_jngl_wall");
+		BaseItem anc_sunset_wall = BobbaEnvironment.getGame().getItemManager().findItem("anc_sunset_wall");
 
-		BaseItem doorD = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("doorD");
-		BaseItem duck = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("duck");
+		BaseItem doorD = BobbaEnvironment.getGame().getItemManager().findItem("doorD");
+		BaseItem duck = BobbaEnvironment.getGame().getItemManager().findItem("duck");
 
-		BaseItem scifirocket3 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("scifirocket*3");
+		BaseItem scifirocket3 = BobbaEnvironment.getGame().getItemManager().findItem("scifirocket*3");
 
-		BaseItem flag_columbia = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("flag_columbia");
+		BaseItem flag_columbia = BobbaEnvironment.getGame().getItemManager().findItem("flag_columbia");
 
-		BaseItem hc_wall_lamp = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("hc_wall_lamp");
+		BaseItem hc_wall_lamp = BobbaEnvironment.getGame().getItemManager().findItem("hc_wall_lamp");
 
 
 		double z = 0.0;

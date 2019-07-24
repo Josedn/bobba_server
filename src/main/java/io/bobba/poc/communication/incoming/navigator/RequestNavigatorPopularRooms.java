@@ -12,7 +12,7 @@ public class RequestNavigatorPopularRooms implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getNavigator().handleGetPopularRooms(user);
+        	BobbaEnvironment.getGame().getNavigator().handleGetPopularRooms(user);
         }
     }
 }

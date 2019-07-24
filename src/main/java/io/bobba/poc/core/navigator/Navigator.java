@@ -15,7 +15,7 @@ public class Navigator {
 	}
 
 	public void handleGetPopularRooms(User user) {
-		List<Room> rooms = BobbaEnvironment.getInstance().getGame().getRoomManager().getLoadedRooms();
+		List<Room> rooms = BobbaEnvironment.getGame().getRoomManager().getLoadedRooms();
 		List<RoomData> data = new ArrayList<>();
 
 		for (Room room : rooms) {
@@ -26,7 +26,7 @@ public class Navigator {
 	}
 
 	public void handleGetOwnRooms(User user) {
-		List<Room> rooms = BobbaEnvironment.getInstance().getGame().getRoomManager().getLoadedRooms();
+		List<Room> rooms = BobbaEnvironment.getGame().getRoomManager().getLoadedRooms();
 		List<RoomData> data = new ArrayList<>();
 
 		for (Room room : rooms) {
@@ -39,7 +39,7 @@ public class Navigator {
 	}
 
 	public void handleSearchRooms(User user, String search) {
-		List<Room> rooms = BobbaEnvironment.getInstance().getGame().getRoomManager().getLoadedRooms();
+		List<Room> rooms = BobbaEnvironment.getGame().getRoomManager().getLoadedRooms();
 		List<RoomData> data = new ArrayList<>();
 
 		for (Room room : rooms) {

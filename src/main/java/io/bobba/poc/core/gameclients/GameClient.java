@@ -28,7 +28,7 @@ public class GameClient {
     public void handleMessage(String rawMessage) {
         Logging.getInstance().writeLine("Received: '" + rawMessage + "'", LogLevel.SuperDebug, this.getClass());
         ClientMessage message = new ClientMessage(rawMessage);
-        BobbaEnvironment.getInstance().getGame().getGameClientManager().getSharedMessageHandler().handleMessage(this, message);
+        BobbaEnvironment.getGame().getGameClientManager().getSharedMessageHandler().handleMessage(this, message);
     }
 
     public void stop() {

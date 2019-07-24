@@ -13,7 +13,7 @@ public class RequestNavigatorSearchRooms  implements IIncomingEvent {
     	User user = client.getUser();
         if (user != null){
         	String search = request.popString();
-        	BobbaEnvironment.getInstance().getGame().getNavigator().handleSearchRooms(user, search);
+        	BobbaEnvironment.getGame().getNavigator().handleSearchRooms(user, search);
         }
     }
 }

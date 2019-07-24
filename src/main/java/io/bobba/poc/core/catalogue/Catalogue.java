@@ -23,12 +23,12 @@ public class Catalogue {
 	}
 	
 	public void initialize() {
-		BaseItem club_sofa = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("club_sofa");
-		BaseItem shelves_norja = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("shelves_norja");
-		BaseItem duck = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("duck");
-		BaseItem flag_columbia = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("flag_columbia");
-		BaseItem scifirocket3 = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("scifirocket*3");
-		BaseItem small_chair_armas = BobbaEnvironment.getInstance().getGame().getItemManager().findItem("small_chair_armas");
+		BaseItem club_sofa = BobbaEnvironment.getGame().getItemManager().findItem("club_sofa");
+		BaseItem shelves_norja = BobbaEnvironment.getGame().getItemManager().findItem("shelves_norja");
+		BaseItem duck = BobbaEnvironment.getGame().getItemManager().findItem("duck");
+		BaseItem flag_columbia = BobbaEnvironment.getGame().getItemManager().findItem("flag_columbia");
+		BaseItem scifirocket3 = BobbaEnvironment.getGame().getItemManager().findItem("scifirocket*3");
+		BaseItem small_chair_armas = BobbaEnvironment.getGame().getItemManager().findItem("small_chair_armas");
 		
 		pages.put(1, new CataloguePage(1, -1, "Catálogo", true, true, 0, "c8684e", 1, "frontpage",
 				"catalog_frontpage_headline_shop_ES", "fatherhabbo_300x187_girl", "Introducing Bobba Catalogue",

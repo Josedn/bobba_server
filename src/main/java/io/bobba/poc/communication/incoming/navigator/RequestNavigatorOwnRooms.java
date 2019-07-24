@@ -12,7 +12,7 @@ public class RequestNavigatorOwnRooms implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getNavigator().handleGetOwnRooms(user);
+        	BobbaEnvironment.getGame().getNavigator().handleGetOwnRooms(user);
         }
     }
 }

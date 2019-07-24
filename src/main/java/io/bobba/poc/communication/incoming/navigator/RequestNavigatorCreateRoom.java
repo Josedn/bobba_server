@@ -14,7 +14,7 @@ public class RequestNavigatorCreateRoom implements IIncomingEvent {
         	String roomName = request.popString();
         	String modelId = request.popString();
         	
-        	BobbaEnvironment.getInstance().getGame().getRoomManager().createRoom(user, roomName, modelId);
+        	BobbaEnvironment.getGame().getRoomManager().createRoom(user, roomName, modelId);
         }
     }
 }

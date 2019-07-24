@@ -13,7 +13,7 @@ public class RequestNavigatorGoToRoom implements IIncomingEvent {
         if (user != null){
         	int roomId = request.popInt();
         	String password = request.popString();
-        	BobbaEnvironment.getInstance().getGame().getRoomManager().prepareRoomForUser(user, roomId, password);
+        	BobbaEnvironment.getGame().getRoomManager().prepareRoomForUser(user, roomId, password);
         }
     }
 }

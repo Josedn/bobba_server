@@ -2,88 +2,93 @@ package io.bobba.poc;
 
 import java.util.Scanner;
 
+import org.omg.CORBA.Environment;
+
 import io.bobba.poc.core.Game;
 import io.bobba.poc.misc.configs.ConfigManager;
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 
 public class BobbaEnvironment {
-    private static BobbaEnvironment instance;
-    private static final String VERSION = "1.0.0 alpha";
-    private static ConfigManager configManager = new ConfigManager("config.txt");
+	private static final String VERSION = "1.0.0 alpha";
+	private static ConfigManager configManager = new ConfigManager("config.txt");
+	private static Game game;
 
-    private Game game;
+	public static ConfigManager getConfigManager() {
+		return configManager;
+	}
 
-    private BobbaEnvironment() {
-        System.out.println("");
-        System.out.println("|         |    |          o     ");
-        System.out.println("|---.,---.|---.|---.,---. .,---.");
-        System.out.println("|   ||   ||   ||   |,---| ||   |");
-        System.out.println("`---'`---'`---'`---'`---^o``---'");
-        System.out.println(VERSION);
-        System.out.println("Copyright (c) 2019 - Relevance");
-        System.out.println("Made by Relevance. Follow me on instagram @josednn");
-        System.out.println();
+	public static Game getGame() {
+		return game;
+	}
+	
+	private static void printSplash() {
+		System.out.println("");
+		System.out.println("|         |    |          o     ");
+		System.out.println("|---.,---.|---.|---.,---. .,---.");
+		System.out.println("|   ||   ||   ||   |,---| ||   |");
+		System.out.println("`---'`---'`---'`---'`---^o``---'");
+		System.out.println(VERSION);
+		System.out.println("Copyright (c) 2019 - Relevance");
+		System.out.println("Made by Relevance. Follow me on instagram @josednn");
+		System.out.println();
+	}
+	
+	private static void startCommandLoop() {
+		Scanner scn = new Scanner(System.in);
+		String command;
+		while (true) {
+			try {
+				command = scn.nextLine();
+				String[] commandArgs = command.split(" ");
+				switch (commandArgs[0]) {
+				case "exit":
+				case "stop":
+					Logging.getInstance().writeLine("Stopping server...", LogLevel.Info, BobbaEnvironment.class);
+					game.getConnectionManager().dispose();
+					scn.close();
+					System.exit(0);
+					return;
 
-        Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(configManager.getLogLevel()));
-        this.game = new Game();
-    }
+				case "cycle":
+					game.onCycle();
+					Logging.getInstance().writeLine("Cycle forced!", LogLevel.Info, BobbaEnvironment.class);
+					break;
 
-    public static ConfigManager getConfigManager() {
-        return configManager;
-    }
+				case "loglevel":
+					Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(commandArgs[1]));
+					configManager.setLogLevel(commandArgs[1]);
+					Logging.getInstance().writeLine(
+							"Log level set to: " + Logging.getInstance().getLogLevel().toString(), LogLevel.Info,
+							BobbaEnvironment.class);
+					break;
 
-    public Game getGame() {
-        return this.game;
-    }
+				default:
+					Logging.getInstance().writeLine("Invalid command", LogLevel.Info, BobbaEnvironment.class);
+					break;
+				}
+			} catch (Exception e) {
+				Logging.getInstance().writeLine("Error with command: " + e.toString(), LogLevel.Info,
+						BobbaEnvironment.class);
+			}
+		}
+	}
 
-    public static BobbaEnvironment getInstance() {
-        return instance;
-    }
+	public static void main(String[] args) {
+		printSplash();
+		
+		Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(configManager.getLogLevel()));
 
-    public static void main(String[] args) {
-        instance = new BobbaEnvironment();
-        
-        try {
-        	instance.getGame().initialize(Integer.parseInt(configManager.getPort()));
-            Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.", LogLevel.Verbose, BobbaEnvironment.class);
-        } catch (Exception e) {
-            Logging.getInstance().logError("Error initializing server", e, BobbaEnvironment.class);
-        }
-        
-        Scanner scn = new Scanner(System.in);
-        String command;
-        while (true) {
-            try {
-                command = scn.nextLine();
-                String[] commandArgs = command.split(" ");
-                switch (commandArgs[0]) {
-                    case "exit":
-                    case "stop":
-                        Logging.getInstance().writeLine("Stopping server...", LogLevel.Info, BobbaEnvironment.class);
-                        getInstance().getGame().getConnectionManager().dispose();
-                        scn.close();
-                        System.exit(0);
-                        return;
-                        
-                    case "cycle":
-                        getInstance().getGame().onCycle();
-                        Logging.getInstance().writeLine("Cycle forced!", LogLevel.Info, BobbaEnvironment.class);
-                        break;
-                        
-                    case "loglevel":
-                        Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(commandArgs[1]));
-                        configManager.setLogLevel(commandArgs[1]);
-                        Logging.getInstance().writeLine("Log level set to: " + Logging.getInstance().getLogLevel().toString(), LogLevel.Info, BobbaEnvironment.class);
-                        break;
-                        
-                    default:
-                        Logging.getInstance().writeLine("Invalid command", LogLevel.Info, BobbaEnvironment.class);
-                        break;
-                }
-            } catch (Exception e) {
-                Logging.getInstance().writeLine("Error with command: " + e.toString(), LogLevel.Info, BobbaEnvironment.class);
-            }
-        }
-    }
+		try {
+			game = new Game();
+			game.initialize(Integer.parseInt(configManager.getPort()));
+			Logging.getInstance().writeLine("The environment has initialized successfully. Ready for connections.",
+					LogLevel.Verbose, BobbaEnvironment.class);
+			
+			startCommandLoop();
+		} catch (Exception e) {
+			Logging.getInstance().logError("Error initializing server", e, BobbaEnvironment.class);
+		}
+		
+	}
 }

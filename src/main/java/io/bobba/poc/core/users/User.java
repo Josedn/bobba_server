@@ -115,7 +115,7 @@ public class User {
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
 		this.messenger = new Messenger(this);
-		for (BaseItem item : BobbaEnvironment.getInstance().getGame().getItemManager().getItems()) {
+		for (BaseItem item : BobbaEnvironment.getGame().getItemManager().getItems()) {
 			this.inventory.addItem(Catalogue.generateItemId(), item, 0);	
 		}		
 	}

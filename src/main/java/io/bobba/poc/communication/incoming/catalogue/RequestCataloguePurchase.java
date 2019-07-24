@@ -14,7 +14,7 @@ public class RequestCataloguePurchase implements IIncomingEvent {
         if (user != null){
         	int pageId = request.popInt();
         	int itemId = request.popInt();
-        	BobbaEnvironment.getInstance().getGame().getCatalogue().handlePurchase(user, pageId, itemId);
+        	BobbaEnvironment.getGame().getCatalogue().handlePurchase(user, pageId, itemId);
         }
     }
 }
