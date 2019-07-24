@@ -5,12 +5,12 @@ import java.util.Date;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
-public class Connection {
+public class ClientConnection {
 	private int id;
 	private Date created;
 	private Channel channel;
 
-	public Connection(int id, Channel channel) {
+	public ClientConnection(int id, Channel channel) {
 		this.id = id;
 		this.channel = channel;
 		this.created = new Date();

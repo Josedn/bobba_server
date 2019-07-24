@@ -114,6 +114,15 @@ public class RoomItemManager {
 			user.getUser().getInventory().addItem(itemId, item.getBaseItem(), item.getState());
 		}
 	}
+	
+	public void handlePickAll(RoomUser user) {
+		for (RoomItem item: new ArrayList<>(floorItems.values())) {
+			handleItemPickUp(item.getId(), user);
+		}
+		for (RoomItem item: new ArrayList<>(wallItems.values())) {
+			handleItemPickUp(item.getId(), user);
+		}
+	}
 
 	public void handleItemPlacement(int itemId, int x, int y, int rot, RoomUser user) {
 		UserItem userItem = user.getUser().getInventory().getItem(itemId);

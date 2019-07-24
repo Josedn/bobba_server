@@ -63,9 +63,9 @@ public class GameClientMessageHandler {
 		try {
 			requestHandlers[message.getId()].handle(client, message);
 		} catch (Exception e) {
-			Logging.getInstance().writeLine("Error handling "
-					+ requestHandlers[message.getId()].getClass().getSimpleName() + ". " + e.toString(),
-					LogLevel.Warning, this.getClass());
+			Logging.getInstance().logError(
+					"Error handling " + requestHandlers[message.getId()].getClass().getSimpleName() + ". ", e,
+					this.getClass());
 		}
 		return true;
 	}
@@ -97,7 +97,7 @@ public class GameClientMessageHandler {
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_GO_TO_ROOM] = new RequestNavigatorGoToRoom();
 		requestHandlers[ClientOpCodes.REQUEST_NAVIGATOR_CREATE_ROOM] = new RequestNavigatorCreateRoom();
 		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_ACCEPT_FRIEND] = new RequestMessengerAcceptFriend();
-		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_ADD_FRIEND]  = new RequestMessengerAddFriend();
+		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_ADD_FRIEND] = new RequestMessengerAddFriend();
 		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_DENY_FRIEND] = new RequestMessengerDenyFriend();
 		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_FOLLOW_FRIEND] = new RequestMessengerFollowFriend();
 		requestHandlers[ClientOpCodes.REQUEST_MESSENGER_LOAD_FRIENDS] = new RequestMessengerLoadFriends();

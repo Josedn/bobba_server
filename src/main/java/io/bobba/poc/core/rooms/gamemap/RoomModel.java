@@ -1,7 +1,6 @@
 package io.bobba.poc.core.rooms.gamemap;
 
 public class RoomModel {
-
 	private int mapSizeX;
 	private int mapSizeY;
 
@@ -109,7 +108,7 @@ public class RoomModel {
 		this.doorRot = doorRot;
 		this.heightmap = heightmap.toLowerCase();
 
-		String[] tempHeightmap = heightmap.split(" ");
+		String[] tempHeightmap = heightmap.toLowerCase().split("[\\r\\n]+");
 
 		this.mapSizeX = tempHeightmap[0].length();
 		this.mapSizeY = tempHeightmap.length;

@@ -10,7 +10,7 @@ import io.bobba.poc.core.items.BaseItemManager;
 import io.bobba.poc.core.navigator.Navigator;
 import io.bobba.poc.core.rooms.RoomManager;
 import io.bobba.poc.core.users.UserManager;
-import io.bobba.poc.database.DatabaseManager;
+import io.bobba.poc.database.Database;
 import io.bobba.poc.misc.SSLHelper;
 import io.bobba.poc.misc.logging.Logging;
 import io.bobba.poc.net.ConnectionManager;
@@ -23,12 +23,12 @@ public class Game {
 	private Catalogue catalogue;
 	private Navigator navigator;
 	private RoomManager roomManager;
-	private DatabaseManager databaseManager;
+	private Database database;
 
 	private final int DELTA_TIME = 500;
 	
 	public Game() throws Exception {
-		this.databaseManager = new DatabaseManager("localhost", 27017, "first");	
+		this.database = new Database(10, 2, BobbaEnvironment.getConfigManager().getMysqlHost(), Integer.parseInt(BobbaEnvironment.getConfigManager().getMysqlPort()), BobbaEnvironment.getConfigManager().getMysqlDatabase(), BobbaEnvironment.getConfigManager().getMysqlUser(), BobbaEnvironment.getConfigManager().getMysqlPass());
 		this.gameClientManager = new GameClientManager();
 		this.userManager = new UserManager();
 		this.itemManager = new BaseItemManager();
@@ -110,7 +110,7 @@ public class Game {
 		return roomManager;
 	}
 	
-	public DatabaseManager getDatabaseManager() {
-		return databaseManager;
+	public Database getDatabase() {
+		return database;
 	}
 }

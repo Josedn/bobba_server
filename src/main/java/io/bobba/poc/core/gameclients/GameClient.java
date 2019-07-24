@@ -6,13 +6,13 @@ import io.bobba.poc.communication.protocol.ServerMessage;
 import io.bobba.poc.core.users.User;
 import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
-import io.bobba.poc.net.Connection;
+import io.bobba.poc.net.ClientConnection;
 
 public class GameClient {
-    private Connection connection;
+    private ClientConnection connection;
     private User user;
 
-    public GameClient(int id, Connection connection) {
+    public GameClient(int id, ClientConnection connection) {
         this.connection = connection;
         this.user = null;
     }

@@ -23,13 +23,6 @@ public class Logging {
         }
     }
 
-    @Deprecated
-    public void writeLine(Object o, LogLevel logLevel) {
-        if (canLog(logLevel)) {
-            System.out.println("[" + logLevel.toString().toUpperCase() + "] - " + o);
-        }
-    }
-
     public void logError(Object o, Exception e, Class<?> tag) {
         if (canLog(LogLevel.Warning)) {
             writeLine(o + ": " + e.toString(), LogLevel.Warning, tag);
