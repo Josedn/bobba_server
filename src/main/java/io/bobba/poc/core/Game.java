@@ -109,4 +109,8 @@ public class Game {
 	public RoomManager getRoomManager() {
 		return roomManager;
 	}
+	
+	public DatabaseManager getDatabaseManager() {
+		return databaseManager;
+	}
 }

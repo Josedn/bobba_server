@@ -12,6 +12,7 @@ public class DatabaseManager {
 		this.database = mongoClient.getDatabase(databaseName);
 	}
 
-	
-	
+	public MongoDatabase getDatabase() {
+		return database;
+	}
 }

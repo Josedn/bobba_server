@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.Document;
+
+import com.mongodb.Block;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.roomdata.HeightMapComposer;
 import io.bobba.poc.communication.outgoing.roomdata.RoomDataComposer;
@@ -40,248 +46,27 @@ public class RoomManager {
 	}
 	
 	private void loadModels() {
-		String model_a = "xxxxxxxxxxxx\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxx00000000\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
+		MongoDatabase db = BobbaEnvironment.getGame().getDatabaseManager().getDatabase();
+		MongoCollection<Document> collection = db.getCollection("room_models");
 		
-		String model_b = "xxxxxxxxxxxx\r\n" + 
-				"xxxxx0000000\r\n" + 
-				"xxxxx0000000\r\n" + 
-				"xxxxx0000000\r\n" + 
-				"xxxxx0000000\r\n" + 
-				"x00000000000\r\n" + 
-				"x00000000000\r\n" + 
-				"x00000000000\r\n" + 
-				"x00000000000\r\n" + 
-				"x00000000000\r\n" + 
-				"x00000000000\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		
-		String model_c = "xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		
-		
-		String model_d = "xxxxxxxxxxxx\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxxxxxxxxx";
-		
-		String model_e = "xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xx0000000000\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		
-		String model_f = "xxxxxxxxxxxx\r\n" + 
-				"xxxxxxx0000x\r\n" + 
-				"xxxxxxx0000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"x0000000000x\r\n" + 
-				"x0000000000x\r\n" + 
-				"x0000000000x\r\n" + 
-				"x0000000000x\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		String model_g = "xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xx1111000000\r\n" + 
-				"xx1111000000\r\n" + 
-				"xx1111000000\r\n" + 
-				"xx1111000000\r\n" + 
-				"xx1111000000\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xxxxxxx00000\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		String model_h = "xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxx111111x\r\n" + 
-				"xxxxx111111x\r\n" + 
-				"xxxxx111111x\r\n" + 
-				"xxxxx111111x\r\n" + 
-				"xxxxx111111x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxxxx000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxx00000000x\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxx";
-		
-		String model_j = "xxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"xxxxxxxxxxx0000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"x0000000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxxxxxxxxxxx";
-		
-		String model_0 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
-				"000000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"x00000000xx00000000xx00000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-		
-		String model_m = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"x0000000000000000000000000000\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxx00000000xxxxxxxxxx\r\n" + 
-				"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-		
-		String model_n = "xxxxxxxxxxxxxxxxxxxxx\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x000000xxxxxxxx000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000x000000x000000\r\n" + 
-				"x000000xxxxxxxx000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"x00000000000000000000\r\n" + 
-				"xxxxxxxxxxxxxxxxxxxxx";
-		
-		this.models.put("model_a", new RoomModel(3, 5, 0, 2, model_a));
-		this.models.put("model_b", new RoomModel(0, 5, 0, 2, model_b));
-		this.models.put("model_c", new RoomModel(4, 7, 0, 2, model_c));
-		this.models.put("model_d", new RoomModel(4, 7, 0, 2, model_d));
-		this.models.put("model_e", new RoomModel(1, 5, 0, 2, model_e));
-		this.models.put("model_f", new RoomModel(2, 5, 0, 2, model_f));
-		this.models.put("model_g", new RoomModel(1, 7, 1, 2, model_g));
-		this.models.put("model_h", new RoomModel(4, 4, 1, 2, model_h));
-		this.models.put("model_j", new RoomModel(0, 10, 0, 2, model_j));
-		this.models.put("model_0", new RoomModel(0, 4, 0, 2, model_0));
-		this.models.put("model_m", new RoomModel(0, 16, 0, 2, model_m));
-		this.models.put("model_n", new RoomModel(0, 7, 0, 2, model_n));
+		collection.find().forEach(new Block<Document>() {
+
+			@Override
+			public void apply(Document document) {
+				String name = document.getString("name");
+				int doorX = document.getInteger("door_x");
+				int doorY = document.getInteger("door_y");
+				int doorZ = document.getInteger("door_z");
+				int doorDir = document.getInteger("door_dir");
+				String heightmap = document.getString("heightmap");
+
+				models.put(name, new RoomModel(doorX, doorY, doorZ, doorDir, heightmap));
+			}
+		});
 	}
 	
 	private void createDummyRoom() {
-		RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_h", LockType.Open);
+		/*RoomData roomData = new RoomData(roomId++, "The deep forest", "Relevance", "a very cool room", 25, "", "model_h", LockType.Open);
 		Room room = new Room(roomData, getModel(roomData.getModelId()));		
 		//addFurniture(room);
 		this.rooms.put(room.getRoomData().getId(), room);
@@ -289,6 +74,7 @@ public class RoomManager {
 		roomData = new RoomData(roomId++, "dot dot dot", "Gravity", "a cool room", 25, "", "model_g", LockType.Open);
 		room = new Room(roomData, getModel(roomData.getModelId()));
 		this.rooms.put(room.getRoomData().getId(), room);
+		*/
 	}
 	
 	public void onCycle() {

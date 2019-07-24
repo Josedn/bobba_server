@@ -109,7 +109,7 @@ public class RoomModel {
 		this.doorRot = doorRot;
 		this.heightmap = heightmap.toLowerCase();
 
-		String[] tempHeightmap = heightmap.split("[\\r\\n]+");
+		String[] tempHeightmap = heightmap.split(" ");
 
 		this.mapSizeX = tempHeightmap[0].length();
 		this.mapSizeY = tempHeightmap.length;
