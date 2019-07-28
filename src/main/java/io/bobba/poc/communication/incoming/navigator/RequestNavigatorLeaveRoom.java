@@ -12,7 +12,7 @@ public class RequestNavigatorLeaveRoom implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getRoomManager().handleUserLeaveRoom(user);
+        	BobbaEnvironment.getGame().getRoomManager().handleUserLeaveRoom(user);
         }
     }
 }

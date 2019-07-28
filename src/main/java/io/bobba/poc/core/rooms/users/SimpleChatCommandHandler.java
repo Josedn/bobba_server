@@ -3,6 +3,9 @@ package io.bobba.poc.core.rooms.users;
 import java.awt.Point;
 import java.util.List;
 
+import io.bobba.poc.BobbaEnvironment;
+import io.bobba.poc.core.catalogue.Catalogue;
+import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.misc.TextHandling;
 import io.bobba.poc.misc.logging.Logging;
 
@@ -38,18 +41,18 @@ public class SimpleChatCommandHandler {
                     return true;
                 }
 
-                /*case "dump": {
-                    currentUser.getRoom().getRoomItemManager().removeAllFurniture();
+                case "pickall": {
+                    currentUser.getRoom().getRoomItemManager().handlePickAll(currentUser);
                     return true;
-                }*/
+                }
                 case "coords": {
                     currentUser.chat("My coords: " + currentUser.getX() + ", " + currentUser.getY() + ", " + TextHandling.getFloatString(currentUser.getZ()) + ", Rot: " + currentUser.getRot());
                     return true;
                 }
 
-                /*case "spawn": {
+                case "spawn": {
                     String itemName = args[1];
-                    BaseItem item = BobbaEnvironment.getInstance().getGame().getItemManager().findItem(itemName);
+                    BaseItem item = BobbaEnvironment.getGame().getItemManager().findItem(itemName);
                     if (item != null) {
                         int rot = currentUser.getRot();
                         if (!item.getDirections().contains(rot))
@@ -57,7 +60,7 @@ public class SimpleChatCommandHandler {
                         currentUser.getRoom().getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), currentUser.getX(), currentUser.getY(), currentUser.getZ(), rot, 0, item);
                     }
                     return true;
-                }*/
+                }
 
                 case "pull": {
                     Point point = null;

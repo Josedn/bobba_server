@@ -11,7 +11,7 @@ public class RequestRoomData implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getRoomManager().finishRoomLoadingForUser(client.getUser());
+        	BobbaEnvironment.getGame().getRoomManager().finishRoomLoadingForUser(client.getUser());
         }
     }
 }

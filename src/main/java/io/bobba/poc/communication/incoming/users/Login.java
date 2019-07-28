@@ -11,6 +11,6 @@ public class Login implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
         String username = request.popString();
         String look = request.popString();
-        BobbaEnvironment.getInstance().getGame().getUserManager().tryLogin(client, username, look);
+        BobbaEnvironment.getGame().getUserManager().tryLogin(client, username, look);
     }
 }

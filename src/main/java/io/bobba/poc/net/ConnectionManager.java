@@ -19,7 +19,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class ConnectionManager {
 	private int totalConnectionCount;
-	private Map<Channel, Connection> connections;
+	private Map<Channel, ClientConnection> connections;
 	public IConnectionHandler connectionHandler;
 	private ServerBootstrap server;
 	EventLoopGroup bossGroup;
@@ -67,13 +67,13 @@ public class ConnectionManager {
 	}
 
 	public void startNewConnection(Channel channel) {
-		Connection connection = new Connection(generateConnectionId(), channel);
+		ClientConnection connection = new ClientConnection(generateConnectionId(), channel);
 		this.connections.put(channel, connection);
 		this.connectionHandler.handleNewConnection(connection);
 	}
 
 	public void stopConnection(Channel channel) {
-		Connection connection = this.connections.get(channel);
+		ClientConnection connection = this.connections.get(channel);
 		if (connection != null) {
 			this.connectionHandler.handleDisconnect(connection);
 			connection.close();
@@ -82,7 +82,7 @@ public class ConnectionManager {
 	}
 
 	public void handleMessage(Channel channel, String message) {
-		Connection connection = this.connections.get(channel);
+		ClientConnection connection = this.connections.get(channel);
 		if (connection != null) {
 			this.connectionHandler.handleMessage(connection, message);
 		}

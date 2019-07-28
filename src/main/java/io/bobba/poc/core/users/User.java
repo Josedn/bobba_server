@@ -1,11 +1,8 @@
 package io.bobba.poc.core.users;
 
-import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.users.LoginOkComposer;
 import io.bobba.poc.communication.outgoing.users.UpdateCreditsBalanceComposer;
-import io.bobba.poc.core.catalogue.Catalogue;
 import io.bobba.poc.core.gameclients.GameClient;
-import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.users.RoomUser;
 import io.bobba.poc.core.users.inventory.Inventory;
@@ -114,10 +111,7 @@ public class User {
 		this.client = client;
 		this.disconnected = false;
 		this.inventory = new Inventory(this);
-		this.messenger = new Messenger(this);
-		for (BaseItem item : BobbaEnvironment.getInstance().getGame().getItemManager().getItems()) {
-			this.inventory.addItem(Catalogue.generateItemId(), item, 0);	
-		}		
+		this.messenger = new Messenger(this);			
 	}
 
 	public RoomUser getCurrentRoomUser() {

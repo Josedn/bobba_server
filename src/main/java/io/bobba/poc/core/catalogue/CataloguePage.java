@@ -9,7 +9,7 @@ public class CataloguePage {
 	private boolean visible;
 	private boolean enabled;
 	private int minRank;
-	private String iconColor;
+	private int iconColor;
 	private int iconId;
 	private String layout;
 	private String imageHeadline;
@@ -45,7 +45,7 @@ public class CataloguePage {
 		return minRank;
 	}
 
-	public String getIconColor() {
+	public int getIconColor() {
 		return iconColor;
 	}
 
@@ -86,7 +86,7 @@ public class CataloguePage {
 	}
 
 	public CataloguePage(int id, int parentId, String caption, boolean visible, boolean enabled, int minRank,
-			String iconColor, int iconId, String layout, String imageHeadline, String imageTeaser, String textHeader,
+			int iconColor, int iconId, String layout, String imageHeadline, String imageTeaser, String textHeader,
 			String textDetails, String textMisc, String textMisc2, List<CatalogueItem> items) {
 		this.id = id;
 		this.parentId = parentId;

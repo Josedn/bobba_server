@@ -2,9 +2,9 @@ package io.bobba.poc.net;
 
 public interface IConnectionHandler {
 
-    void handleNewConnection(Connection newConnection);
+    void handleNewConnection(ClientConnection newConnection);
 
-    void handleDisconnect(Connection connection);
+    void handleDisconnect(ClientConnection connection);
 
-    void handleMessage(Connection connection, String message);
+    void handleMessage(ClientConnection connection, String message);
 }

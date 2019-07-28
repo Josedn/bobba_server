@@ -12,7 +12,7 @@ public class RequestCatalogueIndex implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getCatalogue().serializeIndex(user);
+        	BobbaEnvironment.getGame().getCatalogue().serializeIndex(user);
         }
     }
 }

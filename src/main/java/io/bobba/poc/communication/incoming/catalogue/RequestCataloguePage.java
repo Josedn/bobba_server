@@ -12,7 +12,7 @@ public class RequestCataloguePage implements IIncomingEvent {
     public void handle(GameClient client, ClientMessage request) {
     	User user = client.getUser();
         if (user != null){
-        	BobbaEnvironment.getInstance().getGame().getCatalogue().serializePage(user, request.popInt());
+        	BobbaEnvironment.getGame().getCatalogue().serializePage(user, request.popInt());
         }
     }
 }

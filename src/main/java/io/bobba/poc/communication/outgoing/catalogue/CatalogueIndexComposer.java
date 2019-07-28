@@ -27,7 +27,7 @@ public class CatalogueIndexComposer extends ServerMessage {
 	
 	private void serializePage(CataloguePage page) {
 		appendBoolean(page.isVisible());
-		appendString(page.getIconColor());
+		appendInt(page.getIconColor());
 		appendInt(page.getIconId());
 		appendInt(page.getId());
 		appendString(page.getCaption());
