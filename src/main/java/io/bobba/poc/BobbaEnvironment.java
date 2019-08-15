@@ -2,8 +2,6 @@ package io.bobba.poc;
 
 import java.util.Scanner;
 
-import org.omg.CORBA.Environment;
-
 import io.bobba.poc.core.Game;
 import io.bobba.poc.misc.configs.ConfigManager;
 import io.bobba.poc.misc.logging.LogLevel;
@@ -23,7 +21,7 @@ public class BobbaEnvironment {
 	}
 	
 	private static void printSplash() {
-		System.out.println("");
+		System.out.println();
 		System.out.println("|         |    |          o     ");
 		System.out.println("|---.,---.|---.|---.,---. .,---.");
 		System.out.println("|   ||   ||   ||   |,---| ||   |");

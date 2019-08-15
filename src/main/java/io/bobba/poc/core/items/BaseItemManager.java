@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.bobba.poc.BobbaEnvironment;
-import io.bobba.poc.core.rooms.gamemap.RoomModel;
 
 public class BaseItemManager {
 	public static int baseItemId = 0;

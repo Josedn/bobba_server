@@ -13,8 +13,6 @@ import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.roomdata.HeightMapComposer;
 import io.bobba.poc.communication.outgoing.roomdata.RoomDataComposer;
 import io.bobba.poc.communication.outgoing.roomdata.RoomModelInfoComposer;
-import io.bobba.poc.core.catalogue.Catalogue;
-import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.core.rooms.gamemap.RoomModel;
 import io.bobba.poc.core.rooms.roomdata.LockType;
 import io.bobba.poc.core.rooms.roomdata.RoomData;

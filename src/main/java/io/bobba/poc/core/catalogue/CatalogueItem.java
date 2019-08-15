@@ -4,6 +4,7 @@ import io.bobba.poc.core.items.BaseItem;
 
 public class CatalogueItem {
 	private int id;
+	private int pageId;
 	private BaseItem baseItem;
 	private String name;
 	private int cost;
@@ -24,8 +25,13 @@ public class CatalogueItem {
 		return amount;
 	}
 	
-	public CatalogueItem(int id, BaseItem baseItem, String name, int cost, int amount) {
+	public int getPageId() {
+		return pageId;
+	}
+	
+	public CatalogueItem(int id, int pageId, BaseItem baseItem, String name, int cost, int amount) {
 		this.id = id;
+		this.pageId = pageId;
 		this.baseItem = baseItem;
 		this.name = name;
 		this.cost = cost;

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,7 @@ public class Catalogue {
 										
 										BaseItem base = BobbaEnvironment.getGame().getItemManager().getItem(baseId);
 										if (base != null) {
-											dummy.add(new CatalogueItem(catalogItemId, base, catalogName, cost, 1));	
+											dummy.add(new CatalogueItem(catalogItemId, pageId, base, catalogName, cost, 1));	
 										} else {
 											//System.out.println("null base: " + catalogName);
 										}
@@ -87,55 +86,6 @@ public class Catalogue {
 
 	public void initialize() throws SQLException {
 		loadFromDb();
-	}
-
-	private void initializeDummy() {
-		BaseItem club_sofa = BobbaEnvironment.getGame().getItemManager().findItem("club_sofa");
-		BaseItem shelves_norja = BobbaEnvironment.getGame().getItemManager().findItem("shelves_norja");
-		BaseItem duck = BobbaEnvironment.getGame().getItemManager().findItem("duck");
-		BaseItem flag_columbia = BobbaEnvironment.getGame().getItemManager().findItem("flag_columbia");
-		BaseItem scifirocket3 = BobbaEnvironment.getGame().getItemManager().findItem("scifirocket*3");
-		BaseItem small_chair_armas = BobbaEnvironment.getGame().getItemManager().findItem("small_chair_armas");
-
-		pages.put(1, new CataloguePage(1, -1, "Catálogo", true, true, 0, 5, 1, "frontpage",
-				"catalog_frontpage_headline_shop_ES", "fatherhabbo_300x187_girl", "Introducing Bobba Catalogue",
-				"omg it works", "Why is it in spanish?",
-				"I just took the catalogue from my old hispanic hotel, sorry bout that. :')", new ArrayList<>()));
-
-		pages.put(80, new CataloguePage(80, -1, "Wired", false, true, 0, 5, 80, "default", "", "", "", "", "",
-				"", new ArrayList<>()));
-
-		List<CatalogueItem> dummy = new ArrayList<>();
-		dummy.add(new CatalogueItem(45, club_sofa, "club_sofa", 3, 1));
-		dummy.add(new CatalogueItem(46, shelves_norja, "shelves_norja", 3, 1));
-
-		pages.put(81, new CataloguePage(81, 80, "Causantes", true, true, 0, 5, 81, "default",
-				"catalog_wired_header2_es", "ctlg_pic_wired_triggers",
-				"Los Causantes permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
-				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy));
-
-		List<CatalogueItem> dummy2 = new ArrayList<>();
-		dummy2.add(new CatalogueItem(47, duck, "duck", 5, 1));
-
-		pages.put(82, new CataloguePage(82, 80, "Efectos", true, true, 0, 5, 82, "default",
-				"catalog_wired_header3_es", "ctlg_pic_wired_effects",
-				"Los Efectos permiten definir qué se necesita que pase para que tenga lugar un Efecto. Para programar un Causante, colócalo en una Sala, haz doble clic en él y ponlo en marcha. Necesitarás apilar un Efecto sobre un Causante.",
-				"¡Haz click en cada objeto para ver cómo funciona!", "", "", dummy2));
-
-		pages.put(83, new CataloguePage(83, -1, "Tienda", false, true, 0, 5, 2, "default", "", "", "", "", "",
-				"", Arrays.asList()));
-
-		List<CatalogueItem> dummy3 = new ArrayList<>();
-		dummy3.add(new CatalogueItem(47, duck, "duck", 5, 1));
-		dummy3.add(new CatalogueItem(48, flag_columbia, "flag_columbia", 5, 1));
-		dummy3.add(new CatalogueItem(49, scifirocket3, "scifirocket3", 5, 1));
-		dummy3.add(new CatalogueItem(50, small_chair_armas, "small_chair_armas", 5, 1));
-
-		pages.put(84,
-				new CataloguePage(84, 83, "Extras", true, true, 0, 5, 11, "default",
-						"catalog_extra_headline1_de", "catalog_extra_teaser1",
-						"Los accesorios son indispensables para dar personalidad. ¡Diferénciate!", "¡Me encanta!", "",
-						"", dummy3));
 	}
 
 	public CataloguePage getPage(int pageId) {
@@ -180,5 +130,16 @@ public class Catalogue {
 				user.getInventory().addItem(generateItemId(), item, 0);
 			}
 		}
+	}
+
+	public CatalogueItem findItem(String itemName) {
+		for (CataloguePage page : new ArrayList<>(pages.values())) {
+			for (CatalogueItem item : page.getItems()) {
+				if (item.getName().toLowerCase().equals(itemName.toLowerCase())) {
+					return item;
+				}
+			}
+		}
+		return null;
 	}
 }

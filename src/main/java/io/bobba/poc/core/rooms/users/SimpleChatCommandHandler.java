@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.core.catalogue.Catalogue;
+import io.bobba.poc.core.catalogue.CatalogueItem;
 import io.bobba.poc.core.items.BaseItem;
 import io.bobba.poc.misc.TextHandling;
 import io.bobba.poc.misc.logging.Logging;
@@ -60,6 +61,16 @@ public class SimpleChatCommandHandler {
                         currentUser.getRoom().getRoomItemManager().addFloorItemToRoom(Catalogue.generateItemId(), currentUser.getX(), currentUser.getY(), currentUser.getZ(), rot, 0, item);
                     }
                     return true;
+                }
+                
+                case "buy": {
+                	 String itemName = args[1];
+                     CatalogueItem item = BobbaEnvironment.getGame().getCatalogue().findItem(itemName);
+                     if (item != null) {
+                    	 BobbaEnvironment.getGame().getCatalogue().handlePurchase(currentUser.getUser(), item.getPageId(), item.getId());
+                    	 return true;
+                     }
+                     return false;
                 }
 
                 case "pull": {
