@@ -9,7 +9,7 @@ import io.bobba.poc.misc.logging.Logging;
 
 public class BobbaEnvironment {
 	private static final String VERSION = "1.0.0 alpha";
-	private static ConfigManager configManager = new ConfigManager("config.txt");
+	private static ConfigManager configManager;
 	private static Game game;
 
 	public static ConfigManager getConfigManager() {
@@ -42,7 +42,7 @@ public class BobbaEnvironment {
 				switch (commandArgs[0]) {
 				case "exit":
 				case "stop":
-					Logging.getInstance().writeLine("Stopping server...", LogLevel.Info, BobbaEnvironment.class);
+					Logging.getInstance().writeLine("Stopping server...", LogLevel.None, BobbaEnvironment.class);
 					game.getConnectionManager().dispose();
 					scn.close();
 					System.exit(0);
@@ -50,23 +50,23 @@ public class BobbaEnvironment {
 
 				case "cycle":
 					game.onCycle();
-					Logging.getInstance().writeLine("Cycle forced!", LogLevel.Info, BobbaEnvironment.class);
+					Logging.getInstance().writeLine("Cycle forced!", LogLevel.None, BobbaEnvironment.class);
 					break;
 
 				case "loglevel":
 					Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(commandArgs[1]));
 					configManager.setLogLevel(commandArgs[1]);
 					Logging.getInstance().writeLine(
-							"Log level set to: " + Logging.getInstance().getLogLevel().toString(), LogLevel.Info,
+							"Log level set to: " + Logging.getInstance().getLogLevel().toString(), LogLevel.None,
 							BobbaEnvironment.class);
 					break;
 
 				default:
-					Logging.getInstance().writeLine("Invalid command", LogLevel.Info, BobbaEnvironment.class);
+					Logging.getInstance().writeLine("Invalid command", LogLevel.None, BobbaEnvironment.class);
 					break;
 				}
 			} catch (Exception e) {
-				Logging.getInstance().writeLine("Error with command: " + e.toString(), LogLevel.Info,
+				Logging.getInstance().writeLine("Error with command: " + e.toString(), LogLevel.None,
 						BobbaEnvironment.class);
 			}
 		}
@@ -74,6 +74,12 @@ public class BobbaEnvironment {
 
 	public static void main(String[] args) {
 		printSplash();
+		configManager = new ConfigManager();
+		if (!configManager.initialize("config.txt")) {
+			Logging.getInstance().writeLine("Config file created. Please restart the server.",
+					LogLevel.None, BobbaEnvironment.class);
+			return;
+		}
 		
 		Logging.getInstance().setLogLevel(Logging.valueOfLogLevel(configManager.getLogLevel()));
 

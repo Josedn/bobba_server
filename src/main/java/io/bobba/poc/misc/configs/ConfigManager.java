@@ -117,13 +117,18 @@ public class ConfigManager extends Config {
 		configFile.writeFile();
 	}
 
-	public ConfigManager(String filename) {
+	public ConfigManager() {
 		super();
+	}
+	
+	public boolean initialize(String filename) {
 		this.configFile = new ConfigFile(filename);
 		if (configFile.fileExists()) {
 			setConfigFromFile();
+			return true;
 		} else {
 			setFileFromConfig();
+			return false;
 		}
 	}
 
