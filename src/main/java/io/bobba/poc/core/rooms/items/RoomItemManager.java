@@ -1,15 +1,23 @@
 package io.bobba.poc.core.rooms.items;
 
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.bobba.poc.BobbaEnvironment;
 import io.bobba.poc.communication.outgoing.rooms.FurniRemoveComposer;
 import io.bobba.poc.communication.outgoing.rooms.SerializeFloorItemComposer;
 import io.bobba.poc.communication.outgoing.rooms.SerializeWallItemComposer;
 import io.bobba.poc.core.items.BaseItem;
+import io.bobba.poc.core.items.BaseItemManager;
 import io.bobba.poc.core.items.ItemType;
 import io.bobba.poc.core.rooms.Room;
 import io.bobba.poc.core.rooms.users.RoomUser;
@@ -25,6 +33,44 @@ public class RoomItemManager {
 		floorItems = new HashMap<>();
 		wallItems = new HashMap<>();
 	}
+
+	public void initialize() throws SQLException {
+		//this.loadRoomsFurnisFromDb();
+	}
+
+
+	public void loadRoomsFurnisFromDb() throws SQLException {
+        try (Connection connection = BobbaEnvironment.getGame().getDatabase().getDataSource().getConnection(); Statement statement = connection.createStatement()) {
+            
+        	String query = "SELECT * FROM room_furnis WHERE room_id = "+room.getRoomData().getId();
+        	if (statement.execute(query)) {
+                try (ResultSet set = statement.getResultSet()) {
+                    while (set.next()) {
+                    	int id = set.getInt("id");
+			        				int itemId = set.getInt("item_id");
+						        	int posX = set.getInt("x");
+						        	int posY = set.getInt("y");
+						        	int rotation = set.getInt("rot");
+						        	
+						        	BaseItem baseItem = BobbaEnvironment.getGame().getItemManager().findItemByBaseId(itemId);
+
+						        	if(baseItem == null)
+						        		System.out.println("item is null");
+	
+						        	if(baseItem.getType() == ItemType.WallItem) {
+						        		this.addWallItemToRoom(id, posX, posY, rotation, 0, baseItem);
+											} else {
+												double nextZ = room.getGameMap().sqAbsoluteHeight(new Point(posX, posY));
+												this.addFloorItemToRoom(id, posX, posY, nextZ, rotation, 0, baseItem);
+											}
+										}
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+	}
+	
 
 	public RoomItem getItem(int id) {
 		if (floorItems.containsKey(id))

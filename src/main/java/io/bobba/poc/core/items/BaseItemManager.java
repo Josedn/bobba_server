@@ -91,4 +91,13 @@ public class BaseItemManager {
 		}
 		return null;
 	}
+
+	public BaseItem findItemByBaseId(int baseid) {
+		for (BaseItem item : items.values()) {
+			if (baseid == item.getBaseId()) {
+				return item;
+			}
+		}
+		return null;
+	}
 }
