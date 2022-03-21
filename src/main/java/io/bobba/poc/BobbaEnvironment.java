@@ -8,7 +8,7 @@ import io.bobba.poc.misc.logging.LogLevel;
 import io.bobba.poc.misc.logging.Logging;
 
 public class BobbaEnvironment {
-	private static final String VERSION = "1.0.0 alpha";
+	private static final String VERSION = "1.0.1 alpha";
 	private static ConfigManager configManager;
 	private static Game game;
 

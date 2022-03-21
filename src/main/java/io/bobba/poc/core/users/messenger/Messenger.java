@@ -27,8 +27,9 @@ public class Messenger {
 	public void addHardFriendship(User user) {
 		user.getMessenger().addFriendship(this.user);
 		addFriendship(user);
-		serializeFriends();
-		user.getMessenger().serializeFriends();
+		if (user.isConnected()) {
+			user.getMessenger().serializeFriends();
+		}
 	}
 	
 	public void notifyDisconnection() {
@@ -149,7 +150,7 @@ public class Messenger {
 		}
 	}
 
-	private void serializeFriends() {
+	public void serializeFriends() {
 		List<User> users = new ArrayList<>();
 		for (MessengerRequest friend : new ArrayList<>(this.friends)) {
 			if (friend.getTo() == this.user) {

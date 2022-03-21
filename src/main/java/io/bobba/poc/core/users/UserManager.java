@@ -35,6 +35,7 @@ public class UserManager {
 				user.getMessenger().addHardFriendship(otherUser);	
 			}
 		}
+		user.getMessenger().serializeFriends();
 	}
 	
 	public void tryLogin(GameClient client, String username, String look) {
