@@ -21,6 +21,9 @@ This repo features a compatible [bobba_client](https://github.com/Josedn/bobba_c
 There's a basic database dump included in the repo called **bobba.sql**. You should upload it to a MySQL server in order to run the server.
 Also, the first time you run the server, a **config.txt** file will be created. Be sure to fill it out.
 
+## Building
+> mvn package
+
 ## Related projects
 * [bobba_client](https://github.com/Josedn/bobba_client): Official bobba client.
 
