@@ -1,5 +1,5 @@
 
-# [bobba.io](https://bobba.io/) server&middot; [![GitHub license](https://img.shields.io/badge/license-GNU-blue.svg)](https://github.com/josedn/bobba_client/blob/master/LICENSE)
+# [bobba.io](https://bobba.io/) server &middot; [![GitHub license](https://img.shields.io/badge/license-GNU-blue.svg)](https://github.com/josedn/bobba_client/blob/master/LICENSE)
 ![bobba](https://i.imgur.com/wGITX22.png)
 
 Habbo Hotel (r60+) remake made with modern (as 2019) technologies.
